@@ -1,0 +1,17 @@
+{
+  "name": "lightning-static-resource",
+  "description": "Static resources for lightning components and applications",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "ramda": "^0.25.0",
+    "moment": "^2.19.2",
+    "pegjs": "^0.10.0"
+  }
+}

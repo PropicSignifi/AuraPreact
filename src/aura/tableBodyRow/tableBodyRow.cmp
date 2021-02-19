@@ -1,0 +1,49 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="row" type="Object" access="GLOBAL" description="The table body row object"/>
+    <aura:attribute name="rowConfig" type="Object" access="GLOBAL" description="The table body row config"/>
+    <aura:attribute name="providers" type="Object" access="GLOBAL" description="The providers of the component refs"/>
+    <aura:attribute name="checkable" type="Boolean" access="GLOBAL" description="Whether it supports checking rows"/>
+    <aura:attribute name="expanderConfig" type="Object" access="GLOBAL" description="The table expander config"/>
+    <aura:attribute name="select" type="String" access="GLOBAL" default="multiple"/>
+    <aura:attribute name="index" type="Integer" access="GLOBAL"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateColumns" type="Integer" access="PRIVATE" description="The number of columns"/>
+
+    <aura:method name="renderRow" access="GLOBAL">
+    </aura:method>
+
+    <aura:registerEvent name="onselect" type="c:dataEvent" access="GLOBAL"
+        description="The event is fired when the selectAll checkbox is selected."/>
+    <aura:registerEvent name="onRowEvent" type="c:dataEvent" access="GLOBAL"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="onclick" event="c:dataEvent" action="{! c.handleOnEvent }" includeFacets="true"/>
+    <aura:handler name="onchange" event="c:dataEvent" action="{! c.handleOnEvent }" includeFacets="true"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+
+    <tr class="{! v.privateComputedClass }">
+        <aura:if isTrue="{! v.checkable }">
+            <aura:if isTrue="{! v.select == 'multiple' }">
+                <td style="width: 2rem;">
+                    <c:input type="checkbox" name="select" label="Select" variant="label-hidden" checked="{! v.row.$selected }" onchange="{! c.handleSelected }"/>
+                </td>
+                <aura:set attribute="else">
+                    <td style="width: 2rem;">
+                        <c:input type="radio" name="select" label="Select" variant="label-hidden" checked="{! v.row.$selected }" onchange="{! c.handleSelected }"/>
+                    </td>
+                </aura:set>
+            </aura:if>
+        </aura:if>
+        <c:objectEditor aura:id="private" template="table-body-row" object="{! v.row }" editorConfig="{! v.rowConfig }" providers="{! v.providers }"/>
+    </tr>
+    <aura:if isTrue="{! v.row.$expanded &amp;&amp; v.expanderConfig != null }">
+        <tr class="row-expander">
+            <td colspan="{! v.privateColumns }" class="content">
+                <c:templateCreator template="{! v.expanderConfig.template }" object="{! v.row }"/>
+            </td>
+        </tr>
+        <tr class="row-expander-hidden"/>
+    </aura:if>
+
+</aura:component>

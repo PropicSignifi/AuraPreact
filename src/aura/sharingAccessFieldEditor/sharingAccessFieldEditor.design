@@ -1,0 +1,8 @@
+<design:component label="Propic Sharing Access Field Editor">
+    <design:attribute name="label" label="Label" default="Sharing Access" />
+    <design:attribute name="fieldName" label="Field Name" default="Sharing_Access__c" />
+    <design:supportedFormFactors>
+        <design:supportedFormFactor type="Large"/>
+        <design:supportedFormFactor type="Small"/>
+    </design:supportedFormFactors>
+</design:component>

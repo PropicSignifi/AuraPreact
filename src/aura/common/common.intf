@@ -1,0 +1,4 @@
+<aura:interface description="Common UI element">
+    <aura:attribute name="class" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="title" type="String" access="GLOBAL" required="false"/>
+</aura:interface>

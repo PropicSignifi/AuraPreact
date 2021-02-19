@@ -1,0 +1,21 @@
+{
+    "groups": [{
+            "label": "OCL Client Profile Data",
+            "editHeading": false,
+            "detailHeading": false,
+            "columns": [{
+                    "items": [{
+                            "name": "Has_Finance__c"
+                        }
+                    ]
+                },
+                {
+                    "items": [{
+                            "name": "OwnerId"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

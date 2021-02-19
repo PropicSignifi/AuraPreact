@@ -1,0 +1,39 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="label" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="href" type="String" access="GLOBAL"/>
+    <aura:attribute name="media" type="Aura.Component[]" access="GLOBAL"/>
+
+    <aura:attribute name="privateComputedContainerClassNames" type="String" access="PRIVATE"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleClassChange }" value="{! v.class }"/>
+
+    <div class="{! v.privateComputedContainerClassNames }" title="{! v.title }">
+        <aura:if isTrue="{! !empty(v.media) }">
+            <div class="slds-media__figure">
+                {! v.media }
+            </div>
+            <div class="slds-media__body">
+                <h3 class="slds-truncate" title="{! v.label }">
+                    <a href="{! v.href }">
+                        {! v.label }
+                    </a>
+                </h3>
+                <div class="slds-tile__detail slds-text-body--small">
+                    {! v.body }
+                </div>
+            </div>
+            <aura:set attribute="else">
+                <h3 class="slds-truncate" title="{! v.label }">
+                    <a href="{! v.href }">
+                        {! v.label }
+                    </a>
+                </h3>
+                <div class="slds-tile__detail slds-text-body--small">
+                    {! v.body }
+                </div>
+            </aura:set>
+        </aura:if>
+    </div>
+
+</aura:component>

@@ -1,0 +1,3 @@
+<aura:interface description="UI element with tooltips">
+    <aura:attribute name="tooltip" type="String" access="GLOBAL"/>
+</aura:interface>

@@ -1,0 +1,22 @@
+<aura:component access="GLOBAL" extends="c:baseComponent">
+    <aura:attribute name="name" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="remove" type="Boolean" access="GLOBAL" description="Whether to remove the invisible part" default="true"/>
+
+    <aura:attribute name="privateVisible" type="Boolean" access="PRIVATE" description="description"/>
+
+    <aura:method name="setVisible" access="GLOBAL" description="Description">
+        <aura:attribute name="visible" type="Boolean"/>
+    </aura:method>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+
+    <aura:if isTrue="{! v.privateVisible &amp;&amp; v.remove }">
+        {! v.body }
+    </aura:if>
+    <aura:if isTrue="{! !v.remove }">
+        <div class="{! v.privateVisible ? 'slds-show' : 'slds-hide' }">
+            {! v.body }
+        </div>
+    </aura:if>
+
+</aura:component>

@@ -1,0 +1,66 @@
+<aura:component access="GLOBAL" extends="c:baseComponent">
+    <aura:attribute name="demoComp" type="Object" access="GLOBAL"
+        description="The data object for the demo, please refer to the demo.data.js"/>
+    <aura:attribute name="compName" type="String" access="GLOBAL"
+        description="The qualified name of the component for this demo"/>
+    <aura:attribute name="params" type="Object" access="GLOBAL"
+        description="The parameters used for this demo"/>
+    <aura:attribute name="xml" type="String" access="PRIVATE"
+        description="The generated xml for the demo"/>
+    <aura:attribute name="slim" type="Boolean" default="false"
+        description="Indicator of whether it renders any extra doms"/>
+    <aura:attribute name="triggerFunc" type="Object" access="PRIVATE"
+        description="The function to call when triggered"/>
+    <aura:attribute name="isCustomComp" type="Boolean" access="PRIVATE"
+        description="Whether it is a custom component"/>
+    <aura:attribute name="createdComp" type="Object" access="PRIVATE"
+        description="Dynamically created component"/>
+    <aura:attribute name="privateRequiredAttributes" type="String" access="PRIVATE"
+        description="The required attributes string"/>
+    <aura:attribute name="privateCreateComp" type="String" access="PRIVATE"
+        description="createComp toString"/>
+    <aura:attribute name="privateAfterRender" type="String" access="PRIVATE"
+        description="afterRender toString"/>
+    <aura:attribute name="privateOnTrigger" type="String" access="PRIVATE"
+        description="onTrigger toString"/>
+
+    <aura:method name="load" description="Load the component with params">
+    </aura:method>
+    <aura:method name="evaluate" description="Evaluate the expression">
+        <aura:attribute name="expression" type="String"/>
+    </aura:method>
+
+    <aura:handler name="change" action="{! c.computeCompData }" value="{! v.compName }"/>
+
+    <div aura:id="container">
+    </div>
+    <div class="slds-box slds-m-top_medium">
+        <div class="slds-p-around_small slds-text-color_inverse-weak">Component Markup</div>
+        <aura:if isTrue="{! !empty(v.privateRequiredAttributes) }">
+            <c:alert variant="warning" closeable="false">
+                Required Attributes: <strong>{! v.privateRequiredAttributes }</strong>
+            </c:alert>
+        </aura:if>
+        <pre><code>{! v.xml }</code></pre>
+        <aura:if isTrue="{! !empty(v.privateCreateComp )}">
+            <c:expandableSection title="createComp">
+                <pre><code>{! v.privateCreateComp }</code></pre>
+            </c:expandableSection>
+        </aura:if>
+        <aura:if isTrue="{! !empty(v.privateAfterRender )}">
+            <c:expandableSection title="afterRender">
+                <pre><code>{! v.privateAfterRender }</code></pre>
+            </c:expandableSection>
+        </aura:if>
+        <aura:if isTrue="{! !empty(v.privateOnTrigger )}">
+            <c:expandableSection title="onTrigger">
+                <pre><code>{! v.privateOnTrigger }</code></pre>
+            </c:expandableSection>
+        </aura:if>
+    </div>
+    <div class="slds-m-top_medium">
+        <c:button label="{! 'View Component Doc' }" onclick="{! c.onViewComponentDoc }" />
+        <c:button label="{! 'View Component Doc (New)' }" onclick="{! c.onViewComponentDocNew }" />
+        <c:button label="{! 'View Reference' }" onclick="{! c.onViewComponentRef }" disabled="{! v.isCustomComp }"/>
+    </div>
+</aura:component>

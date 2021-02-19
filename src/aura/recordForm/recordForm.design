@@ -1,0 +1,14 @@
+<design:component label="Propic Record Form">
+    <design:attribute name="name" label="Name" required="true" />
+    <design:attribute name="recordId" label="Record Id" />
+    <design:attribute name="sObjectName" label="SObject Name" />
+    <design:attribute name="layoutCode" label="Layout Code" />
+    <design:attribute name="resourceName" label="Static Resource Name" />
+    <design:attribute name="header" label="Header" />
+    <design:attribute name="type" label="Mode" datasource="view,edit" />
+    <design:attribute name="hideHeader" label="Hide Header" />
+    <design:supportedFormFactors>
+        <design:supportedFormFactor type="Large"/>
+        <design:supportedFormFactor type="Small"/>
+    </design:supportedFormFactors>
+</design:component>

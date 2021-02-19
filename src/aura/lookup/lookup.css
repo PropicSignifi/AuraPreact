@@ -1,0 +1,19 @@
+.THIS .slds-input[readonly]:not([disabled]) {
+    background-color: #FFF;
+    border-color: rgb(217, 219, 221);
+    padding: 0 1rem 0 .75rem;
+}
+
+.THIS .slds-input[readonly][disabled] {
+    background-color: rgb(233, 234, 236);
+    border-color: rgb(196, 198, 202);;
+    padding: 0 1rem 0 .75rem;
+}
+
+.THIS .slds-input[disabled]+.input-group-addon {
+    cursor: default;
+}
+
+.THIS .input-group-addon {
+    cursor: pointer;
+}

@@ -1,0 +1,25 @@
+{
+   "groups":[
+      {
+         "label":"Offer Information",
+         "editHeading":false,
+         "detailHeading":false,
+         "columns":[
+            {
+               "items":[
+                  {
+                     "name":"Status__c"
+                  }
+               ]
+            },
+            {
+               "items":[
+                  {
+                     "name":"Tags__c"
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

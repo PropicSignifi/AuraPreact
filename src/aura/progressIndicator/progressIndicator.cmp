@@ -1,0 +1,46 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="options" type="List" access="GLOBAL" description="Description" required="true"/>
+    <aura:attribute name="value" type="Object" access="GLOBAL" description="The value of the selected option"/>
+    <aura:attribute name="error" type="Boolean" access="GLOBAL" description="Description"/>
+    <aura:attribute name="variant" type="String" access="GLOBAL" description="Description" default="base"/>
+
+    <aura:attribute name="privateOptions" type="List" access="PRIVATE"/>
+    <aura:attribute name="privatePercent" type="Integer" access="PRIVATE"/>
+    <aura:attribute name="privateOffsetPercent" type="Integer" access="PRIVATE"/>
+    <aura:attribute name="privateTooltip" type="String" access="PRIVATE"/>
+
+    <aura:registerEvent name="onchange" type="c:dataEvent" access="GLOBAL" description="Description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleValueChange }" value="{! v.value }"/>
+    <aura:handler name="change" action="{! c.handleValueChange }" value="{! v.options }"/>
+
+    <div>
+        <div class="{! 'slds-progress ' + v.class }">
+            <ol class="slds-progress__list">
+                <aura:iteration items="{! v.privateOptions }" var="option" indexVar="index">
+                    <li class="{! 'slds-progress__item' + (option.$completed ? ' slds-is-completed' : '') + (option.$active &amp;&amp; !v.error ? ' slds-is-active' : '') + (option.$active &amp;&amp; v.error ? ' slds-has-error' : '') }">
+                        <button class="{! 'slds-button slds-progress__marker' + (option.$completed || (option.$active &amp;&amp; v.error) ? ' slds-button_icon slds-progress__marker_icon' : '') }" onclick="{! c.handleOptionClick }" data-index="{! index }" onmouseover="{! c.handleMouseOver }" onmouseout="{! c.handleMouseOut }">
+                            <aura:if isTrue="{! option.$completed }">
+                                <c:primitiveIcon iconName="utility:success" variant="bare" svgClass="slds-button__icon"/>
+                            </aura:if>
+                            <aura:if isTrue="{! option.$active &amp;&amp; v.error }">
+                                <c:primitiveIcon iconName="utility:warning" variant="bare" svgClass="slds-button__icon"/>
+                            </aura:if>
+                            <span class="slds-assistive-text">{! option.label + ' - ' + (option.$completed ? 'Completed' : '') + (option.$active ? 'Active' : '') }</span>
+                        </button>
+                    </li>
+                </aura:iteration>
+            </ol>
+            <div class="slds-progress-bar slds-progress-bar_x-small" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{! v.privatePercent }" role="progressbar">
+                <span class="slds-progress-bar__value" style="{! 'width: ' + v.privatePercent + '%;'}">
+                <span class="slds-assistive-text">Progress: {! v.privatePercent }%</span>
+                </span>
+            </div>
+        </div>
+        <div aura:id="tooltip" class="slds-popover slds-popover_tooltip slds-nubbin_bottom slds-hide" role="tooltip" style="{! 'position: absolute; top: -45px; left: calc(' + v.privateOffsetPercent + '% + 0px); transform: translateX(-50%);' }">
+            <div class="slds-popover__body">{! v.privateTooltip }</div>
+        </div>
+    </div>
+
+</aura:component>

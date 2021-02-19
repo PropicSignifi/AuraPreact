@@ -1,0 +1,28 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="src" type="String" access="GLOBAL" description="Description" required="true"/>
+    <aura:attribute name="alt" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="width" type="Integer" access="GLOBAL" description="Description" default="200"/>
+    <aura:attribute name="height" type="Integer" access="GLOBAL" description="Description" default="100"/>
+    <aura:attribute name="altSrc" type="String" access="GLOBAL" description="Description"/>
+
+    <aura:attribute name="privateLoading" type="Boolean" access="PRIVATE" default="true"/>
+    <aura:attribute name="privateImageSuccess" type="Boolean" access="PRIVATE"/>
+
+    <aura:registerEvent name="onclick" type="c:dataEvent" access="GLOBAL" description="Description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+
+    <div class="image-container" style="{! 'width: ' + v.width + 'px; height: ' + v.height + 'px;' }">
+        <aura:if isTrue="{! v.privateLoading }">
+            <lightning:spinner aura:id="imageSpinner" size="small" alternativeText="loading"></lightning:spinner>
+            <div class="alternative-text">
+                {! v.alt }
+            </div>
+        </aura:if>
+        <img src="{! v.src }" alt="{! v.alt }" style="{! 'width: ' + v.width + 'px; height: ' + v.height + 'px; display: ' + (!v.privateImageSuccess &amp;&amp; !empty(v.altSrc) ? 'none' : 'block') + ';' }" class="{! v.class }" onload="{! c.onLoad }" onerror="{! c.onError }"/>
+        <aura:if isTrue="{! !v.privateImageSuccess &amp;&amp; !empty(v.altSrc) }">
+            <img src="{! v.altSrc }" alt="{! v.alt }" style="{! 'width: ' + v.width + 'px; height: ' + v.height + 'px;' }" class="{! v.class }"/>
+        </aura:if>
+    </div>
+
+</aura:component>

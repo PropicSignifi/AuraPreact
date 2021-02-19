@@ -1,0 +1,15 @@
+.THIS .slds-combobox .slds-input_inside {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.THIS.slds-has-error .slds-pill_container .slds-input {
+    border-color: unset;
+    box-shadow: unset;
+}
+
+.THIS.slds-has-error .slds-pill_container {
+    border: 0;
+    border-color: rgb(194, 57, 52);
+    box-shadow: rgb(194, 57, 52) 0 0 0 1px inset;
+}

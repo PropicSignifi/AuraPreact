@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Inside App</title>
+    </head>
+    <body>
+        Loaded
+    <script src="lib/lcc.js"></script>
+    <script>
+window.$LCC.addMessageHandler(function(msg) {
+    var value = msg.value;
+    window.$LCC.sendMessage({
+        name: msg.name,
+        value: value + " New",
+    });
+});
+
+window.$LCC.addErrorHandler(function(error) {
+    console.error(error);
+});
+    </script>
+    </body>
+</html>

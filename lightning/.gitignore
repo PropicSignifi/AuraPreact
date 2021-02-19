@@ -1,0 +1,11 @@
+/node_modules/
+/bower_components/
+/build/
+/dist/
+/test/
+/src/aura
+env.sh
+/tmp/
+.last
+package-lock.json
+/src/tools/decompile/output

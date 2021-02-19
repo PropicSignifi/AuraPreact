@@ -1,0 +1,48 @@
+.THIS {
+    display: inline-block;
+    position: relative;
+}
+
+.THIS .slds-popover {
+    position: absolute;
+    white-space: nowrap;
+}
+
+.THIS .slds-popover .slds-popover__body {
+    font-size: 0.75rem;
+    color: white;
+    padding: 0.5rem 0.75rem;
+    line-height: 1.5;
+    text-transform: none;
+    font-weight: 400;
+}
+
+.THIS .slds-popover_tooltip_top {
+    top: 35px;
+    left: -10rem;
+}
+
+.THIS .slds-popover_tooltip_top-left {
+    top: 35px;
+    left: -1rem
+}
+
+.THIS .slds-popover_tooltip_top-right {
+    top: 35px;
+    left: -18rem;
+}
+
+.THIS .slds-popover_tooltip_bottom {
+    bottom: 35px;
+    left: -10rem;
+}
+
+.THIS .slds-popover_tooltip_bottom-left {
+    bottom: 35px;
+    left: -1rem
+}
+
+.THIS .slds-popover_tooltip_bottom-right {
+    bottom: 35px;
+    left: -18rem;
+}

@@ -1,0 +1,74 @@
+<apex:page>
+    <apex:includeScript value="{!URLFOR($Resource.ctcPropertyLightning, 'lib/jsforce.js')}"></apex:includeScript>
+    <apex:includeScript value="{!URLFOR($Resource.ctcPropertyLightning, 'lib/postmate.js')}"></apex:includeScript>
+    <apex:includeScript value="{!URLFOR($Resource.ctcPropertyLightning, 'lib/jquery.min.js')}"></apex:includeScript>
+
+    <script>
+        var conn = new jsforce.Connection({ accessToken: '{!$API.Session_Id}', version: '44.0' });
+        var _restRequest;
+        var _httpRequest;
+
+        // Expose your model to the Parent. Property values may be functions, promises, or regular values
+        const handshake = new Postmate.Model({
+            restRequest: function(request) {
+                _restRequest = request;
+            },
+
+            httpRequest: function(request) {
+                _httpRequest = request;
+            },
+
+            restResponse: function() {
+                return new Promise(function(resolve, reject) {
+                    conn.request(_restRequest).then(function(response) {
+                        resolve({
+                            success: true,
+                            data: response,
+                        });
+                    }).catch(function(err) {
+                        // Have to resolve because if reject
+                        // then whole post message operation fails,
+                        // so wrapping our response with our own
+                        // success flag to denote if any errors.
+                        try {
+                            // If the server's response body was JSON but the status code
+                            // indicated an error, the response body is treated
+                            // as a string and set to Error.message property.
+                            // To propogate the original JSON payload as JSON then
+                            // we do JSON.parse here. If the parse fails then
+                            // just resolve with the Error.message string anyways.
+                            resolve({
+                                success: false,
+                                data: JSON.parse(err.message),
+                            });
+                        } catch(e) {
+                            resolve({
+                                success: false,
+                                data: err.message, // postMessage cannot deserialize the Error object, so pick off the message
+                            });
+                        }
+                    });
+                });
+            },
+
+            httpResponse: function() {
+                return new Promise(function(resolve, reject) {
+                    const options = Object.assign({}, _httpRequest, {
+                        success: (data, status) => {
+                            resolve(data);
+                        },
+                        error: (xhr, status) => {
+                            reject(xhr);
+                        },
+                    });
+
+                    $.ajax(options);
+                });
+            },
+        });
+
+        // When parent <-> child handshake is complete, events may be emitted to the parent
+        handshake.then(function(parent) {
+        });
+    </script>
+</apex:page>

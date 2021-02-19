@@ -1,0 +1,12 @@
+<aura:component access="GLOBAL" extends="c:baseRoot" implements="flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="label" access="GLOBAL" type="String" />
+    <aura:attribute name="fieldName" access="GLOBAL" type="String" />
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+
+    <c:gLightningExtension/>
+    <c:dataLightningExtension/>
+    <c:preact aura:id="preact" name="sharingAccessFieldEditor" identifier="{! v.fieldName }" waitFor="GLightningExtension,DataLightningExtension"/>
+</aura:component>

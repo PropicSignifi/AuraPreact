@@ -1,0 +1,424 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:inputable,c:focusable,c:common,c:commented">
+    <aura:attribute name="value" type="Object" access="GLOBAL"/>
+    <aura:attribute name="type" type="String" access="GLOBAL" default="text"/>
+    <aura:attribute name="label" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="formatter" type="String" access="GLOBAL"/>
+    <aura:attribute name="files" type="Object" access="GLOBAL"/>
+    <aura:attribute name="isLoading" type="Boolean" access="GLOBAL" default="false"/>
+    <aura:attribute name="placeholder" type="String" access="GLOBAL"/>
+    <aura:attribute name="maxlength" type="Integer" access="GLOBAL"/>
+    <aura:attribute name="minlength" type="Integer" access="GLOBAL"/>
+    <aura:attribute name="pattern" type="String" access="GLOBAL"/>
+    <aura:attribute name="max" type="Decimal" access="GLOBAL"/>
+    <aura:attribute name="min" type="Decimal" access="GLOBAL"/>
+    <aura:attribute name="step" type="Object" access="GLOBAL"/>
+    <aura:attribute name="checked" type="Boolean" access="GLOBAL" default="false"/>
+    <aura:attribute name="accept" type="String" access="GLOBAL"/>
+    <aura:attribute name="multiple" type="Boolean" access="GLOBAL"/>
+    <aura:attribute name="labelPosition" type="String" access="GLOBAL" default="left"/>
+    <aura:attribute name="allowedPattern" type="String" access="GLOBAL"/>
+    <aura:attribute name="addonBefore" type="String" access="GLOBAL"/>
+    <aura:attribute name="addonAfter" type="String" access="GLOBAL"/>
+    <aura:attribute name="style" type="String" access="GLOBAL" default="tradition"/>
+    <aura:attribute name="iconNameLeft" type="String" access="GLOBAL"/>
+    <aura:attribute name="iconNameRight" type="String" access="GLOBAL"/>
+    <aura:attribute name="forceOnChange" type="Boolean" access="GLOBAL"
+        description="Force flushing onchange events. Normally inputs with formatters will fire onchange events only after blurring."/>
+    <aura:attribute name="messageWhenBadInput" type="String" access="GLOBAL"/>
+    <aura:attribute name="messageWhenPatternMismatch" type="String" access="GLOBAL"/>
+    <aura:attribute name="messageWhenTypeMismatch" type="String" access="GLOBAL"/>
+    <aura:attribute name="messageWhenValueMissing" type="String" access="GLOBAL"/>
+    <aura:attribute name="messageWhenRangeOverflow" type="String" access="GLOBAL"/>
+    <aura:attribute name="messageWhenRangeUnderflow" type="String" access="GLOBAL"/>
+    <aura:attribute name="messageWhenStepMismatch" type="String" access="GLOBAL"/>
+    <aura:attribute name="messageWhenTooLong" type="String" access="GLOBAL"/>
+    <aura:attribute name="messageToggleActive" type="String" access="GLOBAL" default="{! $Label.LightningControl.activeCapitalized }"/>
+    <aura:attribute name="messageToggleInactive" type="String" access="GLOBAL" default="{! $Label.LightningControl.inactiveCapitalized }"/>
+
+    <aura:attribute name="privateContainerComputedClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateHelpMessage" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateFormElementComputedClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateLabelComputedClass" type="String" access="PRIVATE"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleClassChange }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.handleClassChange }" value="{! v.style }"/>
+    <aura:handler name="change" action="{! c.handlePatternChange }" value="{! v.pattern }"/>
+
+    <aura:if isTrue="{! v.type == 'radio-group-item' }">
+        <div class="slds-button slds-radio_button">
+            <input type="radio" id="{! globalId }" aura:id="private"/>
+            <label class="slds-radio_button__label" for="{! globalId }">
+                <span class="slds-radio_faux">
+                    <aura:if isTrue="{! !empty(v.labelHtml) }">
+                        <aura:unescapedHtml value="{! v.labelHtml }"/>
+                        <aura:set attribute="else">
+                            {! v.label }
+                        </aura:set>
+                    </aura:if>
+                </span>
+            </label>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{! v.type == 'checkbox-group-item' }">
+        <div class="slds-button slds-checkbox_button">
+            <input type="checkbox" id="{! globalId }" aura:id="private"/>
+            <label class="slds-checkbox_button__label" for="{! globalId }">
+                <span class="slds-checkbox_faux">
+                    <aura:if isTrue="{! !empty(v.labelHtml) }">
+                        <aura:unescapedHtml value="{! v.labelHtml }"/>
+                        <aura:set attribute="else">
+                            {! v.label }
+                        </aura:set>
+                    </aura:if>
+                </span>
+            </label>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{! v.type != 'radio-group-item' &amp;&amp; v.type != 'checkbox-group-item' }">
+        <div class="{! v.privateContainerComputedClass }" title="{! v.title }">
+            <aura:if isTrue="{! v.type != 'checkbox' &amp;&amp; v.type != 'checkbox-button' &amp;&amp; v.type != 'toggle' &amp;&amp; v.type != 'radio' &amp;&amp; v.type != 'file' &amp;&amp; v.type != 'checkbox-big' &amp;&amp; v.type != 'percent' &amp;&amp; v.type != 'days' &amp;&amp; v.type != 'currency' &amp;&amp; v.type != 'radio-big' &amp;&amp; v.type != 'checkbox-small' &amp;&amp; v.type != 'radio-small' &amp;&amp; v.type != 'checkbox-medium' &amp;&amp; v.type != 'radio-medium' }">
+                <label class="{! v.privateLabelComputedClass }" for="{! globalId }">
+                    <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text': '' }">
+                        <aura:if isTrue="{! !empty(v.labelHtml) }">
+                            <aura:unescapedHtml value="{! v.labelHtml }"/>
+                            <aura:set attribute="else">
+                                {! v.label }
+                            </aura:set>
+                        </aura:if>
+                    </span>
+                    <aura:if isTrue="{! v.required }">
+                        <abbr class="slds-required" title="{! $Label.LightningControl.required }">
+                            *
+                        </abbr>
+                    </aura:if>
+                    <aura:if isTrue="{! !empty(v.tooltip) }">
+                        <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+                    </aura:if>
+                </label>
+                <div class="{! v.privateFormElementComputedClass }">
+                    <aura:if isTrue="{! !empty(v.addonBefore) &amp;&amp; v.type != 'search' }">
+                        <span class="slds-form-element__addon addon-before">{! v.addonBefore }</span>
+                    </aura:if>
+                    <div class="{! 'input-body' + (!empty(v.addonBefore) ? ' addon-before' : '') + (!empty(v.addonAfter) ? ' addon-after' : '') }">
+                        <input class="slds-input" onkeypress="{! c.handleKeyPress }" type="{# v.type }" id="{! globalId }" style="{! v.type == 'number' || v.type == 'text' ? 'position: absolute;' : '' }" aura:id="private"/>
+                        <aura:if isTrue="{! v.type == 'number' || v.type == 'text' }">
+                            <span class="{! 'slds-input' + (v.disabled ? ' slds-is-disabled' : '') }" aria-hidden="true" aura:id="private-formatted"/>
+                        </aura:if>
+                    </div>
+                    <aura:if isTrue="{! !empty(v.addonAfter) &amp;&amp; v.type != 'search' }">
+                        <span class="slds-form-element__addon addon-after">{! v.addonAfter }</span>
+                    </aura:if>
+                    <aura:if isTrue="{! !empty(v.iconNameLeft) &amp;&amp; v.type != 'search' }">
+                        <c:primitiveIcon variant="bare" iconName="{! v.iconNameLeft }" svgClass="slds-input__icon slds-input__icon--left slds-icon-text-default"/>
+                    </aura:if>
+                    <aura:if isTrue="{! !empty(v.iconNameRight) &amp;&amp; v.type != 'search' }">
+                        <c:primitiveIcon variant="bare" iconName="{! v.iconNameRight }" svgClass="slds-input__icon slds-input__icon--right slds-icon-text-default"/>
+                    </aura:if>
+                    <aura:if isTrue="{! v.type == 'search' }">
+                        <c:primitiveIcon variant="bare" iconName="ctc-utility:a_search" svgClass="slds-input__icon slds-input__icon--left slds-icon-text-default"/>
+                        <div class="slds-input__icon-group slds-input__icon-group_right">
+                            <aura:if isTrue="{! v.isLoading }">
+                                <div class="slds-spinner slds-spinner_brand slds-spinner--x-small slds-input__spinner" role="status">
+                                    <span class="slds-assistive-text">
+                                        Loading
+                                    </span>
+                                    <div class="slds-spinner__dot-a"/>
+                                    <div class="slds-spinner__dot-b"/>
+                                </div>
+                            </aura:if>
+                            <button class="{! 'slds-input__icon slds-input__icon--right slds-button slds-button--icon ' + (!empty(v.value) ? 'slds-show' : 'slds-hide') }" onclick="{! c.clearAndSetFocusOnInput }" aura:id="searchClear">
+                                <c:primitiveIcon variant="bare" iconName="ctc-utility:a_clear" svgClass="slds-button__icon"/>
+                                <span class="slds-assistive-text">
+                                    Clear
+                                </span>
+                            </button>
+                        </div>
+                    </aura:if>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{! v.type == 'toggle' }">
+                <div class="slds-form-element__control">
+                    <label class="slds-checkbox--toggle slds-grid" for="{! globalId }">
+                        <span class="{! v.privateLabelComputedClass }">
+                            <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : '' }">
+                                <aura:if isTrue="{! !empty(v.labelHtml) }">
+                                    <aura:unescapedHtml value="{! v.labelHtml }"/>
+                                    <aura:set attribute="else">
+                                        {! v.label }
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                            <aura:if isTrue="{! v.required }">
+                                <abbr class="slds-required" title="{! $Label.LightningControl.required }">
+                                    *
+                                </abbr>
+                            </aura:if>
+                            <aura:if isTrue="{! !empty(v.tooltip) }">
+                                <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+                            </aura:if>
+                        </span>
+                        <input type="checkbox" aria-describedby="{! globalId + '-toggle-desc' }" id="{! globalId }" aura:id="private"/>
+                        <span class="slds-checkbox--faux_container" aria-live="assertive" id="{! globalId + '-toggle-desc' }">
+                            <span class="slds-checkbox--faux"/>
+                            <span class="slds-checkbox--on">
+                                {! v.messageToggleActive }
+                            </span>
+                            <span class="slds-checkbox--off">
+                                {! v.messageToggleInactive }
+                            </span>
+                        </span>
+                    </label>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{! v.type == 'checkbox' }">
+                <div class="slds-form-element__control">
+                    <span class="slds-checkbox">
+                        <input type="checkbox" id="{! globalId }" aura:id="private"/>
+                        <label class="slds-checkbox__label" for="{! globalId }">
+                            <aura:if isTrue="{! v.labelPosition != 'right'}">
+                                <span class="slds-checkbox--faux"/>
+                            </aura:if>
+                            <span class="{! v.privateLabelComputedClass }">
+                                <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : '' }">
+                                    <aura:if isTrue="{! !empty(v.labelHtml) }">
+                                        <aura:unescapedHtml value="{! v.labelHtml }"/>
+                                        <aura:set attribute="else">
+                                            {! v.label }
+                                        </aura:set>
+                                    </aura:if>
+                                </span>
+                                <aura:if isTrue="{! v.required }">
+                                    <abbr class="slds-required" title="{! $Label.LightningControl.required }">
+                                        *
+                                    </abbr>
+                                </aura:if>
+                                <aura:if isTrue="{! !empty(v.tooltip) }">
+                                    <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+                                </aura:if>
+                            </span>
+                            <aura:if isTrue="{! v.labelPosition == 'right'}">
+                                <span class="slds-checkbox--faux slds-m-right_none"/>
+                            </aura:if>
+                        </label>
+                    </span>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{! v.type == 'checkbox-button' }">
+                <div class="slds-checkbox--add-button">
+                    <input class="slds-assistive-text" type="checkbox" id="{! globalId }" aura:id="private"/>
+                    <label class="slds-checkbox--faux" for="{! globalId }">
+                        <span class="slds-assistive-text">
+                            <aura:if isTrue="{! !empty(v.labelHtml) }">
+                                <aura:unescapedHtml value="{! v.labelHtml }"/>
+                                <aura:set attribute="else">
+                                    {! v.label }
+                                </aura:set>
+                            </aura:if>
+                        </span>
+                    </label>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{! v.type == 'checkbox-big' }">
+                <div class="slds-checkbox--big-button">
+                    <input class="slds-assistive-text" type="checkbox" id="{! globalId }" aura:id="private"/>
+                    <label class="{! 'slds-checkbox--faux' + (v.variant == 'label-hidden' ? '' : ' slds-is-inline-flex slds-grid_vertical-align-center')}" for="{! globalId }">
+                        <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : 'slds-m-left_xx-large slds-text_no-wrap transparent' }">
+                            <aura:if isTrue="{! !empty(v.labelHtml) }">
+                                <aura:unescapedHtml value="{! v.labelHtml }"/>
+                                <aura:set attribute="else">
+                                    {! v.label }
+                                </aura:set>
+                            </aura:if>
+                        </span>
+                    </label>
+                    <span class="{! v.variant == 'label-hidden' ? 'slds-hide' : 'slds-m-left_small slds-text_no-wrap' }">
+                        <aura:if isTrue="{! !empty(v.labelHtml) }">
+                            <aura:unescapedHtml value="{! v.labelHtml }"/>
+                            <aura:set attribute="else">
+                                {! v.label }
+                            </aura:set>
+                        </aura:if>
+                    </span>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{! v.type == 'checkbox-small' }">
+                <div class="slds-checkbox--small-button">
+                    <input class="slds-assistive-text" type="checkbox" id="{! globalId }" aura:id="private"/>
+                    <label class="{! 'slds-checkbox--faux' + (v.variant == 'label-hidden' ? '' : ' slds-is-inline-flex slds-grid_vertical-align-center')}" for="{! globalId }">
+                        <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : 'slds-m-left_large slds-text_no-wrap transparent' }">
+                            <aura:if isTrue="{! !empty(v.labelHtml) }">
+                                <aura:unescapedHtml value="{! v.labelHtml }"/>
+                                <aura:set attribute="else">
+                                    {! v.label }
+                                </aura:set>
+                            </aura:if>
+                        </span>
+                    </label>
+                    <span class="{! v.variant == 'label-hidden' ? 'slds-hide' : 'slds-m-left_small slds-text_no-wrap' }">
+                        <aura:if isTrue="{! !empty(v.labelHtml) }">
+                            <aura:unescapedHtml value="{! v.labelHtml }"/>
+                            <aura:set attribute="else">
+                                {! v.label }
+                            </aura:set>
+                        </aura:if>
+                    </span>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{! v.type == 'checkbox-medium' }">
+                <div class="slds-checkbox--medium-button">
+                    <input class="slds-assistive-text" type="checkbox" id="{! globalId }" aura:id="private"/>
+                    <label class="{! 'slds-checkbox--faux' + (v.variant == 'label-hidden' ? '' : ' slds-is-inline-flex slds-grid_vertical-align-center')}" for="{! globalId }">
+                        <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : 'slds-m-left_large slds-text_no-wrap transparent' }">
+                            <aura:if isTrue="{! !empty(v.labelHtml) }">
+                                <aura:unescapedHtml value="{! v.labelHtml }"/>
+                                <aura:set attribute="else">
+                                    {! v.label }
+                                </aura:set>
+                            </aura:if>
+                        </span>
+                    </label>
+                    <span class="{! v.variant == 'label-hidden' ? 'slds-hide' : 'slds-m-left_small slds-text_no-wrap' }">
+                        <aura:if isTrue="{! !empty(v.labelHtml) }">
+                            <aura:unescapedHtml value="{! v.labelHtml }"/>
+                            <aura:set attribute="else">
+                                {! v.label }
+                            </aura:set>
+                        </aura:if>
+                    </span>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{! v.type == 'radio-big' }">
+                <div class="slds-radio--big-button">
+                    <input class="slds-assistive-text" type="radio" id="{! globalId }" aura:id="private"/>
+                    <label class="{! 'slds-radio--faux' + (v.variant == 'label-hidden' ? '' : ' slds-is-inline-flex slds-grid_vertical-align-center')}" for="{! globalId }">
+                        <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : 'slds-m-left_xx-large slds-text_no-wrap transparent' }">
+                            <aura:if isTrue="{! !empty(v.labelHtml) }">
+                                <aura:unescapedHtml value="{! v.labelHtml }"/>
+                                <aura:set attribute="else">
+                                    {! v.label }
+                                </aura:set>
+                            </aura:if>
+                        </span>
+                    </label>
+                    <span class="{! v.variant == 'label-hidden' ? 'slds-hide' : 'slds-m-left_small slds-text_no-wrap' }">
+                        <aura:if isTrue="{! !empty(v.labelHtml) }">
+                            <aura:unescapedHtml value="{! v.labelHtml }"/>
+                            <aura:set attribute="else">
+                                {! v.label }
+                            </aura:set>
+                        </aura:if>
+                    </span>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{! v.type == 'radio-small' }">
+                <div class="slds-radio--small-button">
+                    <input class="slds-assistive-text" type="radio" id="{! globalId }" aura:id="private"/>
+                    <label class="{! 'slds-radio--faux' + (v.variant == 'label-hidden' ? '' : ' slds-is-inline-flex slds-grid_vertical-align-center')}" for="{! globalId }">
+                        <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : 'slds-m-left_large slds-text_no-wrap transparent' }">
+                            <aura:if isTrue="{! !empty(v.labelHtml) }">
+                                <aura:unescapedHtml value="{! v.labelHtml }"/>
+                                <aura:set attribute="else">
+                                    {! v.label }
+                                </aura:set>
+                            </aura:if>
+                        </span>
+                    </label>
+                    <span class="{! v.variant == 'label-hidden' ? 'slds-hide' : 'slds-m-left_small slds-text_no-wrap' }">
+                        <aura:if isTrue="{! !empty(v.labelHtml) }">
+                            <aura:unescapedHtml value="{! v.labelHtml }"/>
+                            <aura:set attribute="else">
+                                {! v.label }
+                            </aura:set>
+                        </aura:if>
+                    </span>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{! v.type == 'radio-medium' }">
+                <div class="slds-radio--medium-button">
+                    <input class="slds-assistive-text" type="radio" id="{! globalId }" aura:id="private"/>
+                    <label class="{! 'slds-radio--faux' + (v.variant == 'label-hidden' ? '' : ' slds-is-inline-flex slds-grid_vertical-align-center')}" for="{! globalId }">
+                        <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : 'slds-m-left_large slds-text_no-wrap transparent' }">
+                            <aura:if isTrue="{! !empty(v.labelHtml) }">
+                                <aura:unescapedHtml value="{! v.labelHtml }"/>
+                                <aura:set attribute="else">
+                                    {! v.label }
+                                </aura:set>
+                            </aura:if>
+                        </span>
+                    </label>
+                    <span class="{! v.variant == 'label-hidden' ? 'slds-hide' : 'slds-m-left_small slds-text_no-wrap' }">
+                        <aura:if isTrue="{! !empty(v.labelHtml) }">
+                            <aura:unescapedHtml value="{! v.labelHtml }"/>
+                            <aura:set attribute="else">
+                                {! v.label }
+                            </aura:set>
+                        </aura:if>
+                    </span>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{! v.type == 'radio' }">
+                <div class="slds-form-element__control">
+                    <span class="slds-radio">
+                        <input type="radio" id="{! globalId }" aura:id="private"/>
+                        <label class="slds-radio__label" for="{! globalId }">
+                            <span class="slds-radio--faux"/>
+                            <span class="{! v.privateLabelComputedClass }">
+                                <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : '' }">
+                                    <aura:if isTrue="{! !empty(v.labelHtml) }">
+                                        <aura:unescapedHtml value="{! v.labelHtml }"/>
+                                        <aura:set attribute="else">
+                                            {! v.label }
+                                        </aura:set>
+                                    </aura:if>
+                                </span>
+                            </span>
+                        </label>
+                    </span>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{! v.type == 'file' }">
+                <span class="{! v.privateLabelComputedClass }" id="{! globalId + '-form-label' }">
+                    <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : '' }">
+                        <aura:if isTrue="{! !empty(v.labelHtml) }">
+                            <aura:unescapedHtml value="{! v.labelHtml }"/>
+                            <aura:set attribute="else">
+                                {! v.label }
+                            </aura:set>
+                        </aura:if>
+                    </span>
+                    <aura:if isTrue="{! v.required }">
+                        <abbr class="slds-required" title="{! $Label.LightningControl.required }">
+                            *
+                        </abbr>
+                    </aura:if>
+                    <aura:if isTrue="{! !empty(v.tooltip) }">
+                        <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+                    </aura:if>
+                </span>
+                <div class="slds-form-element__control">
+                    <div class="slds-file-selector slds-file-selector--files" ondrop="{! c.handleDropFiles }">
+                        <c:primitiveFileDroppableZone disabled="{! v.disabled }" multiple="{! v.multiple }">
+                            <input class="slds-file-selector__input slds-assistive-text" type="file" id="{! globalId }" aura:id="private"/>
+                            <label class="slds-file-selector__body" for="{! globalId }">
+                                <span class="slds-file-selector__button slds-button slds-button--neutral">
+                                    <c:primitiveIcon variant="bare" iconName="utility:upload" svgClass="slds-button__icon slds-button__icon--left"/>
+                                    {! $Label.LightningInputFile.buttonLabel }
+                                </span>
+                                <span class="slds-file-selector__text slds-medium-show">
+                                    {! $Label.LightningInputFile.bodyText }
+                                </span>
+                            </label>
+                        </c:primitiveFileDroppableZone>
+                    </div>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{! !empty(v.privateHelpMessage) }">
+                <div class="slds-form-element__help" role="alert" id="{! globalId + '-message' }">
+                    {! v.privateHelpMessage }
+                </div>
+            </aura:if>
+        </div>
+    </aura:if>
+
+</aura:component>

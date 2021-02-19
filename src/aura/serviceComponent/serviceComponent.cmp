@@ -1,0 +1,9 @@
+<aura:component access="GLOBAL" extensible="true" extends="c:baseComponent">
+    <aura:attribute name="serviceName" type="String" access="PRIVATE" default=""
+        description="The name of the service to be installed"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.onInit }"/>
+    <aura:handler name="$destroy" event="c:dataEvent" action="{! c.onDestroy }"/>
+
+    {! v.body }
+</aura:component>

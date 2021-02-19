@@ -1,0 +1,16 @@
+{
+    "bitwise": true,
+    "curly": true,
+    "eqeqeq": true,
+    "esversion": 6,
+    "globals": {
+        "_": true,
+        "$A": true,
+        "R": true
+    },
+    "maxdepth": 3,
+    "maxparams": 7,
+    "unused": "vars",
+    "browser": true,
+    "jasmine": true
+}

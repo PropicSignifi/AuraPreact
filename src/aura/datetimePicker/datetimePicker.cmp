@@ -1,0 +1,48 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:inputable,c:focusable,c:common,c:commented">
+    <aura:attribute name="date" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="time" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="label" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="placeholder" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="messageWhenBadInput" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="value" type="Long" access="GLOBAL" required="false"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" required="false"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleClassChange }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.handleDateTimeValueChange }" value="{! v.value }"/>
+
+    <div class="{! v.privateComputedClass }" title="{! v.title }">
+        <fieldset class="slds-form-element">
+            <legend class="{! join(' ', 'slds-form-element__label', (v.variant == 'label-hidden' ? 'slds-m-right--xxx-small' : '')) }" for="{! globalId }">
+                <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : '' }">
+                    <aura:if isTrue="{! !empty(v.labelHtml) }">
+                        <aura:unescapedHtml value="{! v.labelHtml }"/>
+                        <aura:set attribute="else">
+                            {! v.label }
+                        </aura:set>
+                    </aura:if>
+                </span>
+                <aura:if isTrue="{! v.required }">
+                    <abbr class="slds-required" title="{! $Label.LightningControl.required }">
+                        *
+                    </abbr>
+                </aura:if>
+                <aura:if isTrue="{! !empty(v.tooltip) }">
+                    <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+                </aura:if>
+            </legend>
+            <div class="slds-form-element__group">
+                <div class="slds-form-element__row">
+                    <c:datePicker aura:id="date" name="{! v.name + '-datePicker' }" label="Date" variant="{! v.variant }" date="{! v.date }"
+                        disabled="{! v.disabled }" readonly="{! v.readonly }" required="{! v.required }" class="slds-grow"
+                        onchange="{! c.handleValueChange }" onblur="{! c.handleNodeBlur }" onfocus="{! c.handleNodeFocus }"/>
+                    <c:timePicker aura:id="time" name="{! v.name + '-timePicker' }" label="Time" variant="{! v.variant }" time="{! v.time }"
+                        disabled="{! v.disabled }" readonly="{! v.readonly }" required="{! v.required }" class="slds-grow"
+                        onchange="{! c.handleValueChange }" onblur="{! c.handleNodeBlur }" onfocus="{! c.handleNodeFocus }"/>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+</aura:component>

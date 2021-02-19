@@ -1,0 +1,5 @@
+{
+    "presets": ["env", "preact"],
+    "compact": false,
+    "plugins": ["transform-object-rest-spread"]
+}

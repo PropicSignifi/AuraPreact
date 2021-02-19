@@ -1,0 +1,8 @@
+.THIS .picklist-body {
+    height: 32px;
+}
+
+.THIS .picklist-body span.slds-input {
+    display: inline-flex;
+    align-items: center;
+}

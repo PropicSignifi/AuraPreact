@@ -1,0 +1,44 @@
+.THIS .slds-radio_button-group-primary .slds-radio_button {
+    color: #16325c;
+}
+
+.THIS .slds-radio_button-group-primary .slds-radio_button [type=radio][disabled]+.slds-radio_button__label {
+    color: #16325c;
+    background-color: #F4F6F9;
+}
+
+.THIS .slds-radio_button-group-primary .slds-radio_button [type=radio][disabled]:checked+.slds-radio_button__label {
+    color: #16325c;
+    background-color: #D8DDE6;
+}
+
+.THIS .slds-radio_button-group-select .slds-radio_button {
+    color: #16325c;
+}
+
+.THIS .slds-radio_button-group-select .slds-radio_button [type=radio][disabled]+.slds-radio_button__label {
+    color: #16325c;
+    background-color: #F4F6F9;
+}
+
+.THIS .slds-radio_button-group-select .slds-radio_button [type=radio][disabled]:checked+.slds-radio_button__label {
+    color: #16325c;
+    background-color: #D8DDE6;
+}
+
+.THIS .slds-radio_button-group-select {
+    border-radius: 50px;
+}
+
+.THIS .slds-radio_button-group-select .slds-radio_button:first-child>.slds-radio_button__label {
+    border-radius: 50px 0 0 50px;
+}
+
+.THIS .slds-radio_button-group-select .slds-radio_button:last-child>.slds-radio_button__label {
+    border-radius: 0 50px 50px 0;
+}
+
+.THIS .slds-radio_button-group-select .slds-radio_button .slds-radio_faux {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}

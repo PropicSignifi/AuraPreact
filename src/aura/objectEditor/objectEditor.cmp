@@ -1,0 +1,13 @@
+<aura:component access="GLOBAL" extends="c:baseComponent">
+    <aura:attribute name="template" type="String" access="GLOBAL" description="The template name of the object editor"/>
+    <aura:attribute name="object" type="Object" access="GLOBAL" description="The object to be edited"/>
+    <aura:attribute name="editorConfig" type="List" access="GLOBAL" description="The editor configs for this object"/>
+    <aura:attribute name="providers" type="Object" access="GLOBAL" description="The providers of the component reference"/>
+
+    <aura:method name="renderEditor" access="GLOBAL">
+        <aura:attribute name="callback" type="Object"/>
+    </aura:method>
+
+    {! v.body }
+
+</aura:component>

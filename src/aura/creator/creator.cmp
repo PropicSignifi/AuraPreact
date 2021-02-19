@@ -1,0 +1,23 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="componentName" type="String" access="GLOBAL" description="Description" required="true"/>
+    <aura:attribute name="interfaceName" type="String" access="GLOBAL" description="Description"/>
+
+    <aura:attribute name="slim" type="Boolean" default="false"
+        description="Indicator of whether it renders any extra doms"/>
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateCreated" type="Object" access="PRIVATE" description="description"/>
+
+    <aura:method name="getCreated" access="GLOBAL" description="Description">
+    </aura:method>
+
+    <aura:registerEvent name="onCreated" type="c:dataEvent" access="GLOBAL" description="Description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.handleCreateComponent }" value="{! v.componentName }"/>
+    <aura:handler name="onParameterChange" event="c:dataEvent" action="{! c.handleParameterChange }" includeFacets="true"/>
+
+    <div class="{! v.privateComputedClass }" aura:id="container">
+    </div>
+
+</aura:component>

@@ -1,0 +1,46 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:focusable,c:common">
+    <aura:attribute name="variant" type="String" access="GLOBAL" required="false" default="border"/>
+    <aura:attribute name="menuAlignment" type="String" access="GLOBAL" required="false" default="left"/>
+    <aura:attribute name="iconName" type="String" access="GLOBAL" required="false" default="ctc-utility:down"/>
+    <aura:attribute name="iconSize" type="String" access="GLOBAL" required="false" default="medium"/>
+    <aura:attribute name="disabled" type="Boolean" access="GLOBAL" required="false" default="false"/>
+    <aura:attribute name="visible" type="Boolean" access="GLOBAL" required="false" default="false"/>
+    <aura:attribute name="alternativeText" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="name" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="value" type="String" access="GLOBAL" required="false"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" required="false"/>
+    <aura:attribute name="privateComputedDropdownClass" type="String" access="PRIVATE" required="false"/>
+    <aura:attribute name="privateComputedButtonClass" type="String" access="PRIVATE" required="false"/>
+    <aura:attribute name="privateShowDropdownIcon" type="Boolean" access="PRIVATE" required="false"/>
+    <aura:attribute name="privateBody" type="Aura.Component[]" access="GLOBAL"/>
+
+    <aura:registerEvent name="onselect" type="c:dataEvent" access="GLOBAL"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.changeVisibility }" value="{! v.visible }"/>
+    <aura:handler name="change" action="{! c.changeVariant }" value="{! v.variant }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computeDropdownClassNames }" value="{! v.menuAlignment }"/>
+    <aura:handler name="change" action="{! c.changeIconName }" value="{! v.iconName }"/>
+
+    <div class="{! v.privateComputedClass }" title="{! v.title }">
+        <button class="{! v.privateComputedButtonClass }" onblur="{! c.handleBlur }" onkeydown="{! c.handleKeyDown }" onfocus="{! c.handleFocus }" name="{! v.name }" disabled="{! v.disabled }" tabindex="{! v.tabindex }" aria-expanded="{! v.visible }" value="{! v.value }" accesskey="{! v.accesskey }" aria-haspopup="true" onclick="{! c.handleClick }" onmousedown="{! c.handleMouseDown }" title="{! v.title }" aura:id="privateButton">
+            <c:primitiveIcon variant="bare" iconName="{! v.iconName }" svgClass="slds-button__icon"/>
+            <aura:if isTrue="{! v.privateShowDropdownIcon }">
+                <c:primitiveIcon variant="bare" iconName="ctc-utility:a_down" svgClass="slds-button__icon slds-button__icon--x-small slds-m-left--xx-small"/>
+            </aura:if>
+            <aura:if isTrue="{! !empty(v.alternativeText) }">
+                <span class="slds-assistive-text">
+                    {! v.alternativeText }
+                </span>
+            </aura:if>
+        </button>
+        <div class="{! v.privateComputedDropdownClass }">
+            <ul class="dropdown__list" role="menu" aura:id="list">
+                {! v.privateBody }
+            </ul>
+        </div>
+    </div>
+
+</aura:component>

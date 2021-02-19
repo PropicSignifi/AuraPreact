@@ -1,0 +1,14 @@
+{
+    "getData": {
+        "actionName": "getData",
+        "active": true,
+        "paramTypes": [],
+        "params": [
+            {
+                "paramDescription": "The message",
+                "paramName": "msg",
+                "paramType": "String"
+            }
+        ]
+    }
+}

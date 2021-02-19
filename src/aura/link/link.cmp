@@ -1,0 +1,29 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common,c:commented">
+    <aura:attribute name="variant" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="url" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="recordId" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="parentRecordId" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="relatedListId" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="isredirect" type="Boolean" access="GLOBAL" description="Description"/>
+    <aura:attribute name="scope" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="resetHistory" type="Boolean" access="GLOBAL" description="Description"/>
+    <aura:attribute name="listViewId" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="listViewName" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="componentDef" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="componentAttributes" type="Object" access="GLOBAL" description="Description"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" description="description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+
+    <div>
+        <a class="{! v.privateComputedClass }" href="javascript:void(0)" onclick="{! c.onClick }" title="{! v.title }">
+            {! v.body }
+        </a>
+        <aura:if isTrue="{! !empty(v.tooltip) }">
+            <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+        </aura:if>
+    </div>
+
+</aura:component>

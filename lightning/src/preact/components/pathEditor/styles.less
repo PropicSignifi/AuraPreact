@@ -1,0 +1,45 @@
+:global(.slds-path-editor) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    :global(.slds-path-editor_module) {
+        position: relative;
+        border-radius: .25rem .25rem 0 0;
+        box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, 0.16);
+        border: 1px solid rgb(217, 219, 221);
+        background-color: rgb(255, 255, 255);
+        margin-bottom: 3rem;
+        min-width: 400px;
+        min-height: 100px;
+
+        &:before {
+            box-sizing: border-box;
+            position: absolute;
+            content: '';
+            width: 2px;
+            height: 3rem;
+            background-color: #4bc076;
+            left: 50%;
+            top: 100%;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &:last-child:before {
+            width: 0;
+        }
+
+        :global(.slds-path-editor_module-header) {
+            background: rgb(255, 255, 255);
+            border-bottom: 2px solid rgb(21, 137, 238);
+            border-radius: .25rem .25rem 0 0;
+            padding: .5rem .75rem;
+        }
+
+        :global(.slds-path-editor_module-body) {
+        }
+    }
+}

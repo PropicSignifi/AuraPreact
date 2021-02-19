@@ -1,0 +1,27 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="variant" type="String" access="GLOBAL" description="The variant of the alert"/>
+    <aura:attribute name="closeable" type="Boolean" access="GLOBAL" description="Whether it is closeable" default="true"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateClosed" type="Boolean" access="PRIVATE" description="description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.variant }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.privateClosed }"/>
+
+    <div class="{! v.privateComputedClass }" role="alert">
+        <span class="slds-assistive-text">{! v.variant }</span>
+        <span class="slds-icon_container slds-m-right_x-small" title="{! v.variant }">
+            <c:primitiveIcon variant="bare" iconName="{! 'utility:' + v.variant }" svgClass="slds-icon slds-icon_x-small"/>
+        </span>
+        {! v.body }
+        <aura:if isTrue="{! v.closeable }">
+            <button class="slds-button slds-button_icon slds-notify__close slds-button_icon-inverse" title="Close" onclick="{! c.onclose }">
+                <c:primitiveIcon variant="bare" iconName="utility:close" svgClass="slds-button__icon"/>
+                <span class="slds-assistive-text">Close</span>
+            </button>
+        </aura:if>
+    </div>
+
+</aura:component>

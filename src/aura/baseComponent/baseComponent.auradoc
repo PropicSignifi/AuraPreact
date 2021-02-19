@@ -1,0 +1,19 @@
+<aura:documentation>
+	<aura:description>
+        <h2>Base Component for CTC Lightning Development</h2>
+        <p>
+            BaseComponent will load all necessary javascript and css files by default.
+            These files will be loaded only once.
+        </p>
+        <p>
+            BaseComponent provides two lifecycle events, '$init' and '$destroy'.
+            '$init' is triggered when the application is initialized and all the scripts
+            and the styles are loaded. '$destroy' is triggered when the application is unrendered
+            or the url location is changed.
+        </p>
+        <p>
+            BaseComponent provides inherited busy loading feature. It uses the 'lightning:spinner'
+            during the busy loading process.
+        </p>
+    </aura:description>
+</aura:documentation>

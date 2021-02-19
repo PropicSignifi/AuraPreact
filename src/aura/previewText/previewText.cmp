@@ -1,0 +1,25 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="text" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="texts" type="List" access="GLOBAL" description="Description"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" description="description"/>
+    <aura:attribute name="privatePreviewText" type="String" access="PRIVATE" description="description"/>
+    <aura:attribute name="privatePreviewTexts" type="List" access="PRIVATE" description="description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computePreviewText }" value="{! v.text }"/>
+    <aura:handler name="change" action="{! c.computePreviewText }" value="{! v.texts }"/>
+
+    <div class="{! v.privateComputedClass }">
+        <div class="slds-truncate">
+            {! v.privatePreviewText }
+        </div>
+        <c:dynamicMenu iconName="ctc-utility:a_down">
+            <aura:iteration items="{! v.privatePreviewTexts }" var="text">
+                <div>{! text }</div>
+            </aura:iteration>
+        </c:dynamicMenu>
+    </div>
+
+</aura:component>

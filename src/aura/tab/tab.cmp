@@ -1,0 +1,34 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:focusable,c:common,c:commented">
+    <aura:attribute name="label" type="Aura.Component[]" access="GLOBAL"/>
+    <aura:attribute name="id" type="String" access="GLOBAL"/>
+    <aura:attribute name="disabled" type="Boolean" access="GLOBAL"/>
+    <aura:attribute name="privateTabClassNames" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateLinkClassNames" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateVariant" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateSelected" type="Boolean" access="PRIVATE" default="false"/>
+
+    <aura:method name="deselect" action="{! c.deselect }"/>
+    <aura:method name="select" action="{! c.select }"/>
+    <aura:method name="setVariant" action="{! c.setVariant }">
+        <aura:attribute name="variant" type="String"/>
+    </aura:method>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeStyles }" value="{! v.privateVariant }"/>
+    <aura:handler name="change" action="{! c.computeStyles }" value="{! v.disabled }"/>
+    <aura:handler name="change" action="{! c.handleSelectedChange }" value="{! v.privateSelected }"/>
+    <aura:handler name="change" action="{! c.handleBodyChange }" value="{! v.body }"/>
+
+    <aura:registerEvent name="onactive" type="c:dataEvent" access="GLOBAL"/>
+    <aura:registerEvent name="oninactive" type="c:dataEvent" access="GLOBAL"/>
+
+    <li class="{! v.privateTabClassNames }" role="presentation" onclick="{! c.select }" title="{! v.title }" aura:id="privateTabContainer">
+        <a class="{! v.privateLinkClassNames }" aria-selected="{! v.privateSelected }" onblur="{! c.handleBlur }" href="javascript:void(0)" onfocus="{! c.handleFocus }" role="tab" tabindex="{! v.tabindex }" id="{! v.id }" aria-controls="{! globalId }" aura:id="privateAnchor">
+            {! v.label }
+            <aura:if isTrue="{! !empty(v.tooltip) }">
+                <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+            </aura:if>
+        </a>
+    </li>
+
+</aura:component>

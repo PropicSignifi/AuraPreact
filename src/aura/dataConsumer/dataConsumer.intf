@@ -1,0 +1,3 @@
+<aura:interface description="UI element that consumes data from data provider">
+    <aura:attribute name="dataProducer" type="String" access="GLOBAL"/>
+</aura:interface>

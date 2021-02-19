@@ -1,0 +1,57 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="variant" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="iconName" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="titleText" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="title" type="Aura.Component[]" access="GLOBAL" description="Description"/>
+    <aura:attribute name="time" type="Long" access="GLOBAL" description="Description"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateComputedIconClass" type="String" access="PRIVATE" description="description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.variant }"/>
+
+    <li>
+        <div class="{! v.privateComputedClass }">
+            <span class="slds-assistive-text">{! v.variant }</span>
+            <div class="slds-media">
+                <div class="slds-media__body">
+                    <div class="{! 'slds-media slds-timeline__media slds-timeline__media_' + v.variant }">
+                        <div class="slds-media__figure slds-timeline__icon">
+                            <div class="{! 'slds-icon_container slds-icon-standard-' + v.variant }" title="{! v.variant }">
+                                <c:primitiveIcon variant="bare" iconName="{! v.iconName }" svgClass="slds-icon slds-icon_small"></c:primitiveIcon>
+                            </div>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-media">
+                                <div class="slds-media__body">
+                                    <div class="slds-grid">
+                                        <aura:if isTrue="{! !empty(v.titleText) }">
+                                            <h3 class="slds-truncate" title="{! v.titleText }">{! v.titleText }</h3>
+                                            <aura:set attribute="else">
+                                                <h3>
+                                                {! v.title }
+                                                </h3>
+                                            </aura:set>
+                                        </aura:if>
+                                        <div class="slds-col slds-timeline__item_line"></div>
+                                    </div>
+                                    {! v.body }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-media__figure slds-media__figure_reverse">
+                    <div class="slds-timeline__actions">
+                        <p class="slds-timeline__date">
+                            <c:formattedDateTime value="{! v.time }" type="datetime-short"/>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+
+</aura:component>

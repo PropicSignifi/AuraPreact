@@ -1,0 +1,23 @@
+<aura:component access="GLOBAL">
+    <aura:attribute name="eventName" type="String" access="GLOBAL" description="The name of the event" required="true"/>
+    <aura:attribute name="param1" type="String" access="GLOBAL" description="Parameter 1"/>
+    <aura:attribute name="param2" type="String" access="GLOBAL" description="Parameter 2"/>
+    <aura:attribute name="param3" type="String" access="GLOBAL" description="Parameter 3"/>
+
+    <aura:registerEvent name="onEvent" type="c:dataEvent" access="GLOBAL" description="Description"/>
+
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }"/>
+    <aura:handler name="onclick" event="c:dataEvent" action="{! c.emitNewEvent }" includeFacets="true" />
+    <aura:handler name="onselect" event="c:dataEvent" action="{! c.emitNewEvent }" includeFacets="true" />
+    <aura:handler name="onselectAll" event="c:dataEvent" action="{! c.emitNewEvent }" includeFacets="true" />
+    <aura:handler name="onchange" event="c:dataEvent" action="{! c.emitNewEvent }" includeFacets="true" />
+    <aura:handler name="onfocus" event="c:dataEvent" action="{! c.emitNewEvent }" includeFacets="true" />
+    <aura:handler name="onblur" event="c:dataEvent" action="{! c.emitNewEvent }" includeFacets="true" />
+    <aura:handler name="onlookup" event="c:dataEvent" action="{! c.emitNewEvent }" includeFacets="true" />
+    <aura:handler name="onactive" event="c:dataEvent" action="{! c.emitNewEvent }" includeFacets="true" />
+    <aura:handler name="oninactive" event="c:dataEvent" action="{! c.emitNewEvent }" includeFacets="true" />
+    <aura:handler name="onsort" event="c:dataEvent" action="{! c.emitNewEvent }" includeFacets="true" />
+
+    {! v.body }
+
+</aura:component>

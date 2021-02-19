@@ -1,0 +1,35 @@
+[
+    {
+        "name": "id",
+        "header": "Id",
+        "type": "String"
+    },
+    {
+        "name": "Subject",
+        "fieldName": "Subject",
+        "header": "Task",
+    },
+    {
+        "name": "Who.Name",
+        "fieldName": "Who.Name",
+        "header": "Who",
+    },
+    {
+        "name": "type",
+        "header": "Activity Type",
+        "type": "String"
+    },
+    {
+        "name": "comment",
+        "header": "Comment",
+        "type": "String"
+    },
+    {
+        "name": "priority",
+        "header": "Priority",
+        "type": "String"
+    },
+    {
+        "name": "action"
+    }
+]

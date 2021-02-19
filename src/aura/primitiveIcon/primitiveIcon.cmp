@@ -1,0 +1,23 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="iconName" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="size" type="String" access="GLOBAL"/>
+    <aura:attribute name="variant" type="String" access="GLOBAL"/>
+    <aura:attribute name="svgClass" type="String" access="GLOBAL"/>
+    <aura:attribute name="display" type="String" access="GLOBAL"/>
+
+    <aura:attribute name="privateSvg" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateSvgComputedClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateContainerComputedClass" type="String" access="PRIVATE"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.updateSVG }" value="{! v.iconName }"/>
+    <aura:handler name="change" action="{! c.computeClassNamesAndUpdate }" value="{! v.size }"/>
+    <aura:handler name="change" action="{! c.computeClassNamesAndUpdate }" value="{! v.svgClass }"/>
+    <aura:handler name="change" action="{! c.computeClassNamesAndUpdate }" value="{! v.variant }"/>
+    <aura:handler name="change" action="{! c.computeContainerClassNamesAndUpdate }" value="{! v.display }"/>
+
+    <span class="{! v.privateContainerComputedClass }">
+        <aura:unescapedHtml value="{! v.privateSvg }"/>
+    </span>
+
+</aura:component>

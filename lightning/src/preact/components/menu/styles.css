@@ -1,0 +1,25 @@
+.menuItem {
+    display: inline-flex;
+    align-items: center;
+}
+
+.dynamicMenu {
+    position: relative;
+}
+
+.popover {
+    width: unset;
+    white-space: nowrap;
+}
+
+.positionBorder {
+    position: absolute;
+    left: -8px;
+    top: 48px;
+}
+
+.positionBare {
+    position: absolute;
+    left: -16px;
+    top: 32px;
+}

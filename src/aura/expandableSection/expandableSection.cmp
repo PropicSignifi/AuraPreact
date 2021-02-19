@@ -1,0 +1,25 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common,c:commented">
+    <aura:attribute name="expanded" type="Boolean" access="GLOBAL"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.expanded }"/>
+
+    <div class="{! v.privateComputedClass }">
+        <h3 class="slds-section__title">
+            <button aria-controls="{! globalId + '-expando' }" aria-expanded="{! v.expanded }" class="slds-button slds-section__title-action" onclick="{! c.onToggle }">
+                <c:primitiveIcon variant="bare" iconName="utility:switch" svgClass="slds-section__title-action-icon slds-button__icon slds-button__icon_left"/>
+                <span class="slds-truncate" title="{! v.title }">{! v.title }</span>
+                <aura:if isTrue="{! !empty(v.tooltip) }">
+                    <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+                </aura:if>
+            </button>
+        </h3>
+        <div aria-hidden="false" class="slds-section__content" id="{! globalId + '-expando' }">
+            {! v.body }
+        </div>
+    </div>
+
+</aura:component>

@@ -1,0 +1,7 @@
+<aura:interface description="UI with content editable">
+    <aura:attribute name="saveable" type="Boolean" access="GLOBAL"/>
+
+    <aura:method name="checkDirty" access="GLOBAL"/>
+    <aura:method name="save" access="GLOBAL"/>
+    <aura:method name="cancel" access="GLOBAL"/>
+</aura:interface>

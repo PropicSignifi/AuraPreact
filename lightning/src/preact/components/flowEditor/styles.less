@@ -1,0 +1,84 @@
+.flowEditor {
+    position: relative;
+
+    :global(.conceptG) {
+        text {
+            pointer-events: none;
+        }
+    }
+
+    marker {
+        fill: #333;
+    }
+
+    :global(.conceptG) {
+        circle {
+            fill: #F6FBFF;
+            stroke: #333;
+            stroke-width: 2px;
+        }
+
+        &:hover {
+            circle {
+                fill: rgb(200, 238, 241);
+            }
+        }
+    }
+
+    :global(.selected) {
+        circle {
+            fill: rgb(250, 232, 255);
+        }
+
+        &:hover {
+            circle {
+                fill: rgb(250, 232, 255);
+            }
+        }
+    }
+
+    :global(.link) {
+        fill: none;
+        stroke: #333;
+        stroke-width: 6px;
+        cursor: default;
+
+        &:hover {
+            stroke: rgb(94, 196, 204);
+        }
+    }
+
+    :global(.connect-node) {
+        circle {
+            fill: #BEFFFF;
+        }
+    }
+
+    :global(.link.hidden) {
+        stroke-width: 0;
+    }
+
+    :global(.link.selected) {
+        stroke: rgb(229, 172, 247);
+    }
+}
+
+.svg {
+    border-radius: .25rem;
+    border: 1px solid rgb(217, 219, 221);
+}
+
+.toolbox {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.helpbox {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 1rem;
+}

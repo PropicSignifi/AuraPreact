@@ -1,0 +1,14 @@
+<aura:component access="GLOBAL" extends="c:baseComponent">
+    <aura:attribute name="visible" type="Boolean" required="false" default="false"/>
+    <aura:attribute name="variant" type="String" required="false" default="default"/>
+    <aura:attribute name="tabId" type="String" required="true"/>
+    <aura:attribute name="privateComputedClassNames" type="String" access="PRIVATE" required="false"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.updateVisibility }" value="{! v.visible }"/>
+
+    <div class="{! v.privateComputedClassNames }" aria-labelledby="{! v.tabId }" role="tabpanel" id="{! v.tabId }">
+        {! v.body }
+    </div>
+
+</aura:component>

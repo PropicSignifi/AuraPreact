@@ -1,0 +1,67 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="name" type="String" access="GLOBAL" description="The name of the preact app"/>
+    <aura:attribute name="identifier" type="String" access="GLOBAL" description="The identifier of the preact app"/>
+    <aura:attribute name="waitFor" type="String" access="GLOBAL" description="The list of services waited for, separated by comma"/>
+    <aura:attribute name="props" type="Object" access="GLOBAL" description="The props of the preact app"/>
+
+    <aura:attribute name="preactlet" type="Object" access="GLOBAL" description="The preactlet component"/>
+
+    <aura:attribute name="value" type="List" access="PRIVATE" description="The internal value"/>
+    <aura:attribute name="config" type="List" access="PRIVATE" description="The internal config"/>
+    <aura:attribute name="apiProxyEnabled" type="Boolean" access="PRIVATE" description="The internal value"/>
+
+    <aura:attribute name="width" type="String" access="PRIVATE" description="The region width"/>
+
+    <aura:registerEvent name="onPreactEvent" type="c:dataEvent" access="GLOBAL"/>
+    <aura:registerEvent name="onPreactReady" type="c:dataEvent" access="GLOBAL"/>
+    <aura:registerEvent name="$startLoading" type="c:dataEvent" access="GLOBAL"/>
+    <aura:registerEvent name="$stopLoading" type="c:dataEvent" access="GLOBAL"/>
+    <aura:registerEvent name="appEvent" type="c:appEvent"/>
+
+    <aura:method name="forceReload" access="GLOBAL" description="Force reloading the preact component">
+    </aura:method>
+    <aura:method name="startLoading" access="GLOBAL">
+    </aura:method>
+    <aura:method name="stopLoading" access="GLOBAL">
+    </aura:method>
+    <aura:method name="registerPreactlet" access="GLOBAL">
+        <aura:attribute name="name" type="String"/>
+        <aura:attribute name="preactlet" type="Object"/>
+    </aura:method>
+    <aura:method name="wrap" access="GLOBAL">
+        <aura:attribute name="markup" type="String"/>
+    </aura:method>
+    <aura:method name="requireComponent" access="GLOBAL">
+        <aura:attribute name="name" type="String"/>
+    </aura:method>
+    <aura:method name="requireApiProxy" access="GLOBAL">
+    </aura:method>
+    <aura:method name="requireLibrary" access="GLOBAL">
+        <aura:attribute name="libraryNames" type="List"/>
+    </aura:method>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handlePropsChange }" value="{! v.props }"/>
+    <aura:handler name="change" action="{! c.handleValueChange }" value="{! v.value }"/>
+    <aura:handler name="change" action="{! c.handlePropsChange }" value="{! v.preactlet }"/>
+    <aura:handler event="force:closeQuickAction" action="{! c.handleApplicationEvent }"/>
+    <aura:handler event="c:appEvent" action="{! c.handleApplicationEvent }"/>
+
+    <lightning:navigation aura:id="navService"/>
+    <lightning:empApi aura:id="empApi"/>
+    <lightning:flexipageRegionInfo width="{! v.width }"/>
+    <lightning:unsavedChanges aura:id="unsavedChangesMonitor" onsave="{! c.handleSave }"/>
+    <lightning:pageReferenceUtils aura:id="pageReferenceUtils"/>
+    <aura:if isTrue="{! v.apiProxyEnabled }">
+        <c:apiProxy aura:id="apiProxy"/>
+    </aura:if>
+    <div aura:id="container" class="{! v.class }" data-type="{! v.name }">
+        <div class="slds-box slds-theme_default" style="height: 100px;">
+            <lightning:spinner variant="brand" alternativeText="Loading" size="medium" />
+        </div>
+    </div>
+
+    <div aura:id="shadow" class="shadow">
+    </div>
+
+</aura:component>

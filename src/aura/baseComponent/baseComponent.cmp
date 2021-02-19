@@ -1,0 +1,71 @@
+<aura:component access="GLOBAL" extensible="true" abstract="true">
+    <ltng:require
+        styles="{! join(',',
+            $Resource.ctcPropertyLightning + '/css/app.css'
+        ) }"
+    />
+    <ltng:require
+        scripts="{! join(',',
+            $Resource.ctcPropertyLightning + '/lib/lodash.js',
+            $Resource.ctcPropertyLightning + '/js/library.js',
+            $Resource.ctcPropertyLightning + '/js/app.js'
+        ) }"
+        afterScriptsLoaded="{! c.onScriptsLoaded }"
+    />
+
+    <ltng:require
+        scripts="{! join(',',
+            $Resource.ctcPropertyLightning + '/lib/moment.js',
+            $Resource.ctcPropertyLightning + '/lib/moment.timezone-with-data.js',
+            $Resource.ctcPropertyLightning + '/lib/jquery.min.js'
+        ) }"
+        afterScriptsLoaded="{! c.onScriptsLoaded }"
+    />
+    <ltng:require
+        scripts="{! join(',',
+            $Resource.ctcPropertyLightning + '/lib/libphonenumber.js'
+        ) }"
+        afterScriptsLoaded="{! c.onScriptsLoaded }"
+    />
+    <ltng:require
+        scripts="{! join(',',
+            $Resource.ctcPropertyLightning + '/lib/pjxml.js'
+        ) }"
+        afterScriptsLoaded="{! c.onScriptsLoaded }"
+    />
+
+    <aura:attribute name="loading" type="Boolean" access="PUBLIC" default="true"
+        description="Indicator of whether it is loading. Not to be set externally."/>
+    <aura:attribute name="slim" type="Boolean" default="true"
+        description="Indicator of whether it renders any extra doms. Not to be set externally."/>
+    <aura:attribute name="computed" type="Map" default="{}"
+        description="The computed object. Not to be set externally."/>
+
+    <aura:attribute name="privateChildren" type="List"/>
+
+    <aura:method name="getChildren" access="GLOBAL">
+    </aura:method>
+
+    <aura:registerEvent name="$init" type="c:dataEvent" access="GLOBAL"
+        description="The event is fired when the application is initiated."/>
+    <aura:registerEvent name="$heartbeat" type="c:dataEvent" access="GLOBAL"
+        description="The event is used to construct the internal component tree"/>
+    <aura:registerEvent name="$destroy" type="c:dataEvent" access="GLOBAL"
+        description="The event is fired when the application is destroyed."/>
+
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }"/>
+    <aura:handler event="aura:locationChange" action="{! c.onLocationChange }"/>
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="$heartbeat" event="c:dataEvent" includeFacets="true" action="{! c.heartbeat }"/>
+    <aura:handler name="$destroy" event="c:dataEvent" action="{! c.destroy }"/>
+
+    <aura:if isTrue="{! !v.slim }">
+        <div class="root">
+            <lightning:spinner aura:id="spinner" size="large" alternativeText="loading" class="{! v.loading ? '' : 'slds-hide' }"></lightning:spinner>
+            {! v.body }
+        </div>
+        <aura:set attribute="else">
+            {! v.body }
+        </aura:set>
+    </aura:if>
+</aura:component>

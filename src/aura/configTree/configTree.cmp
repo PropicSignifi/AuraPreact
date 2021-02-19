@@ -1,0 +1,4 @@
+<aura:component access="GLOBAL" extends="c:baseRoot" implements="force:appHostable,lightning:isUrlAddressable" >
+    <c:dataLightningExtension/>
+    <c:preact name="configTree" waitFor="DataLightningExtension"/>
+</aura:component>

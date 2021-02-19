@@ -1,0 +1,34 @@
+<aura:component access="GLOBAL" extends="c:baseRoot" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,lightning:availableForFlowScreens">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="resourceName" access="GLOBAL" type="String" />
+    <aura:attribute name="attribute1" access="GLOBAL" type="String" default=""/>
+    <aura:attribute name="attribute2" access="GLOBAL" type="String" default=""/>
+    <aura:attribute name="attribute3" access="GLOBAL" type="String" default=""/>
+    <aura:attribute name="attribute4" access="GLOBAL" type="String" default=""/>
+    <aura:attribute name="attribute5" access="GLOBAL" type="String" default=""/>
+    <aura:attribute name="attribute6" access="GLOBAL" type="String" default=""/>
+    <aura:attribute name="attribute7" access="GLOBAL" type="String" default=""/>
+    <aura:attribute name="attribute8" access="GLOBAL" type="String" default=""/>
+    <aura:attribute name="attribute9" access="GLOBAL" type="String" default=""/>
+    <aura:attribute name="attribute10" access="GLOBAL" type="String" default=""/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.init }" value="{! v.recordId }"/>
+    <aura:handler name="change" action="{! c.init }" value="{! v.sObjectName }"/>
+    <aura:handler name="change" action="{! c.init }" value="{! v.resourceName }"/>
+    <aura:handler name="change" action="{! c.init }" value="{! v.attribute1 }"/>
+    <aura:handler name="change" action="{! c.init }" value="{! v.attribute2 }"/>
+    <aura:handler name="change" action="{! c.init }" value="{! v.attribute3 }"/>
+    <aura:handler name="change" action="{! c.init }" value="{! v.attribute4 }"/>
+    <aura:handler name="change" action="{! c.init }" value="{! v.attribute5 }"/>
+    <aura:handler name="change" action="{! c.init }" value="{! v.attribute6 }"/>
+    <aura:handler name="change" action="{! c.init }" value="{! v.attribute7 }"/>
+    <aura:handler name="change" action="{! c.init }" value="{! v.attribute8 }"/>
+    <aura:handler name="change" action="{! c.init }" value="{! v.attribute9 }"/>
+    <aura:handler name="change" action="{! c.init }" value="{! v.attribute10 }"/>
+
+    <c:gLightningExtension/>
+    <c:dataLightningExtension/>
+    <c:preact aura:id="preact" name="customUI" waitFor="GLightningExtension,DataLightningExtension"/>
+</aura:component>

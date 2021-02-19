@@ -1,0 +1,21 @@
+<aura:component access="GLOBAL" extends="c:baseComponent">
+    <aura:attribute name="privateParameters" type="Object" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateExpressions" type="List" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateTarget" type="Object" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateText" type="Object" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateHtml" type="Object" access="PRIVATE" description="description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="onParameterChange" event="c:dataEvent" action="{! c.handleParameterChange }" includeFacets="true"/>
+
+    <aura:if isTrue="{! !empty(v.privateText) }">
+        {! v.privateText }
+    </aura:if>
+    <aura:if isTrue="{! !empty(v.privateHtml) }">
+        <aura:unescapedHtml value="{! v.privateHtml }"/>
+        <aura:set attribute="else">
+            {! v.body }
+        </aura:set>
+    </aura:if>
+
+</aura:component>

@@ -1,0 +1,18 @@
+<aura:component access="GLOBAL" extends="c:baseComponent">
+    <aura:dependency resource="c:iterationItem"/>
+
+    <aura:attribute name="items" type="List" access="GLOBAL" description="Description"/>
+    <aura:attribute name="template" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="providers" type="Object" access="GLOBAL" description="Description"/>
+
+    <aura:method name="renderItems" access="GLOBAL" description="Description">
+        <aura:attribute name="callback" type="Object"/>
+    </aura:method>
+    <aura:method name="getItemUIs" access="GLOBAL" description="Description">
+    </aura:method>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+
+    {! v.body }
+
+</aura:component>

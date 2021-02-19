@@ -1,0 +1,29 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="name" type="String" access="GLOBAL" description="Description" required="true"/>
+    <aura:attribute name="items" type="List" access="GLOBAL" description="Description"/>
+    <aura:attribute name="itemsConfig" type="List" access="GLOBAL" description="Description"/>
+    <aura:attribute name="paginatorName" type="String" access="GLOBAL" description="The name of the paginator"/>
+    <aura:attribute name="slim" type="Boolean" default="false"
+        description="Indicator of whether it renders any extra doms"/>
+
+    <aura:attribute name="privateItems" type="List" access="PRIVATE" description="Description"/>
+    <aura:attribute name="privateLastSize" type="Integer" access="PRIVATE" description="Description"/>
+    <aura:attribute name="privateStartIndex" type="Integer" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateEndIndex" type="Integer" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateLoaded" type="Boolean" access="PRIVATE" description="Whether the list editor is laoded"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler event="c:appEvent" action="{! c.handlePageChange }"/>
+
+    <div aura:id="placeholder" class="{! v.privateLoaded ? ' slds-hide' : '' }">
+        <c:placeholder name="table_list_line_item" opacity="50"/>
+        <c:placeholder name="table_list_line_item" opacity="50"/>
+        <c:placeholder name="table_list_line_item" opacity="50"/>
+        <c:placeholder name="table_list_line_item" opacity="50"/>
+        <c:placeholder name="table_list_line_item" opacity="50"/>
+    </div>
+    <ul class="{! v.class + ' ' + (v.privateLoaded ? '' : 'slds-hide') }">
+        <c:iteration aura:id="itemList" items="{! v.privateItems }" template="{! v.computed.template }" providers="{! v.computed.providers }"/>
+    </ul>
+
+</aura:component>

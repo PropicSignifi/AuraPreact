@@ -1,0 +1,13 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="object" type="Object" access="GLOBAL" description="Description"/>
+    <aura:attribute name="index" type="Integer" access="GLOBAL" description="Description"/>
+    <aura:attribute name="itemsConfig" type="List" access="GLOBAL" description="Description"/>
+    <aura:attribute name="slim" type="Boolean" default="false"
+        description="Indicator of whether it renders any extra doms"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+
+    <li class="{! v.class }" aura:id="container">
+    </li>
+
+</aura:component>

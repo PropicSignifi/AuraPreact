@@ -1,0 +1,98 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:inputable,c:focusable,c:common,c:commented,c:hasPopup">
+    <aura:attribute name="value" type="Object" access="GLOBAL"/>
+    <aura:attribute name="label" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="placeholder" type="String" access="GLOBAL"/>
+    <aura:attribute name="getSuggestions" type="Object" access="GLOBAL" description="Function to load suggestions"/>
+    <aura:attribute name="messageWhenValueMissing" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="cache" type="Boolean" access="GLOBAL" description="Whether to use cache for the suggestions" default="false"/>
+    <aura:attribute name="wait" type="Integer" access="GLOBAL" description="A period of waiting before loading the suggestions" default="50"/>
+    <aura:attribute name="minlength" type="Integer" access="GLOBAL" description="The min length to start auto completion" default="3"/>
+    <aura:attribute name="limit" type="Integer" access="GLOBAL" description="The limit of the suggestion list" default="5"/>
+    <aura:attribute name="iconName" type="String" access="GLOBAL"/>
+    <aura:attribute name="messageWhenNotFound" type="String" access="GLOBAL" default="No results found"/>
+    <aura:attribute name="messageWhenRendering" type="String" access="GLOBAL" default="Loading ..."/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateHelpMessage" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateFocused" type="Boolean" access="PRIVATE"/>
+    <aura:attribute name="privateVisible" type="Boolean" access="PRIVATE"/>
+    <aura:attribute name="privateOptions" type="List" access="PRIVATE"/>
+    <aura:attribute name="privateFilteredOptions" type="List" access="PRIVATE"/>
+    <aura:attribute name="privateLoadingOptions" type="Boolean" access="PRIVATE" default="true"/>
+    <aura:attribute name="privateId" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateValue" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateIsRendering" type="Boolean" access="PRIVATE"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="$destroy" event="c:dataEvent" action="{! c.doDestroy }"/>
+    <aura:handler name="change" action="{! c.handleClassChange }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.handleValueChange }" value="{! v.value }"/>
+
+    <div class="{! v.privateComputedClass }" title="{! v.title }">
+        <label class="{! join(' ', 'slds-form-element__label', (v.variant == 'label-hidden' ? 'slds-m-right--xxx-small' : '')) }" for="{! globalId }">
+            <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : '' }">
+                <aura:if isTrue="{! !empty(v.labelHtml) }">
+                    <aura:unescapedHtml value="{! v.labelHtml }"/>
+                    <aura:set attribute="else">
+                        {! v.label }
+                    </aura:set>
+                </aura:if>
+            </span>
+            <aura:if isTrue="{! v.required }">
+                <abbr class="slds-required" title="{! $Label.LightningControl.required }">
+                    *
+                </abbr>
+            </aura:if>
+            <aura:if isTrue="{! !empty(v.tooltip) }">
+                <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+            </aura:if>
+        </label>
+        <div class="slds-form-element__control slds-grow">
+            <div class="{! 'slds-combobox_container slds-has-inline-listbox' + (v.privateFocused ? ' slds-has-input-focus' : '') }">
+                <div class="{! 'slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-combobox-lookup' + (v.privateVisible ? ' slds-is-open' : '') }" aria-expanded="false" aria-haspopup="listbox" role="combobox" data-suggestion-box="{! globalId }">
+                    <div class="{! 'slds-combobox__form-element slds-input-has-icon ' + (!empty(v.iconName) ? 'slds-input-has-icon_left-right' : 'slds-input-has-icon_right') }" role="none">
+                        <input aura:id="private" type="text" class="slds-input slds-combobox__input" id="{! globalId }" aria-autocomplete="list" aria-controls="{! 'listbox-' + globalId }" role="textbox" style="{! !empty(v.iconName) ? 'padding-left: 2.25rem;' : '' }"/>
+                        <aura:if isTrue="{! !empty(v.iconName) }">
+                            <c:primitiveIcon variant="bare" iconName="{! v.iconName }" svgClass="slds-input__icon slds-input__icon--left slds-icon-text-default"/>
+                        </aura:if>
+                        <aura:if isTrue="{! !v.value }">
+                            <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                <c:primitiveIcon variant="bare" iconName="ctc-utility:a_search" svgClass="slds-icon slds-icon slds-icon_x-small slds-icon-text-default"/>
+                            </span>
+                            <aura:set attribute="else">
+                                <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Remove selected option" onclick="{! c.onClearItem }">
+                                    <c:primitiveIcon variant="bare" iconName="ctc-utility:a_clear" svgClass="slds-button__icon"/>
+                                    <span class="slds-assistive-text">Remove selected option</span>
+                                </button>
+                            </aura:set>
+                        </aura:if>
+                    </div>
+                    <div aura:id="popup" data-suggestion-box="{! globalId }" id="{! 'listbox-' + globalId }" role="listbox" class="{! 'slds-dropdown_append-to-body ' + v.popupClass }">
+                        <ul class="{! 'slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid slds-dropdown_length-' + v.limit + ' ' + (v.privateVisible ? '' : 'slds-hide ') + 'slds-dropdown_custom-suggestion-box ' }" role="presentation">
+                            <li role="presentation" class="{! 'slds-listbox__item ' + (v.privateLoadingOptions ? 'slds-show' : 'slds-hide') }" style="height: 3.5rem;">
+                                <lightning:spinner aura:id="spinner" variant="brand" size="medium" alternativeText="loading"></lightning:spinner>
+                            </li>
+                            <c:iteration aura:id="itemList" items="{! v.privateFilteredOptions }" template="{! v.computed.template }" providers="{! v.computed.providers }"/>
+                            <li role="presentation" class="{! 'slds-listbox__item ' + ((v.privateIsRendering &amp;&amp; !v.privateLoadingOptions) ? 'slds-show' : 'slds-hide') }">
+                                <span class="slds-media slds-listbox__option slds-listbox__option_plain" role="presentation" id="{! 'listbox-option-' + globalId + '-rendering' }">
+                                    <h3 class="slds-text-title_caps" role="presentation">{! v.messageWhenRendering }</h3>
+                                </span>
+                            </li>
+                            <li role="presentation" class="{! 'slds-listbox__item ' + ((!v.privateIsRendering &amp;&amp; empty(v.privateFilteredOptions) &amp;&amp; !v.privateLoadingOptions) ? 'slds-show' : 'slds-hide') }">
+                                <span class="slds-media slds-listbox__option slds-listbox__option_plain" role="presentation" id="{! 'listbox-option-' + globalId + '-noResultFound' }">
+                                    <h3 class="slds-text-title_caps" role="presentation">{! v.messageWhenNotFound }</h3>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <aura:if isTrue="{! !empty(v.privateHelpMessage) }">
+            <div class="slds-form-element__help" aria-live="assertive" id="{! globalId + '-desc' }">
+                {! v.privateHelpMessage }
+            </div>
+        </aura:if>
+    </div>
+
+</aura:component>

@@ -1,0 +1,50 @@
+.root {
+    display: inline-flex;
+    position: relative;
+}
+
+.popover {
+    position: absolute;
+    white-space: pre-wrap;
+    min-width: 15rem;
+    z-index: 9999;
+}
+
+.body {
+    font-size: 0.75rem;
+    color: white;
+    padding: 0.5rem 0.75rem;
+    line-height: 1.5;
+    text-transform: none;
+    font-weight: 400;
+}
+
+.top {
+    top: 35px;
+    left: -10rem;
+}
+
+.topLeft {
+    top: 35px;
+    left: -1rem
+}
+
+.topRight {
+    top: 35px;
+    left: -18rem;
+}
+
+.bottom {
+    bottom: 30px;
+    left: -10rem;
+}
+
+.bottomLeft {
+    bottom: 30px;
+    left: -1rem
+}
+
+.bottomRight {
+    bottom: 30px;
+    left: -18rem;
+}

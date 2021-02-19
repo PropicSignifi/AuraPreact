@@ -1,0 +1,7 @@
+.THIS .paramsTextarea textarea {
+    min-height: 150px;
+}
+
+.THIS .expressionTextarea textarea {
+    min-height: 80px;
+}

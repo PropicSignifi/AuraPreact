@@ -1,0 +1,61 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:inputable,c:focusable,c:common,c:commented">
+    <aura:attribute name="label" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="value" type="Object" access="GLOBAL" required="false"/>
+    <aura:attribute name="messageWhenValueMissing" type="String" access="GLOBAL" required="false"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" required="false"/>
+    <aura:attribute name="privateHelpMessage" type="String" access="PRIVATE" required="false"/>
+    <aura:attribute name="privateId" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="privateValue" type="String" access="GLOBAL" required="false"/>
+
+    <aura:method name="setObject" access="GLOBAL">
+        <aura:attribute name="object" type="Object"/>
+    </aura:method>
+
+    <aura:registerEvent name="onlookup" type="c:dataEvent" access="GLOBAL"
+        description="The event is fired when the search icon is clicked"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleClassChange }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.handleValueChange }" value="{! v.value }"/>
+
+    <div class="{! v.privateComputedClass }" title="{! v.title }">
+        <label class="{! join(' ', 'slds-form-element__label', (v.variant == 'label-hidden' ? 'slds-m-right--xxx-small' : '')) }" for="{! globalId }">
+            <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : '' }">
+                <aura:if isTrue="{! !empty(v.labelHtml) }">
+                    <aura:unescapedHtml value="{! v.labelHtml }"/>
+                    <aura:set attribute="else">
+                        {! v.label }
+                    </aura:set>
+                </aura:if>
+            </span>
+            <aura:if isTrue="{! v.required }">
+                <abbr class="slds-required" title="{! $Label.LightningControl.required }">
+                    *
+                </abbr>
+            </aura:if>
+            <aura:if isTrue="{! !empty(v.tooltip) }">
+                <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+            </aura:if>
+        </label>
+        <div class="slds-form-element__control slds-grow">
+            <div class="slds-input-group">
+                <input class="slds-input" readonly="readonly" type="text" id="{! globalId }" aura:id="private"/>
+                <span class="input-group-addon" onclick="{! c.onLookup }">
+                    <aura:if isTrue="{! v.value }">
+                        <c:primitiveIcon variant="bare" iconName="ctc-utility:a_clear" size="x-small"/>
+                        <aura:set attribute="else">
+                            <c:primitiveIcon variant="bare" iconName="ctc-utility:a_search" size="x-small"/>
+                        </aura:set>
+                    </aura:if>
+                </span>
+            </div>
+        </div>
+        <aura:if isTrue="{! !empty(v.privateHelpMessage) }">
+            <div class="slds-form-element__help" aria-live="assertive" id="{! globalId + '-desc' }">
+                {! v.privateHelpMessage }
+            </div>
+        </aura:if>
+    </div>
+
+</aura:component>

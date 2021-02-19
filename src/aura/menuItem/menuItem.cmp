@@ -1,0 +1,33 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:focusable,c:common,c:commented">
+    <aura:attribute name="value" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="iconName" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="label" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="checked" type="Boolean" access="GLOBAL" required="false"/>
+    <aura:attribute name="disabled" type="Boolean" access="GLOBAL" required="false"/>
+    <aura:attribute name="privateClassNames" type="String" access="PRIVATE" required="false"/>
+    <aura:attribute name="privateRole" type="String" access="PRIVATE" required="false"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleClassChange }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.handleCheckedChange }" value="{! v.checked }"/>
+
+    <aura:registerEvent name="onactive" type="c:dataEvent" access="GLOBAL"/>
+
+    <li class="{! v.privateClassNames }" role="presentation" title="{! v.title }">
+        <a aria-checked="{! v.checked }" onblur="{! c.handleBlur }" href="#" onkeydown="{! c.handleKeyDown }" onfocus="{! c.handleFocus }" aria-disabled="{! v.disabled }" role="{! v.privateRole }" tabindex="{! v.tabindex }" onclick="{! c.handleClick }" aura:id="anchor">
+            <aura:if isTrue="{! v.iconName }">
+                <c:primitiveIcon size="x-small" variant="bare" iconName="{! v.iconName }" svgClass="slds-icon-text-default slds-m-right--small slds-shrink-none"/>
+            </aura:if>
+            <span class="slds-truncate">
+                <aura:if isTrue="{! !empty(v.checked) }">
+                    <c:primitiveIcon size="x-small" variant="bare" iconName="ctc-utility:a_tick" svgClass="slds-icon--selected slds-icon-text-default slds-m-right--x-small"/>
+                </aura:if>
+                {! v.label }
+            </span>
+            <aura:if isTrue="{! !empty(v.tooltip) }">
+                <c:helptext content="{! v.tooltip }"/>
+            </aura:if>
+        </a>
+    </li>
+
+</aura:component>

@@ -1,0 +1,14 @@
+<aura:component access="GLOBAL" extends="c:baseComponent">
+    <aura:attribute name="isTrue" type="Boolean" access="GLOBAL" description="Description" required="true"/>
+    <aura:attribute name="else" type="Aura.Component[]" access="GLOBAL" description="Description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+
+    <aura:if isTrue="{! v.isTrue }">
+        {! v.body }
+        <aura:set attribute="else">
+            {! v.else }
+        </aura:set>
+    </aura:if>
+
+</aura:component>

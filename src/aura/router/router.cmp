@@ -1,0 +1,15 @@
+<aura:component access="GLOBAL" extends="c:baseComponent">
+    <aura:attribute name="name" type="String" access="GLOBAL" description="Description" required="true"/>
+    <aura:attribute name="routes" type="List" access="GLOBAL" description="Description" required="true"/>
+    <aura:attribute name="data" type="Object" access="GLOBAL" description="Used to hold route params temporarily"/>
+
+    <aura:attribute name="slim" type="Boolean" default="false"
+        description="Indicator of whether it renders any extra doms"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler event="c:appEvent" action="{! c.handleRouteChange }"/>
+
+    <div aura:id="container">
+    </div>
+
+</aura:component>

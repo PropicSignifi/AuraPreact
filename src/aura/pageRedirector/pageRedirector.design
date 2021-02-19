@@ -1,0 +1,3 @@
+<design:component label="Propic Page Redirector">
+    <design:attribute name="sObjectName" label="sObjectName" />
+</design:component>

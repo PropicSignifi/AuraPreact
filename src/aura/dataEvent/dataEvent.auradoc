@@ -1,0 +1,24 @@
+<aura:documentation>
+	<aura:description>
+        <h2>Data Event for CTC Lightning Development</h2>
+        <p>
+            Data event will be used as a component event that is able to hold dynamic data.
+        </p>
+        <p>
+            This is an example of how you fire a data event.
+        </p>
+        <pre>
+            <code>
+({
+    fireEvent : function(component, event, helper) {
+        var dataEvent = $A.get("eventName");
+        dataEvent.setParams({
+            data: {},
+        })
+        dataEvent.fire();
+    }
+})
+            </code>
+        </pre>
+    </aura:description>
+</aura:documentation>

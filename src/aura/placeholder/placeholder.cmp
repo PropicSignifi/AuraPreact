@@ -1,0 +1,9 @@
+<aura:component access="GLOBAL" extends="c:baseComponent">
+    <aura:attribute name="name" type="String" default="default"/>
+    <aura:attribute name="opacity" type="Integer" default="1"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+
+    <div/>
+
+</aura:component>

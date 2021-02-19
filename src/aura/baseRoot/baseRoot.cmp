@@ -1,0 +1,194 @@
+<aura:component access="GLOBAL" extensible="true" abstract="true" >
+    <aura:if isTrue="{! v.personalizedChecked }">
+        <aura:if isTrue="{! v.personalized }">
+            <ltng:require
+                styles="{! join(',',
+                    $Resource.ctcPropertyLightning + '/css/app.css',
+                    $Resource.ctcPropertyLightningApp + '_' + v.personalized + '/preact-app.css'
+                ) }"
+            />
+            <ltng:require
+                scripts="{! join(',',
+                    $Resource.ctcPropertyLightning + '/lib/lodash.js',
+                    $Resource.ctcPropertyLightning + '/js/library.js',
+                    $Resource.ctcPropertyLightning + '/js/app.js',
+                    $Resource.ctcPropertyLightningApp + '_' + v.personalized + '/preact-app.js'
+                ) }"
+                afterScriptsLoaded="{! c.onScriptsLoaded }"
+            />
+            <aura:set attribute="else">
+                <ltng:require
+                    styles="{! join(',',
+                        $Resource.ctcPropertyLightning + '/css/app.css',
+                        $Resource.ctcPropertyLightningApp + '/preact-app.css'
+                    ) }"
+                />
+                <ltng:require
+                    scripts="{! join(',',
+                        $Resource.ctcPropertyLightning + '/lib/lodash.js',
+                        $Resource.ctcPropertyLightning + '/js/library.js',
+                        $Resource.ctcPropertyLightning + '/js/app.js',
+                        $Resource.ctcPropertyLightningApp + '/preact-app.js'
+                    ) }"
+                    afterScriptsLoaded="{! c.onScriptsLoaded }"
+                />
+            </aura:set>
+    	</aura:if>
+    </aura:if>
+
+    <ltng:require
+        scripts="{! join(',',
+            $Resource.ctcPropertyLightning + '/lib/moment.js',
+            $Resource.ctcPropertyLightning + '/lib/moment.timezone-with-data.js',
+            $Resource.ctcPropertyLightning + '/lib/jquery.min.js'
+        ) }"
+        afterScriptsLoaded="{! c.onScriptsLoaded }"
+    />
+    <ltng:require
+        scripts="{! join(',',
+            $Resource.ctcPropertyLightning + '/lib/libphonenumber.js'
+        ) }"
+        afterScriptsLoaded="{! c.onScriptsLoaded }"
+    />
+    <ltng:require
+        scripts="{! join(',',
+            $Resource.ctcPropertyLightning + '/lib/pjxml.js'
+        ) }"
+        afterScriptsLoaded="{! c.onScriptsLoaded }"
+    />
+
+    <aura:attribute name="loading" type="Boolean" access="PUBLIC" required="true" default="true"
+        description="Indicator of whether it is loading. Not to be set externally."/>
+    <aura:attribute name="loadingLocal" type="Integer" access="PUBLIC" required="true" default="0"
+        description="Indicator of whether it is loading. Not to be set externally."/>
+    <aura:attribute name="mobileModalLoading" type="Boolean" default="false"/>
+    <aura:attribute name="modalLoading" type="Boolean" default="false"/>
+    <aura:attribute name="popoverLoading" type="Boolean" default="false"/>
+    <aura:attribute name="loadingContainerStyle" type="String" default="with"/>
+    <aura:attribute name="computed" type="Map" required="true" default="{}"
+        description="The computed object. Not to be set externally."/>
+    <aura:attribute name="personalized" type="Boolean"/>
+    <aura:attribute name="personalizedChecked" type="Boolean"/>
+
+    <aura:attribute name="privateAlert" type="Object"
+        description="The global alert for the application"/>
+    <aura:attribute name="privateToast" type="Object" access="PRIVATE"
+        description="The global toast for the application"/>
+    <aura:attribute name="privatePopover" type="Object"
+        description="The global popover for the application"/>
+
+    <aura:attribute name="privatePopoverClassnames" type="String" default="slds-hide"/>
+    <aura:attribute name="privatePopoverButtonClassnames" type="String"/>
+
+    <aura:attribute name="privateChildren" type="List"/>
+
+    <aura:method name="getChildren" access="GLOBAL">
+    </aura:method>
+    <aura:method name="alert" access="GLOBAL">
+        <aura:attribute name="options" type="Object"/>
+    </aura:method>
+    <aura:method name="toast" access="GLOBAL">
+        <aura:attribute name="options" type="Object"/>
+    </aura:method>
+    <aura:method name="popover" access="GLOBAL">
+        <aura:attribute name="options" type="Object"/>
+    </aura:method>
+
+    <aura:registerEvent name="$init" type="c:dataEvent" access="GLOBAL"
+        description="The event is fired when the application is initiated."/>
+    <aura:registerEvent name="$destroy" type="c:dataEvent" access="GLOBAL"
+        description="The event is fired when the application is destroyed."/>
+    <aura:registerEvent name="$ready" type="c:dataEvent" access="GLOBAL"
+        description="The event is fired when the component is ready"/>
+
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }"/>
+    <aura:handler name="$heartbeat" event="c:dataEvent" includeFacets="true" action="{! c.heartbeat }"/>
+    <aura:handler name="$startLoading" event="c:dataEvent" includeFacets="true" action="{! c.startLoading }"/>
+    <aura:handler name="$stopLoading" event="c:dataEvent" includeFacets="true" action="{! c.stopLoading }"/>
+    <aura:handler name="onPreactReady" event="c:dataEvent" includeFacets="true" action="{! c.onPreactReady }"/>
+    <aura:handler event="aura:locationChange" action="{! c.onLocationChange }"/>
+    <aura:handler name="change" value="{! v.privatePopover }" action="{! c.computePrivatePopoverClassnames }" />
+
+    <c:toast visible="{! v.privateToast.visible }" contentText="{! v.privateToast.content }" variant="{! v.privateToast.variant }" position="{! v.privateToast.position }"/>
+    <div aura:id="body" class="root">
+        <c:spinner aura:id="spinnerLocal" size="large" variant="brand" container="{! v.loadingContainerStyle }" alternativeText="loading" class="{! v.loadingLocal > 0 ? '' : 'slds-hide' }"></c:spinner>
+
+        {! v.body }
+    </div>
+    <div aura:id="mobileModal" class="slds-hide">
+        <div class="slds-p-around_medium slds-border_bottom slds-grid">
+            <c:button variant="neutral" label="Back" onclick="{! c.onAlertCancel }"></c:button>
+        </div>
+        <header class="slds-grid slds-grid_align-center slds-p-around_medium slds-border_bottom">
+            <h2 class="slds-text-heading_medium slds-hyphenate">{! v.privateAlert.header }</h2>
+        </header>
+        <div class="slds-is-relative">
+            <c:spinner size="large" variant="brand" container="with" alternativeText="loading" class="{! v.mobileModalLoading > 0 ? '' : 'slds-hide' }"></c:spinner>
+            <p>{! v.privateAlert.message }</p>
+            <div aura:id="mobileModalContent" class="slds-p-around_medium"></div>
+        </div>
+        <footer class="slds-grid slds-grid_align-center">
+            <aura:if isTrue="{! !v.privateAlert.hideCancel }">
+                <c:button variant="neutral" label="{! v.privateAlert.onCancelText }" onclick="{! c.onAlertCancel }"/>
+            </aura:if>
+            <aura:if isTrue="{! v.privateAlert.onOtherText }">
+                <c:button variant="secondary" label="{! v.privateAlert.onOtherText }" onclick="{! c.onAlertOther }"/>
+            </aura:if>
+            <aura:if isTrue="{! v.privateAlert.variant != 'prompt' }">
+                <c:button variant="brand" label="{! v.privateAlert.onSaveText }" onclick="{! c.onAlertSave }"/>
+            </aura:if>
+        </footer>
+    </div>
+    <aura:if isTrue="{! v.privateAlert }">
+        <c:modal aura:id="alertModal" headerText="{! v.privateAlert.header }" variant="{! v.privateAlert.variant }">
+            <div class="slds-is-relative">
+                <c:spinner size="large" variant="brand" container="with" alternativeText="loading" class="{! v.modalLoading > 0 ? '' : 'slds-hide' }"></c:spinner>
+                <p>{! v.privateAlert.message }</p>
+                <div aura:id="modalContent"></div>
+            </div>
+            <aura:set attribute="footer">
+                <aura:if isTrue="{! !v.privateAlert.hideCancel }">
+                    <c:button variant="neutral" label="{! v.privateAlert.onCancelText }" onclick="{! c.onAlertCancel }"/>
+                </aura:if>
+                <aura:if isTrue="{! v.privateAlert.onOtherText }">
+                    <c:button variant="secondary" label="{! v.privateAlert.onOtherText }" onclick="{! c.onAlertOther }"/>
+                </aura:if>
+                <aura:if isTrue="{! v.privateAlert.variant != 'prompt' }">
+                    <c:button variant="brand" label="{! v.privateAlert.onSaveText }" onclick="{! c.onAlertSave }"/>
+                </aura:if>
+            </aura:set>
+        </c:modal>
+    </aura:if>
+    <section aura:id="popover" class="{! v.privatePopoverClassnames }" role="dialog" data-popup-source="app-popover">
+        <button class="{! v.privatePopoverButtonClassnames }" title="Close" onclick="{! c.onPopoverCancel }">
+            <c:primitiveIcon variant="bare" iconName="utility:close" svgClass="slds-button__icon"/>
+            <span class="slds-assistive-text">Close</span>
+        </button>
+        <aura:if isTrue="{! v.privatePopover.variant == 'error' || v.privatePopover.variant == 'warning' }">
+            <header class="slds-popover__header">
+                <div class="slds-media slds-media_center slds-has-flexi-truncate ">
+                    <div class="slds-media__figure">
+                        <span class="{! 'slds-icon_container slds-icon-utility-' + v.privatePopover.variant }">
+                            <c:primitiveIcon variant="bare" iconName="{! 'utility:' + v.privatePopover.variant }" svgClass="slds-icon slds-icon_x-small"/>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-truncate slds-text-heading_medium">{! v.privatePopover.header }</h2>
+                    </div>
+                </div>
+            </header>
+            <aura:set attribute="else">
+                <aura:if isTrue="{! v.privatePopover.header }">
+                    <header class="slds-popover__header">
+                        <h2 className="slds-text-heading_small">{! v.privatePopover.header }</h2>
+                    </header>
+                </aura:if>
+            </aura:set>
+        </aura:if>
+        <div class="slds-popover__body slds-is-relative">
+            <c:spinner size="medium" variant="brand" container="with" alternativeText="loading" class="{! v.popoverLoading > 0 ? '' : 'slds-hide' }"></c:spinner>
+            {! v.privatePopover.content }
+            <div aura:id="popoverContent"></div>
+        </div>
+    </section>
+</aura:component>

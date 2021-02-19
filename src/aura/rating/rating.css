@@ -1,0 +1,11 @@
+.THIS .slds-button:focus {
+    box-shadow: none;
+}
+
+.THIS .favorite-active svg {
+    fill: rgb(255, 183, 93);
+}
+
+.THIS .favorite-inactive svg {
+    fill: #eee;
+}

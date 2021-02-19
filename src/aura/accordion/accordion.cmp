@@ -1,0 +1,16 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="activeSectionName" type="String" access="GLOBAL"/>
+
+    <aura:attribute name="privateSectionBag" type="Object" access="PRIVATE"/>
+    <aura:attribute name="privateSortedSections" type="Object" access="PRIVATE"/>
+    <aura:attribute name="privateSelectedSectionId" type="String" access="PRIVATE" default=""/>
+    <aura:attribute name="privateIsOpenProgrammatically" type="Boolean" access="PRIVATE" default="false"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleActiveSectionNameChange }" value="{! v.activeSectionName }"/>
+
+    <ul class="{! 'slds-accordion ' + v.class }" onaccordionsectionregister="{! c.handleSectionRegister }" onaccordionsectionkeynav="{! c.handleSectionKeyNav }" onaccordionsectionselect="{! c.handleSectionSelect }" onaccordionsectionderegister="{! c.handleSectionDeregister }" title="{! v.title }">
+        {! v.body }
+    </ul>
+
+</aura:component>

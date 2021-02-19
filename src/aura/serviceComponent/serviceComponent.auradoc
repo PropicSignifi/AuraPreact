@@ -1,0 +1,9 @@
+<aura:documentation>
+	<aura:description>
+        <h2>Service Component for CTC Lightning Development</h2>
+        <p>
+            Extend this component to create a concrete service component. Set the
+            'serviceName' attribute to be the name that you want to register.
+        </p>
+    </aura:description>
+</aura:documentation>

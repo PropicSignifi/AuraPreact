@@ -1,0 +1,17 @@
+<design:component label="Propic Custom UI">
+    <design:attribute name="resourceName" label="Static Resource Name" default="" />
+    <design:attribute name="attribute1" label="Attribute 1" default="" />
+    <design:attribute name="attribute2" label="Attribute 2" default="" />
+    <design:attribute name="attribute3" label="Attribute 3" default="" />
+    <design:attribute name="attribute4" label="Attribute 4" default="" />
+    <design:attribute name="attribute5" label="Attribute 5" default="" />
+    <design:attribute name="attribute6" label="Attribute 6" default="" />
+    <design:attribute name="attribute7" label="Attribute 7" default="" />
+    <design:attribute name="attribute8" label="Attribute 8" default="" />
+    <design:attribute name="attribute9" label="Attribute 9" default="" />
+    <design:attribute name="attribute10" label="Attribute 10" default="" />
+    <design:supportedFormFactors>
+        <design:supportedFormFactor type="Large"/>
+        <design:supportedFormFactor type="Small"/>
+    </design:supportedFormFactors>
+</design:component>

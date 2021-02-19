@@ -1,0 +1,68 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="variant" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="size" type="String" access="GLOBAL" description="Description" default="medium"/>
+    <aura:attribute name="timing" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="container" type="String" access="GLOBAL" description="Description" default="with"/>
+    <aura:attribute name="alternativeText" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="text" type="String" access="GLOBAL" description="Description"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateComputedContainerClass" type="String" access="PRIVATE" description="description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.variant }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.size }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.timing }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.container }"/>
+
+    <aura:if isTrue="{! !empty(v.privateComputedContainerClass) }">
+        <div class="{! v.privateComputedContainerClass }">
+            <aura:if isTrue="{! !empty(v.text) }">
+                <div class="slds-spinner_custom-wrapper">
+                    <div class="slds-spinner_custom-container">
+                        <div role="status" class="{! v.privateComputedClass }">
+                            <span class="slds-assistive-text">{! v.alternativeText }</span>
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                    <div class="{! 'slds-m-left_' + v.size }">
+                        {! v.text }
+                    </div>
+                </div>
+                <aura:set attribute="else">
+                    <div role="status" class="{! v.privateComputedClass }">
+                        <span class="slds-assistive-text">{! v.alternativeText }</span>
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </aura:set>
+            </aura:if>
+        </div>
+        <aura:set attribute="else">
+            <aura:if isTrue="{! !empty(v.text) }">
+                <div class="slds-spinner_custom-wrapper">
+                    <div class="slds-spinner_custom-container">
+                        <div role="status" class="{! v.privateComputedClass }">
+                            <span class="slds-assistive-text">{! v.alternativeText }</span>
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                    <div class="{! 'slds-m-left_' + v.size }">
+                        {! v.text }
+                    </div>
+                </div>
+                <aura:set attribute="else">
+                    <div role="status" class="{! v.privateComputedClass }">
+                        <span class="slds-assistive-text">{! v.alternativeText }</span>
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </aura:set>
+            </aura:if>
+        </aura:set>
+    </aura:if>
+
+</aura:component>

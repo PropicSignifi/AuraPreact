@@ -1,0 +1,17 @@
+<aura:component access="GLOBAL" extends="c:baseRoot" implements="forceCommunity:availableForAllPageTypes,force:lightningQuickAction,force:hasRecordId,force:hasSObjectName,lightning:isUrlAddressable">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="channel" type="String" />
+    <aura:attribute name="title" type="String" />
+    <aura:attribute name="sourceRecordId" type="String" />
+    <aura:attribute name="sourceRecordIdList" type="String" />
+    <aura:attribute name="saveToId" type="String" />
+    <aura:attribute name="paramsObject" type="Object" access="GLOBAL"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" value="{! v.pageReference }" action="{! c.init }" />
+
+    <c:gLightningExtension/>
+    <c:dataLightningExtension/>
+    <c:preact aura:id="preact" name="reportGenerator" waitFor="GLightningExtension,DataLightningExtension"/>
+</aura:component>

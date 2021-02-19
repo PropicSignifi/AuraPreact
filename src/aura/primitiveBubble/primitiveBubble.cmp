@@ -1,0 +1,20 @@
+<aura:component access="GLOBAL" extends="c:baseComponent">
+    <aura:attribute name="align" type="Map" access="GLOBAL" default="{ horizontal: 'left', vertical: 'bottom' }"/>
+    <aura:attribute name="content" type="String" access="GLOBAL"/>
+    <aura:attribute name="contentId" type="String" access="GLOBAL"/>
+    <aura:attribute name="visible" type="String" access="GLOBAL"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="GLOBAL"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="$destroy" event="c:dataEvent" action="{! c.doDestroy }"/>
+    <aura:handler name="change" action="{! c.setContent }" value="{! v.content }"/>
+    <aura:handler name="change" action="{! c.setAlign }" value="{! v.align }"/>
+    <aura:handler name="change" action="{! c.setVisible }" value="{! v.visible }"/>
+
+    <div class="{! v.privateComputedClass }">
+        <div class="slds-popover__body" id="{! v.contentId }">
+        </div>
+    </div>
+
+</aura:component>

@@ -1,0 +1,8 @@
+.disabled {
+    background-color: rgb(233, 234, 236);
+    border-color: rgb(196, 198, 202);
+}
+
+.searchInput {
+    margin-left: -8px;
+}

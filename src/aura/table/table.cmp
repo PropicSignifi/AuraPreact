@@ -1,0 +1,84 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common,c:configurable">
+    <aura:attribute name="variant" type="String" access="GLOBAL" description="The variant of the table" default="striped"/>
+    <aura:attribute name="headerRow" type="Object" access="GLOBAL" description="The table header row" required="true"/>
+    <aura:attribute name="headerRowConfig" type="Object" access="GLOBAL" description="The table header row config" required="true"/>
+    <aura:attribute name="rows" type="List" access="GLOBAL" description="The table body rows" required="true"/>
+    <aura:attribute name="rowConfig" type="Object" access="GLOBAL" description="The table body row config" required="true"/>
+    <aura:attribute name="providers" type="Object" access="GLOBAL" description="The providers of the component refs"/>
+    <aura:attribute name="checkable" type="Boolean" access="GLOBAL" description="Whether it supports checking rows"/>
+    <aura:attribute name="paginatorName" type="String" access="GLOBAL" description="The name of the paginator"/>
+    <aura:attribute name="name" type="String" access="GLOBAL" description="The name of the table" required="true"/>
+    <aura:attribute name="expanderConfig" type="Object" access="GLOBAL" description="The expander config"/>
+    <aura:attribute name="select" type="String" access="GLOBAL" default="multiple"/>
+    <aura:attribute name="resizable" type="Boolean" access="GLOBAL"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" description="The private computed class"/>
+    <aura:attribute name="privateRows" type="List" access="PRIVATE" description="The table body rows"/>
+    <aura:attribute name="privateFilterPredicate" type="Object" access="PRIVATE" description="The filter predicate"/>
+    <aura:attribute name="privateLastSize" type="Integer" access="PRIVATE" description="The last size of the filtered rows"/>
+    <aura:attribute name="privateStartIndex" type="Integer" access="PRIVATE" description="The start index"/>
+    <aura:attribute name="privateEndIndex" type="Integer" access="PRIVATE" description="The end index"/>
+    <aura:attribute name="privateLoaded" type="Boolean" access="PRIVATE" description="Whether the table is laoded"/>
+    <aura:attribute name="slim" type="Boolean" default="false"
+        description="Indicator of whether it renders any extra doms"/>
+
+    <aura:method name="filter" access="GLOBAL">
+        <aura:attribute name="predicate" type="Object"/>
+    </aura:method>
+    <aura:method name="isFiltered" access="GLOBAL">
+    </aura:method>
+    <aura:method name="setExpanded" access="GLOBAL">
+        <aura:attribute name="row" type="Object"/>
+        <aura:attribute name="expanded" type="Boolean"/>
+    </aura:method>
+    <aura:method name="refresh" access="GLOBAL" action="{! c.computeRows }">
+    </aura:method>
+    <aura:method name="refreshTable" access="GLOBAL" action="{! c.refreshTable }">
+    </aura:method>
+    <aura:method name="selectAll" access="GLOBAL">
+    </aura:method>
+    <aura:method name="deselectAll" access="GLOBAL">
+    </aura:method>
+    <aura:method name="getSelectedRows" access="GLOBAL">
+    </aura:method>
+    <aura:method name="sortBy" access="GLOBAL">
+        <aura:attribute name="name" type="String"/>
+        <aura:attribute name="direction" type="String"/>
+    </aura:method>
+
+    <aura:registerEvent name="onSizeChange" type="c:appEvent" access="GLOBAL"
+        description="The event is fired when the row size is changed."/>
+    <aura:registerEvent name="onHeaderEvent" type="c:dataEvent" access="GLOBAL"/>
+    <aura:registerEvent name="onRowEvent" type="c:dataEvent" access="GLOBAL"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.variant }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.privateLoaded }"/>
+    <aura:handler name="change" action="{! c.computeRows }" value="{! v.headerRow }"/>
+    <aura:handler name="change" action="{! c.computeRows }" value="{! v.rows }"/>
+    <aura:handler name="change" action="{! c.computeRows }" value="{! v.privateFilterPredicate }"/>
+    <aura:handler name="onsort" event="c:dataEvent" action="{! c.handleSort }"/>
+    <aura:handler event="c:appEvent" action="{! c.handlePageChange }"/>
+
+    <c:tableHeaderRow aura:id="headerRowPreload" class="slds-hide" rowConfig="{! v.headerRowConfig }" providers="{! v.providers }"/>
+    <c:tableBodyRow aura:id="rowPreload" class="slds-hide" rowConfig="{! v.rowConfig }" providers="{! v.providers }"/>
+
+    <div aura:id="placeholder" class="{! v.privateLoaded ? ' slds-hide' : '' }">
+        <c:placeholder name="table_list_line_item" opacity="50"/>
+        <c:placeholder name="table_list_line_item" opacity="50"/>
+        <c:placeholder name="table_list_line_item" opacity="50"/>
+        <c:placeholder name="table_list_line_item" opacity="50"/>
+        <c:placeholder name="table_list_line_item" opacity="50"/>
+    </div>
+    <table class="{! v.privateComputedClass }">
+        <thead>
+            <c:tableHeaderRow aura:id="headerRow" row="{! v.headerRow }" rowConfig="{! v.headerRowConfig }" providers="{! v.providers }" checkable="{! v.checkable }" resizable="{! v.resizable }" select="{! v.select }" onselectAll="{! c.handleSelectAll }"/>
+        </thead>
+        <tbody>
+            <c:iteration aura:id="itemList" items="{! v.privateRows }" template="{! v.computed.rowTemplate }" providers="{! v.computed.rowProviders}"/>
+            {! v.body }
+        </tbody>
+    </table>
+
+</aura:component>

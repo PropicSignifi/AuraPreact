@@ -1,0 +1,35 @@
+<aura:component access="GLOBAL" extends="c:baseRoot" implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="name" access="GLOBAL" type="String" default="DynamicQuery" />
+    <aura:attribute name="title" access="GLOBAL" type="String" default="Table Data" />
+    <aura:attribute name="query" access="GLOBAL" type="String" default="SELECT Id FROM Account" />
+    <aura:attribute name="pageSize" access="GLOBAL" type="Integer" default="5" />
+    <aura:attribute name="column1" access="GLOBAL" type="String" />
+    <aura:attribute name="column2" access="GLOBAL" type="String" />
+    <aura:attribute name="column3" access="GLOBAL" type="String" />
+    <aura:attribute name="column4" access="GLOBAL" type="String" />
+    <aura:attribute name="column5" access="GLOBAL" type="String" />
+    <aura:attribute name="column6" access="GLOBAL" type="String" />
+    <aura:attribute name="column7" access="GLOBAL" type="String" />
+    <aura:attribute name="column8" access="GLOBAL" type="String" />
+    <aura:attribute name="column9" access="GLOBAL" type="String" />
+    <aura:attribute name="column10" access="GLOBAL" type="String" />
+    <aura:attribute name="action1" access="GLOBAL" type="String" />
+    <aura:attribute name="action2" access="GLOBAL" type="String" />
+    <aura:attribute name="action3" access="GLOBAL" type="String" />
+    <aura:attribute name="action4" access="GLOBAL" type="String" />
+    <aura:attribute name="action5" access="GLOBAL" type="String" />
+    <aura:attribute name="action6" access="GLOBAL" type="String" />
+    <aura:attribute name="action7" access="GLOBAL" type="String" />
+    <aura:attribute name="action8" access="GLOBAL" type="String" />
+    <aura:attribute name="action9" access="GLOBAL" type="String" />
+    <aura:attribute name="action10" access="GLOBAL" type="String" />
+    <aura:attribute name="extension" access="GLOBAL" type="String" default="" />
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+
+    <c:gLightningExtension/>
+    <c:dataLightningExtension/>
+    <c:preact aura:id="preact" name="dynamicQuery" identifier="{! v.name }" waitFor="GLightningExtension,DataLightningExtension"/>
+</aura:component>

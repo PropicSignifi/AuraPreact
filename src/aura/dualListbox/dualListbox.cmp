@@ -1,0 +1,118 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:inputable,c:focusable,c:common,c:commented">
+    <aura:attribute name="value" type="List" access="GLOBAL"/>
+    <aura:attribute name="sourceLabel" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="selectedLabel" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="options" type="List" access="GLOBAL" required="true"/>
+
+    <aura:attribute name="privateHelpMessage" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateSourceOptions" type="List" access="PRIVATE"/>
+    <aura:attribute name="privateSelectedOptions" type="List" access="PRIVATE"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleValueChange }" value="{! v.options }"/>
+    <aura:handler name="change" action="{! c.handleValueChange }" value="{! v.value }"/>
+
+    <h3 class="{! 'slds-text ' + (v.variant == 'label-hidden' ? 'slds-assistive-text' : '') }">
+        <aura:if isTrue="{! !empty(v.labelHtml) }">
+            <aura:unescapedHtml value="{! v.labelHtml }"/>
+            <aura:set attribute="else">
+                {! v.label }
+            </aura:set>
+        </aura:if>
+        <aura:if isTrue="{! v.required }">
+            <abbr class="slds-required" title="{! $Label.LightningControl.required }">
+                *
+            </abbr>
+        </aura:if>
+        <aura:if isTrue="{! !empty(v.tooltip) }">
+            <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+        </aura:if>
+    </h3>
+    <div class="slds-dueling-list" onfocusin="{! c.handleNodeFocus }" onfocusout="{! c.handleNodeBlur }">
+        <div class="slds-assistive-text" id="{! globalId }" aria-live="assertive"/>
+        <div class="slds-assistive-text" id="{! globalId + '-kbi' }">
+            {! $Label.LightningDualListbox.componentAssistiveText }
+        </div>
+        <div class="slds-dueling-list__column">
+            <span class="slds-form-element__label" id="{! globalId + '-source-list-label' }">
+                {! v.sourceLabel }
+            </span>
+            <div class="{! 'slds-dueling-list__options ' + (v.disabled ? 'slds-is-disabled' : '') }" role="application">
+                <ul aura:id="private" class="slds-listbox slds-listbox_vertical" id="{! globalId + '-source-list' }" aria-describedby="{! globalId + '-kbi' }" aria-labelledby="{! globalId + '-source-list-label' }" aria-multiselectable="true" role="listbox" aria-disabled="{! v.disabled }">
+                    <aura:iteration items="{! v.privateSourceOptions }" var="option" indexVar="index">
+                        <li class="slds-listbox__item" role="presentation">
+                            <div class="{! 'slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline ' + (option.$selected ? 'slds-is-selected' : '') }" aria-selected="{! option.$selected }" role="option" tabindex="-1" data-index="{! index }" data-value="{! option.value }" data-type="source-list" onclick="{! c.handleOptionClick }">
+                                <span class="slds-media__body">
+                                    <span class="slds-truncate" title="{! option.label }">
+                                        {! option.label }
+                                    </span>
+                                </span>
+                            </div>
+                        </li>
+                    </aura:iteration>
+                </ul>
+            </div>
+        </div>
+        <div class="slds-dueling-list__column">
+            <button class="slds-button slds-button_icon slds-button_icon-container" title="right" disabled="{! v.disabled }" onclick="{! c.handleRightButtonClick }">
+                <c:primitiveIcon iconName="utility:right" svgClass="slds-button__icon" variant="bare"/>
+                <span class="slds-assistive-text">
+                    Right
+                </span>
+            </button>
+            <button class="slds-button slds-button_icon slds-button_icon-container" title="left" disabled="{! v.disabled }" onclick="{! c.handleLeftButtonClick }">
+                <c:primitiveIcon iconName="utility:left" svgClass="slds-button__icon" variant="bare"/>
+                <span class="slds-assistive-text">
+                    Left
+                </span>
+            </button>
+        </div>
+        <div class="slds-dueling-list__column">
+            <span class="slds-form-element__label" id="{! globalId + '-selected-list-label' }">
+                {! v.selectedLabel }
+            </span>
+            <div class="{! 'slds-dueling-list__options ' + (v.disabled ? 'slds-is-disabled' : '') }" role="application">
+                <ul class="slds-listbox slds-listbox_vertical" id="{! globalId + '-selected-list' }" aria-describedby="{! globalId + '-kbi' }" aria-labelledby="{! globalId + '-selected-list-label' }" aria-multiselectable="true" role="listbox" aria-disabled="{! v.disabled }">
+                    <aura:iteration items="{! v.privateSelectedOptions }" var="option" indexVar="index">
+                        <li class="slds-listbox__item" role="presentation">
+                            <div class="{! 'slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline ' + (option.$selected ? 'slds-is-selected' : '') }" aria-selected="{! option.$selected }" role="option" tabindex="-1" data-index="{! index }" data-value="{! option.value }" data-type="selected-list" onclick="{! c.handleOptionClick }">
+                                <span class="slds-media__body">
+                                    <span class="slds-truncate" title="{! option.label }">
+                                        {! option.label }
+                                    </span>
+                                </span>
+                                <aura:if isTrue="{! option.isLocked }">
+                                    <span class="slds-media__figure slds-media__figure_reverse">
+                                        <c:primitiveIcon iconName="utility:lock" size="x-small"/>
+                                    </span>
+                                </aura:if>
+                            </div>
+                        </li>
+                    </aura:iteration>
+                </ul>
+            </div>
+        </div>
+        <div class="slds-dueling-list__column">
+            <button class="slds-button slds-button_icon slds-button_icon-container" title="up" disabled="{! v.disabled }" onclick="{! c.handleUpButtonClick }">
+                <c:primitiveIcon iconName="utility:up" svgClass="slds-button__icon" variant="bare"/>
+                <span class="slds-assistive-text">
+                    Up
+                </span>
+            </button>
+            <button class="slds-button slds-button_icon slds-button_icon-container" title="down" disabled="{! v.disabled }" onclick="{! c.handleDownButtonClick }">
+                <c:primitiveIcon iconName="utility:down" svgClass="slds-button__icon" variant="bare"/>
+                <span class="slds-assistive-text">
+                    Down
+                </span>
+            </button>
+        </div>
+    </div>
+    <aura:if isTrue="{! !empty(v.privateHelpMessage) }">
+        <div class="slds-has-error">
+            <span class="slds-form-element__help" id="{! globalId + '-desc' }" aria-live="assertive">
+                {! v.privateHelpMessage }
+            </span>
+        </div>
+    </aura:if>
+
+</aura:component>

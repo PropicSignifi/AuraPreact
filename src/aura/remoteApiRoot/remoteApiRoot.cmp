@@ -1,0 +1,59 @@
+<aura:component access="GLOBAL" extends="c:baseRoot" implements="force:appHostable">
+    <aura:attribute name="serviceName" type="String"
+        description="The passed in service name"/>
+    <aura:attribute name="currentServiceName" type="String" access="PRIVATE"
+        description="The current selected service name"/>
+    <aura:attribute name="serviceNames" type="List" access="PRIVATE"
+        description="All of the service names."/>
+    <aura:attribute name="currentServiceActionName" type="String" access="PRIVATE"
+        description="The current selected service action name"/>
+    <aura:attribute name="serviceActionNames" type="List" access="PRIVATE"
+        description="All of the service action names."/>
+    <aura:attribute name="serviceAction" type="Object" access="PRIVATE"
+        description="The current service action"/>
+    <aura:attribute name="serviceActionParams" type="Object" access="PRIVATE"
+        description="The current service action parameters"/>
+    <aura:attribute name="serviceActionResult" type="String" access="PRIVATE" default=""
+        description="The result of the service action"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.onInit }"/>
+    <aura:handler name="$destroy" event="c:dataEvent" action="{! c.onDestroy }"/>
+
+    <div aura:id="container"/>
+    <lightning:card >
+        <aura:set attribute="title">
+            <h1 class="slds-text-align_center">Lightning Server Side Actions</h1>
+        </aura:set>
+        <p class="slds-p-horizontal_small">
+            <lightning:select aura:id="serviceNameSelect" name="serviceNameSelect" label="Select a Service" onchange="{! c.selectService }" value="{! v.currentServiceName }">
+                <option value="">-- select --</option>
+                <aura:iteration items="{! v.serviceNames }" var="serviceName">
+                    <option value="{! serviceName }" text="{! serviceName }"></option>
+                </aura:iteration>
+            </lightning:select>
+            <aura:if isTrue="{! v.currentServiceName }">
+                <lightning:select aura:id="serviceActionNameSelect" name="serviceActionNameSelect" label="Select an Action" onchange="{! c.selectServiceAction }" value="{! v.currentServiceActionName }" class="slds-m-top_medium">
+                    <option value="">-- select --</option>
+                    <aura:iteration items="{! v.serviceActionNames }" var="serviceActionName">
+                        <option value="{! serviceActionName }" text="{! serviceActionName }"></option>
+                    </aura:iteration>
+                </lightning:select>
+            </aura:if>
+            <aura:if isTrue="{! v.currentServiceActionName }">
+                <div class="slds-m-top_medium">Action Parameters</div>
+                <div aura:id="paramsContainer" class="slds-m-top_medium">
+                </div>
+                <div class="slds-m-top_medium">
+                    <lightning:button variant="brand" label="Send" onclick="{! c.onSend }"/>
+                </div>
+                <aura:if isTrue="{! v.serviceActionResult != '' }">
+                    <div class="slds-box slds-theme_shade slds-m-top_medium">
+                        <code>
+                            <pre>{! v.serviceActionResult }</pre>
+                        </code>
+                    </div>
+                </aura:if>
+            </aura:if>
+        </p>
+    </lightning:card>
+</aura:component>

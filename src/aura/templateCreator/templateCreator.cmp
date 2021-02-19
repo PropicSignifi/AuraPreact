@@ -1,0 +1,16 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="template" type="String" access="GLOBAL" description="Description" required="true"/>
+    <aura:attribute name="object" type="Object" access="GLOBAL" description="Description"/>
+
+    <aura:attribute name="slim" type="Boolean" default="false"
+        description="Indicator of whether it renders any extra doms"/>
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" description="description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.handleTemplateChange }" value="{! v.template }"/>
+
+    <div class="{! v.privateComputedClass }" aura:id="container">
+    </div>
+
+</aura:component>

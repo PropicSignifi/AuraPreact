@@ -1,0 +1,1120 @@
+.THIS .placeholder .body {
+    padding: 1.5rem
+}
+.THIS .placeholder .center {
+    margin-left: auto;
+    margin-right: auto;
+}
+.THIS .placeholder .icon {
+    width: 2rem;
+    height: 2rem;
+    background-color: rgb(236, 235, 234);
+    border-radius: .25rem;
+    margin-right: .75rem;
+    display: inline-block
+}
+.THIS .placeholder .icon-huge {
+    width: 110px;
+    height: 110px
+}
+.THIS .placeholder .icon-xhuge {
+    width: 160px;
+    height: 160px
+}
+.THIS .placeholder .icon-large {
+    width: 3rem;
+    height: 3rem
+}
+.THIS .placeholder .icon-medium {
+    width: 2rem;
+    height: 2rem
+}
+.THIS .placeholder .icon-small {
+    width: 2rem;
+    height: 2rem
+}
+.THIS .placeholder .icon-x-small {
+    width: 1rem;
+    height: 1rem
+}
+.THIS .placeholder .icon-round-large {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%
+}
+.THIS .placeholder .icon-round-small {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%
+}
+.THIS .placeholder .icon-square {
+    width: 2rem;
+    height: 2rem;
+    border-radius: .125rem;
+    background-color: rgb(243, 242, 242)
+}
+.THIS .placeholder .text-body {
+    display: inline-block;
+    width: 50%;
+    height: 100%
+}
+.THIS .placeholder .text {
+    border-radius: 15rem;
+    display: block;
+    margin-bottom: .75rem;
+    background-color: rgb(236, 235, 234);
+    height: .5rem
+}
+.THIS .placeholder .text:last-child {
+    margin-bottom: 0
+}
+.THIS .placeholder .text-thick {
+    height: 14px;
+    margin: 10px 0
+}
+.THIS .placeholder .text-thin {
+    height: 6px;
+    border-radius: 15rem
+}
+.THIS .placeholder .text-thinner {
+    height: 4px;
+    margin: 10px 0;
+    border-radius: .125rem
+}
+.THIS .placeholder .text-long {
+    width: 100%
+}
+.THIS .placeholder .text-medium {
+    width: 60%
+}
+.THIS .placeholder .text-short {
+    width: 45%
+}
+.THIS .placeholder .text-shorter {
+    width: 20%
+}
+.THIS .placeholder .text-tiny {
+    width: 5%
+}
+.THIS .placeholder .multi-text-line>div {
+    float: left;
+    margin-right: .75rem
+}
+.THIS .placeholder .image {
+    margin-right: .75rem
+}
+.THIS .placeholder .image-block {
+    background: rgb(243, 242, 242);
+    border-radius: .25rem;
+    margin-bottom: .75rem
+}
+.THIS .placeholder .image-large {
+    width: 132px;
+    height: 103px
+}
+.THIS .placeholder .image-mega {
+    width: 272px;
+    height: 152px
+}
+.THIS .placeholder .image-full {
+    width: 100%;
+    height: 152px
+}
+.THIS .placeholder .body,
+.THIS .placeholder .card,
+.THIS .placeholder .anchor {
+    background-color: rgb(255, 255, 255)
+}
+.THIS .placeholder .text,
+.THIS .placeholder .icon {
+    background-color: rgb(243, 242, 242)
+}
+.THIS .placeholder.split_view .body,
+.THIS .placeholder.split_view_header .anchor {
+    background-color: rgb(250, 250, 249)
+}
+.THIS .placeholder.list_view_header .anchor {
+    background-color: rgb(243, 242, 242)
+}
+.THIS .placeholder.list_view_header {
+    padding-top: 1px;
+    padding-bottom: .25rem
+}
+.THIS .placeholder.split_view_header {
+    padding-top: 1px;
+    padding-bottom: .5rem
+}
+.THIS .placeholder.split_view_header .text-thinner {
+    margin-top: 1.5rem
+}
+.THIS .placeholder.list_view_header .text-thinner {
+    margin-top: 2rem
+}
+.THIS .placeholder .darker .text,
+.THIS .placeholder .darker .body>.field .text-secondary,
+.THIS .placeholder .darker .icon {
+    background-color: #ccd4e2
+}
+.THIS .placeholder .dark {
+    background-color: rgb(243, 242, 242)
+}
+.THIS .placeholder .dark .text,
+.THIS .placeholder .dark .icon {
+    background-color: rgb(236, 235, 234)
+}
+.THIS .placeholder .border-bottom {
+    border-bottom: 1px solid rgb(221, 219, 218)
+}
+.THIS .placeholder .card {
+    border: 1px solid rgb(243, 242, 242);
+    border-radius: .25rem
+}
+.THIS .placeholder .text-body-col,
+.THIS .placeholder .text-body-no-col {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%
+}
+.THIS .placeholder .text-body-col .text,
+.THIS .placeholder .text-body-no-col .text {
+    border-radius: 14px;
+    display: inline-block;
+    margin-bottom: .75rem;
+    height: .5rem;
+    margin-right: .75rem
+}
+.THIS .placeholder .input-field {
+    height: 30px;
+    border-radius: .25rem;
+    display: inline-block;
+    margin-right: .75rem
+}
+.THIS .placeholder .input-field.input-text-long {
+    width: 80%
+}
+.THIS .placeholder .input-field.input-text-small {
+    width: 10%
+}
+.THIS .placeholder .flex-grid {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex
+}
+.THIS .placeholder .flex-grow {
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto
+}
+.THIS .placeholder .flex-none {
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto
+}
+.THIS .placeholder .flex-stack {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap
+}
+.THIS .placeholder .flex-h-center {
+    -webkit-justify-content: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center
+}
+.THIS .placeholder .flex-v-center {
+    align-items: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+.THIS .placeholder .flex-v-start {
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-align-content: flex-start;
+    -ms-flex-line-pack: start;
+    align-content: flex-start
+}
+.THIS .opacity95 {
+    opacity: .95
+}
+.THIS .opacity90 {
+    opacity: .90
+}
+.THIS .opacity85 {
+    opacity: .85
+}
+.THIS .opacity80 {
+    opacity: .80
+}
+.THIS .opacity75 {
+    opacity: .75
+}
+.THIS .opacity70 {
+    opacity: .70
+}
+.THIS .opacity65 {
+    opacity: .65
+}
+.THIS .opacity60 {
+    opacity: .60
+}
+.THIS .opacity55 {
+    opacity: .55
+}
+.THIS .opacity50 {
+    opacity: .50
+}
+.THIS .opacity45 {
+    opacity: .45
+}
+.THIS .opacity40 {
+    opacity: .40
+}
+.THIS .opacity35 {
+    opacity: .35
+}
+.THIS .opacity30 {
+    opacity: .30
+}
+.THIS .opacity25 {
+    opacity: .25
+}
+.THIS .opacity20 {
+    opacity: .20
+}
+.THIS .opacity15 {
+    opacity: .15
+}
+.THIS .opacity10 {
+    opacity: .10
+}
+.THIS .opacity5 {
+    opacity: .05
+}
+.THIS .opacity0 {
+    opacity: 0
+}
+.THIS .placeholder.highlight {
+    background: rgb(243, 242, 242);
+    border-bottom: .125rem solid rgb(221, 219, 218);
+    width: 100%
+}
+.THIS .placeholder.highlight .anchor {
+    padding: 1rem .75rem;
+    width: 100%
+}
+.THIS .placeholder.highlight .icon {
+    margin: 0 auto
+}
+.THIS .placeholder.highlight .text-body {
+    text-align: center;
+    margin: 0 auto;
+    padding: 0 .75rem
+}
+.THIS .placeholder.highlight .text-body .text {
+    margin: .75rem 0
+}
+.THIS .placeholder.highlight .text-body .text-primary {
+    max-width: 175px
+}
+.THIS .placeholder.highlight .text-body .text-secondary {
+    max-width: 225px
+}
+.THIS .placeholder.highlight .tabs {
+    background: rgb(243, 242, 242);
+    padding: 1rem 0;
+    margin: 0 auto
+}
+.THIS .placeholder.highlight .tabs .tab {
+    margin: 0 2rem;
+    width: 20%;
+    max-width: 60px;
+    display: block
+}
+.THIS .placeholder .button.button-small {
+    height: 0;
+    width: 70px;
+    padding: 1rem;
+    margin: .5rem 0
+}
+.THIS .placeholder .button.button-full-width-small {
+    height: 0;
+    padding: 1rem;
+    margin: .5rem 0
+}
+.THIS .placeholder.record_home_anchor_vertical .p-bottom--small {
+    margin-bottom: .75rem
+}
+.THIS .placeholder.record_home_anchor_vertical .icon-medium,
+.THIS .placeholder.record_home_anchor_vertical .text-thick {
+    vertical-align: middle
+}
+.THIS .placeholder.record_home_anchor_vertical .text-thick {
+    margin-top: 0
+}
+@media only screen and (min-width: 48em) {
+    .THIS .placeholder.highlight .anchor {
+        padding: 1rem 1rem;
+        text-align: left
+    }
+    .THIS .placeholder.highlight .icon,
+    .THIS .placeholder.highlight .text-body {
+        vertical-align: middle
+    }
+    .THIS .placeholder.highlight .text-body {
+        margin-left: 1rem
+    }
+    .THIS .placeholder.highlight .text-body>.text {
+        margin: 0;
+        width: 250px;
+        height: 12px;
+        border-radius: 6px
+    }
+    .THIS .placeholder.highlight .text-body>.text+.text {
+        margin: 1rem 0 0 0;
+        width: 325px;
+        height: 8px;
+        border-radius: .25rem
+    }
+    .THIS .placeholder.highlight .tabs {
+        clear: both;
+        padding: 2rem 0 1rem 0;
+        margin: 0;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start
+    }
+}
+.THIS .placeholder.group_highlight .container {
+    position: relative;
+    top: 50px;
+    padding-bottom: 30px
+}
+.THIS .placeholder.group_highlight .anchor {
+    padding: 1rem;
+    height: 140px
+}
+.THIS .placeholder.group_highlight {
+    height: 230px
+}
+.THIS .placeholder.detail {
+    background-color: rgb(255, 255, 255)
+}
+.THIS .placeholder.detail .right-column {
+    display: none
+}
+.THIS .placeholder.detail .field {
+    padding: 1.5rem 1rem
+}
+.THIS .placeholder.detail .text-secondary {
+    background-color: rgb(236, 235, 234)
+}
+.THIS .placeholder.detail .field:nth-child(even) .text-secondary {
+    width: 33%
+}
+@media only screen and (min-width: 48em) {
+    .THIS .placeholder.detail {
+        float: left;
+        width: 100%;
+        clear: both
+    }
+    .THIS .placeholder.detail .left-column,
+    .THIS .placeholder.detail .right-column {
+        float: left;
+        display: block;
+        width: 50%
+    }
+    .THIS .placeholder.detail .right-column {
+        padding-left: 1.5rem
+    }
+}
+@media only screen and (min-width: 64.0625em) {
+    .THIS .placeholder.detail .text {
+        border-radius: 15rem;
+        height: .5rem
+    }
+}
+.THIS .placeholder.detail.fieldMapping .right-column {
+    padding-left: 0
+}
+.THIS .placeholder.fieldMapping>.right-column>.anchor,
+.THIS .placeholder.fieldMapping>.right-column>.field {
+    padding-left: 2.5rem;
+    border-left: 1px solid rgb(216, 221, 230)
+}
+.THIS .placeholder.fieldMapping>.left-column>.field {
+    padding: 1.25rem 1rem 1.25rem 1rem
+}
+.THIS .placeholder.fieldMapping>.right-column>.field {
+    padding: 1.25rem 1rem 1.75rem 2.5rem
+}
+@media only screen and (min-width: 64.0625em) {
+    .THIS .placeholder.fieldMapping>.left-column>.field {
+        padding: 1.25rem 1rem 1.25rem 1rem
+    }
+    .THIS .placeholder.fieldMapping>.right-column>.field {
+        padding: 1.25rem 1rem 1.75rem 2.5rem
+    }
+}
+.THIS .placeholder.fieldMapping .anchor {
+    padding: .125rem 1rem;
+    border-bottom: 1px solid rgb(216, 221, 230)
+}
+.THIS .placeholder.fieldMapping>.right-column>.field>.text {
+    float: left;
+    margin: 0
+}
+.THIS .placeholder.fieldMapping>.right-column>.field>.text:last-child {
+    float: right
+}
+.THIS .placeholder.fieldMapping>.right-column>.field>.text-action {
+    width: .625rem;
+    height: .625rem;
+    border-radius: 50%
+}
+.THIS .placeholder.fieldMapping .content-tabs {
+    padding: 1.5rem 1rem 0 1rem
+}
+.THIS .placeholder.fieldMapping .intro {
+    padding: 1.5rem 1rem .75rem 1rem
+}
+.THIS .placeholder.fieldMapping .anchor>.field .text {
+    max-width: 125px
+}
+.THIS .placeholder.fieldMapping .body>.field {
+    padding: 0 1rem
+}
+.THIS .placeholder.fieldMapping .body>.field .text {
+    margin: 1rem 0
+}
+.THIS .placeholder.fieldMapping .body>.field .text-primary {
+    max-width: 180px
+}
+.THIS .placeholder.fieldMapping .body>.field .text-secondary {
+    max-width: 210px;
+    background: rgb(224, 229, 238)
+}
+.THIS .placeholder.fieldMapping .body>.field:nth-child(odd) .text-primary {
+    max-width: 265px
+}
+.THIS .placeholder.fieldMapping .body>.field:nth-child(odd) .text-secondary {
+    max-width: 130px
+}
+.THIS .placeholder.list .anchor {
+    padding: 1rem
+}
+.THIS .placeholder.list .anchor>.field .text {
+    max-width: 125px
+}
+.THIS .placeholder.list .body,
+.THIS .placeholder.list_app .body,
+.THIS .placeholder.listpreview .body,
+.THIS .placeholder.list_no_header .body,
+.THIS .placeholder.split_view .body {
+    padding: .125rem 0
+}
+.THIS .placeholder.list .body>.field,
+.THIS .placeholder.list_app .body>.field,
+.THIS .placeholder.listpreview .body>.field,
+.THIS .placeholder.list_no_header .body>.field,
+.THIS .placeholder.split_view .body>.field {
+    padding: 0 1rem
+}
+.THIS .placeholder.list .body>.field .text,
+.THIS .placeholder.list_app .body>.field .text,
+.THIS .placeholder.listpreview .body>.field .text,
+.THIS .placeholder.list_no_header .body>.field .text,
+.THIS .placeholder.split_view .body>.field .text {
+    margin: 1rem 0
+}
+.THIS .placeholder.list .body>.field .text-primary,
+.THIS .placeholder.list_app .body>.field .text-primary,
+.THIS .placeholder.listpreview .body>.field .text-primary,
+.THIS .placeholder.list_no_header .body>.field .text-primary,
+.THIS .placeholder.split_view .body>.field .text-primary {
+    max-width: 180px
+}
+.THIS .placeholder.list .body>.field .text-secondary,
+.THIS .placeholder.list_app .body>.field .text-secondary,
+.THIS .placeholder.listpreview .body>.field .text-secondary,
+.THIS .placeholder.list_no_header .body>.field .text-secondary {
+    max-width: 210px;
+    background: rgb(236, 235, 234)
+}
+.THIS .placeholder.split_view .body>.field .text-secondary {
+    max-width: 210px
+}
+.THIS .placeholder.list .body>.field:nth-child(odd) .text-primary,
+.THIS .placeholder.list_app .body>.field:nth-child(odd) .text-primary,
+.THIS .placeholder.listpreview .body>.field:nth-child(odd) .text-primary,
+.THIS .placeholder.list_no_header .body>.field:nth-child(odd) .text-primary,
+.THIS .placeholder.split_view .body>.field:nth-child(odd) .text-primary {
+    max-width: 265px
+}
+.THIS .placeholder.list .body>.field:nth-child(odd) .text-secondary,
+.THIS .placeholder.list_app .body>.field:nth-child(odd) .text-secondary,
+.THIS .placeholder.listpreview .body>.field:nth-child(odd) .text-secondary,
+.THIS .placeholder.split_view .body>.field:nth-child(odd) .text-secondary {
+    max-width: 130px
+}
+.THIS .placeholder.twitter_bird .body {
+    padding: .75rem
+}
+.THIS .placeholder.feed {
+    height: 100%;
+    width: 100%;
+    padding: 1rem 1rem 0
+}
+.THIS .placeholder.feed .card {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: .25rem
+}
+.THIS .placeholder.feed .card .text {
+    margin: 1rem 0
+}
+.THIS .placeholder.feed .card .text-body:nth-child(odd) {
+    width: 100%
+}
+.THIS .placeholder.feed .card .actions {
+    border-top: 1px solid rgb(243, 242, 242);
+    padding: 1.5rem 0 1rem
+}
+.THIS .placeholder.feed .card .actions .text {
+    float: left;
+    margin: 0
+}
+.THIS .placeholder.feed .card .actions .text:last-child {
+    float: right
+}
+.THIS .placeholder.feed .card:nth-child(even) .text-shorter {
+    width: 15%
+}
+.THIS .placeholder.related .card,
+.THIS .placeholder.relatedInPreview .card {
+    background: rgb(255, 255, 255);
+    height: calc(62px + 2rem + (2 * 1rem));
+    padding: .75rem;
+    margin: 1rem;
+    border-radius: .25rem
+}
+.THIS .placeholder.related .card .field,
+.THIS .placeholder.relatedInPreview .card .field {
+    margin: 0
+}
+.THIS .placeholder.related .card .text,
+.THIS .placeholder.relatedInPreview .card .text {
+    border-radius: 3px;
+    max-width: 250px
+}
+.THIS .placeholder.related .card:nth-child(odd) .text {
+    width: 60%;
+    max-width: 175px
+}
+.THIS .placeholder.map {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(/projRes/ui-force-components/img/map_placeholder.svg)
+}
+.THIS .placeholder.map .messagebox {
+    background-color: rgb(6, 28, 63);
+    border-radius: .25rem;
+    width: 60%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    text-align: center
+}
+.THIS .placeholder.map .messagebox .message {
+    font-size: .8125rem;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    padding: 1.5rem 0;
+    display: inline-block
+}
+.THIS .placeholder.map .messagebox .checkin {
+    background-image: url(/projRes/ui-force-components/img/checkin.svg);
+    background-size: cover;
+    width: 1rem;
+    height: 1rem;
+    float: left
+}
+.THIS .placeholder.composer_tabs {
+    background-color: rgb(243, 242, 242);
+    border: 2px solid rgb(243, 242, 242);
+    padding: 1rem;
+    border-radius: .125rem;
+    height: 124px
+}
+.THIS .placeholder.composer_tabs .composer {
+    -webkit-align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    padding: 0;
+    height: 100%
+}
+.THIS .placeholder.composer_tabs .composer .input,
+.THIS .placeholder.composer .input {
+    background: rgb(255, 255, 255);
+    border-radius: .125rem;
+    margin-right: 1rem;
+    height: 42px
+}
+.THIS .placeholder.composer_tabs .button,
+.THIS .placeholder.composer .button {
+    width: 70px;
+    height: 42px;
+    background: rgb(236, 235, 234);
+    border-radius: .125rem
+}
+.THIS .placeholder.path {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex
+}
+.THIS .placeholder.path .pathStencil {
+    width: 100%;
+    z-index: 1
+}
+.THIS .placeholder.path div.chevron {
+    width: 80%;
+    padding-left: .5rem
+}
+.THIS .placeholder.path div ul.list {
+    width: 100%;
+    white-space: nowrap;
+    border-radius: .125rem;
+    overflow: hidden;
+    padding-left: 0;
+    margin: 0;
+    overflow: hidden;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px
+}
+.THIS .placeholder.path .chevronButton {
+    width: 20%;
+    margin: 0;
+    max-width: 300px;
+    padding-left: .75rem
+}
+.THIS .placeholder.path .chevronStep:before,
+.THIS .placeholder.path .chevronStep:after {
+    height: 16px;
+    background-color: rgb(243, 242, 242);
+    left: -8px
+}
+.THIS .placeholder.path .chevronStep {
+    height: 32px;
+    width: 80px;
+    position: relative;
+    text-align: center;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 11%;
+    -ms-flex: 1 1 11%;
+    flex: 1 1 11%;
+    min-width: 80px;
+    margin-left: 5px;
+    background-color: transparent;
+    list-style: none
+}
+.THIS .placeholder.path .chevronStep:first-child,
+.THIS .placeholder.path .chevronStep:last-child {
+    padding-left: 0;
+    padding-right: 0
+}
+.THIS .placeholder.path .chevronStep:first-child {
+    overflow: hidden;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px
+}
+.THIS .placeholder.path .chevronStep:last-child {
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px
+}
+.THIS .placeholder.path .chevronStep:before {
+    content: '';
+    position: absolute;
+    -webkit-transform: skew(30deg);
+    -ms-transform: skew(30deg);
+    transform: skew(30deg);
+    width: 100%;
+    height: 16px;
+    top: 0;
+    left: -8px;
+    z-index: -1;
+    border: 1px solid transparent;
+    border-bottom: 0;
+    border-top-left-radius: .125rem;
+    border-top-right-radius: .125rem;
+    border-bottom-left-radius: 1px;
+    border-bottom-right-radius: 1px
+}
+.THIS .placeholder.path .chevronStep:after {
+    content: '';
+    position: absolute;
+    -webkit-transform: skew(-30deg);
+    -ms-transform: skew(-30deg);
+    transform: skew(-30deg);
+    width: 100%;
+    height: 16px;
+    top: 16px;
+    left: -8px;
+    z-index: -1;
+    border: 1px solid transparent;
+    border-top: 0;
+    border-top-left-radius: 1px;
+    border-top-right-radius: 1px;
+    border-bottom-left-radius: .125rem;
+    border-bottom-right-radius: .125rem
+}
+.THIS .placeholder.path .chevronStep:last-child:before,
+.THIS .placeholder.path .chevronStep:last-child:after {
+    width: 200%
+}
+.THIS .placeholder.path .chevronStep:before {
+    -webkit-transform: skew(45deg);
+    -ms-transform: skew(45deg);
+    transform: skew(45deg)
+}
+.THIS .placeholder.path .chevronStep:after {
+    top: 16px;
+    -webkit-transform: skew(-45deg);
+    -ms-transform: skew(-45deg);
+    transform: skew(-45deg)
+}
+.THIS .placeholder.record_home_anchor .body {
+    height: 141px;
+    padding: 1.5rem 1.5rem 0 1.5rem;
+    box-sizing: border-box
+}
+.THIS .placeholder.record_home_anchor .body>.text-body {
+    height: 2rem;
+    margin-bottom: 0
+}
+.THIS .placeholder.record_home_anchor .below-text-body>.text-body {
+    width: 10%
+}
+.THIS .placeholder.record_home_anchor .below-text-body {
+    margin: 1.5rem -1.5rem -1.5rem;
+    padding: 1rem 1rem;
+    padding-bottom: .25rem;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(243, 242, 242)
+}
+.THIS .placeholder.record_home_anchor .icon {
+    vertical-align: top
+}
+.THIS .placeholder.record_home_anchor .below-text-body .text-body {
+    margin: 0 2rem 0 0
+}
+.THIS .placeholder.preview_panel_anchor .body {
+    padding: 1rem
+}
+.THIS .placeholder.preview_panel_anchor .body>.text-body {
+    height: 3rem
+}
+.THIS .placeholder.preview_panel_anchor .text-body {
+    width: 80%
+}
+.THIS .placeholder.preview_panel_anchor .below-text-body>.text-body {
+    width: 40%;
+    margin-right: .75rem
+}
+.THIS .placeholder.preview_panel_anchor .below-text-body {
+    margin: .5rem 0 0 60px
+}
+.THIS .placeholder.related_record .text-body {
+    width: 90%
+}
+.THIS .placeholder.publisher .body {
+    padding: 28px 0 0 70px
+}
+.THIS .placeholder.table_list_line_item .body {
+    padding: 1rem 1.5rem .3rem
+}
+.THIS .placeholder.event_card .body>.text-body {
+    width: 100%
+}
+.THIS .placeholder.event_card .text-body-no-col:nth-child(even) {
+    margin-top: 25px
+}
+.THIS .placeholder.top_deals .icon {
+    width: 26px;
+    height: 10px;
+    vertical-align: top
+}
+.THIS .placeholder.stencil_account_news_compact .image {
+    max-width: 272px
+}
+.THIS .placeholder.setup_card .body {
+    width: 300px;
+    padding: 18px
+}
+.THIS .placeholder.setup_card .icon {
+    margin: 5px auto 1rem
+}
+.THIS .placeholder.setup_card .text-body {
+    display: block;
+    width: 80%;
+    height: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto
+}
+.THIS .placeholder.setup_card .text-body .text {
+    margin-left: auto;
+    margin-right: auto
+}
+.THIS .placeholder.app_detail .sidebar {
+    float: left;
+    width: calc(208px + 2rem);
+    margin: 2rem
+}
+.THIS .placeholder.app_detail .main {
+    float: right;
+    width: calc(100% - 208px - (4 * 2rem));
+    margin-top: calc(3 * 2rem)
+}
+.THIS .placeholder.app_detail .text-body {
+    vertical-align: top
+}
+.THIS .placeholder.app_detail .main>div {
+    border-top: 1px solid rgb(221, 219, 218);
+    padding: 1.5rem 0 .5rem 0
+}
+.THIS .placeholder.empty_chart {
+    background: rgb(255, 255, 255);
+    margin-left: 39px;
+    margin-right: 28px
+}
+.THIS .placeholder.empty_chart .body {
+    height: 275px;
+    position: relative;
+    width: 100%;
+    background: -webkit-repeating-linear-gradient(to right, transparent 0px, transparent 250px, rgb(238, 241, 246) 251px), -webkit-repeating-linear-gradient(to top, transparent 0px, transparent 56px, rgb(238, 241, 246) 57px);
+    background: repeating-linear-gradient(to right, transparent 0px, transparent 250px, rgb(238, 241, 246) 251px), repeating-linear-gradient(to top, transparent 0px, transparent 56px, rgb(238, 241, 246) 57px)
+}
+.THIS .placeholder.empty_chart .body:before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 100%;
+    background-color: rgb(221, 219, 218);
+    position: absolute;
+    top: 0;
+    left: 3px
+}
+.THIS .placeholder.empty_chart .body:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: rgb(221, 219, 218);
+    position: absolute;
+    bottom: 3px;
+    right: 0
+}
+.THIS .placeholder.dashboard_card .body {
+    width: 300px;
+    height: 175px;
+    padding: 18px
+}
+.THIS .placeholder.dashboard_card .text-body {
+    width: 100%
+}
+.THIS .placeholder.dashboard_card .svg {
+    height: 100%
+}
+.THIS .placeholder.pipelineView {
+    padding-left: .5rem;
+    padding-right: .5rem
+}
+.THIS .placeholder.pipelineView .pipelineView-column .stageHeader {
+    position: relative;
+    padding: 1.25rem .5rem 1.25rem .5rem;
+    background: rgb(236, 235, 234)
+}
+.THIS .placeholder.pipelineView .pipelineView-column:first-of-type .stageHeader {
+    border-radius: 15rem 0 0 15rem
+}
+.THIS .placeholder.pipelineView .pipelineView-column:last-of-type .stageHeader {
+    border-radius: 0 15rem 15rem 0
+}
+.THIS .placeholder.pipelineView .pipelineView-column .stageHeader:before {
+    content: "";
+    position: absolute;
+    left: -1rem;
+    top: .275rem;
+    display: block;
+    width: 1.85rem;
+    height: 1.85rem;
+    border: 2px solid #fff;
+    border-left: none;
+    border-bottom: none;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg)
+}
+.THIS .placeholder.pipelineView .pipelineView-column:first-of-type .stageHeader:before {
+    content: none
+}
+.THIS .placeholder.pipelineView .pipelineView-column .stageAggregateValue {
+    padding: .5rem 0;
+    border-left: rgb(221, 219, 218) 1px solid;
+    height: 1.5rem
+}
+.THIS .placeholder.pipelineView .pipelineView-column:last-of-type .stageAggregateValue,
+.THIS .placeholder.pipelineView .pipelineView-column:last-of-type .listContent {
+    border-right: rgb(221, 219, 218) 1px solid
+}
+.THIS .placeholder.pipelineView .pipelineView-column .listContent {
+    border-left: rgb(221, 219, 218) 1px solid
+}
+.THIS .placeholder.pipelineView .pipelineView-column .listContent ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none
+}
+.THIS .placeholder.pipelineView .text-body {
+    margin: .5rem;
+    padding: .5rem;
+    border: rgb(221, 219, 218) 1px solid;
+    border-radius: .25rem;
+    width: 100%
+}
+.THIS .placeholder.object_home_list_anchor .body {
+    padding: 0
+}
+.THIS .placeholder.object_home_list_anchor .entity {
+    padding-top: .25rem;
+    padding-bottom: 1rem
+}
+.THIS .placeholder.object_home_list_anchor .title {
+    padding-bottom: .75rem;
+    margin-bottom: .125rem
+}
+.THIS .placeholder.object_home_list_anchor .title .text-thick {
+    margin: 0
+}
+.THIS .placeholder.object_home_list_summary .body {
+    padding: 0
+}
+.THIS .placeholder.object_home_list_summary .text-body-col {
+    padding-top: .5rem;
+    margin-bottom: 5px
+}
+.THIS .placeholder.lead_insights_hover .lead-insights-title {
+    text-align: center;
+    margin-top: .75rem;
+    margin-bottom: .5rem;
+    font-size: .8125rem
+}
+.THIS .placeholder.lead_insights_hover .lead-insights-title .text {
+    display: inline-block
+}
+.THIS .placeholder.lead_insights_hover .lead-insights-body {
+    margin: 0 20px 10px;
+    border-top: 1px solid rgb(221, 219, 218)
+}
+.THIS .placeholder.lead_insights_hover .lead-insights-body .body {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    padding: 0
+}
+.THIS .placeholder.lead_insights_hover .lead-insights-footer .button {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    border-radius: 0;
+    min-height: 2.5rem;
+    background: rgb(236, 235, 234);
+    margin: 0
+}
+.THIS .placeholder.lead_insights_hover .lead-insights-footer .button:first-child {
+    border-bottom-left-radius: .25rem
+}
+.THIS .placeholder.lead_insights_hover .lead-insights-footer .button+.button {
+    margin-left: 1px;
+    margin-right: -1px
+}
+.THIS .placeholder.lead_insights_hover .lead-insights-footer .button:last-child {
+    border-bottom-right-radius: .25rem
+}
+.THIS .placeholder.lead_insights_record_home .score-container {
+    border-bottom: solid 1px rgb(221, 219, 218);
+    background-color: rgb(250, 250, 249)
+}
+.THIS .placeholder.lead_insights_record_home .score-container .actions .icon {
+    margin: 0
+}
+.THIS .placeholder.lead_insights_record_home .score-container .actions .icon-small {
+    background: rgb(255, 255, 255);
+    border: solid 1px rgb(221, 219, 218);
+    text-align: center;
+    border-radius: 0
+}
+.THIS .placeholder.lead_insights_record_home .score-container .actions .icon-small:first-child {
+    border-top-left-radius: .125rem;
+    border-bottom-left-radius: .125rem;
+    margin-right: -1px
+}
+.THIS .placeholder.lead_insights_record_home .score-container .actions .icon-small:first-child {
+    border-top-right-radius: .125rem;
+    border-bottom-right-radius: .125rem
+}
+.THIS .placeholder.lead_insights_record_home .score-container .actions .icon-small .icon-x-small {
+    margin-top: .35rem
+}
+.THIS .placeholder.lead_insights_record_home .lead-insights-title {
+    text-align: center;
+    margin-top: .75rem;
+    margin-bottom: .5rem;
+    font-size: .8125rem
+}
+.THIS .placeholder.lead_insights_record_home .lead-insights-title .text {
+    display: inline-block
+}
+.THIS .placeholder.lead_insights_record_home .lead-insights-body {
+    margin: 0 20px 10px;
+    border-top: 1px solid rgb(221, 219, 218)
+}
+.THIS .placeholder.lead_insights_record_home .lead-insights-body .body {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    padding: 0
+}
+.THIS .placeholder.lead_insights_record_home .lead-insights-footer .button {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    border-radius: 0;
+    min-height: 2.5rem;
+    background: rgb(236, 235, 234);
+    margin: 0
+}
+.THIS .placeholder.lead_insights_record_home .lead-insights-footer .button:first-child {
+    border-bottom-left-radius: .25rem
+}
+.THIS .placeholder.lead_insights_record_home .lead-insights-footer .button+.button {
+    margin-left: 1px;
+    margin-right: -1px
+}
+.THIS .placeholder.lead_insights_record_home .lead-insights-footer .button:last-child {
+    border-bottom-right-radius: .25rem
+}

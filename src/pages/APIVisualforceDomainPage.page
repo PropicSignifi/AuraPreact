@@ -1,0 +1,11 @@
+<apex:page
+    controller="APIVisualforceDomainController"
+    contentType="text/plain"
+    showHeader="false"
+    showChat="false"
+    sideBar="false"
+    applyHtmlTag="false"
+    applyBodyTag="false"
+>
+    {!domainURL}
+</apex:page>

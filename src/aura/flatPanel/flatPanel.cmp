@@ -1,0 +1,32 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common,c:commented">
+    <aura:attribute name="header" type="String" access="GLOBAL"/>
+    <aura:attribute name="iconName" type="String" access="GLOBAL"/>
+    <aura:attribute name="expandable" type="Boolean" access="GLOBAL"/>
+    <aura:attribute name="expanded" type="Boolean" access="GLOBAL" default="true"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.expandable }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.expanded }"/>
+
+    <div title="{! v.title }" class="{! v.privateComputedClass }">
+        <div class="header" onclick="{! c.onClickHeader }">
+            <aura:if isTrue="{! !empty(v.iconName) }">
+                <c:primitiveIcon variant="bare" iconName="{! v.iconName }" size="x-small" svgClass="slds-m-bottom_xxx-small slds-m-right_xx-small"/>
+            </aura:if>
+            {! v.header }
+            <aura:if isTrue="{! !empty(v.tooltip) }">
+                <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+            </aura:if>
+            <aura:if isTrue="{! v.expandable }">
+                <c:primitiveIcon variant="bare" iconName="ctc-utility:a_switch" size="x-small" class="slds-col_bump-left" svgClass="slds-flat-panel_action"/>
+            </aura:if>
+        </div>
+        <div class="content">
+            {! v.body }
+        </div>
+    </div>
+
+</aura:component>

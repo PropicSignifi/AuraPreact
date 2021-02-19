@@ -1,0 +1,115 @@
+.slds-markdown {
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 1.6875rem;
+        border-bottom: 1px solid #ddd;
+    }
+
+    h2 {
+        font-size: 1.4375rem;
+        line-height: 1.4;
+    }
+
+    h3 {
+        font-size: 1.125rem;
+        line-height: 1.4;
+    }
+
+    p {
+        line-height: 1.6;
+        margin-bottom: 1.25rem;
+    }
+
+    pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        background-color: #f8f8f8;
+        border: 1px solid #dfdfdf;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+        padding: 0.125rem 0.3125rem 0.0625rem;
+
+        code {
+            background-color: transparent;
+            border: 0;
+            padding: 0;
+        }
+    }
+
+    ol {
+        list-style-type: decimal;
+    }
+
+    ul {
+        list-style-type: disc;
+    }
+
+    ol, ul {
+        padding-left: 30px;
+
+        ul {
+            list-style-type: circle;
+        }
+    }
+
+    code {
+        background-color: #f8f8f8;
+        border-color: #dfdfdf;
+        border-style: solid;
+        border-width: 1px;
+        color: #333;
+        font-family: Consolas,"Liberation Mono",Courier,monospace;
+        font-weight: normal;
+        padding: 0.125rem 0.3125rem 0.0625rem;
+    }
+
+    blockquote {
+        margin: 0 0 1.25rem;
+        padding: 0.5625rem 1.25rem 0 1.1875rem;
+        border-left: 1px solid #ddd;
+
+        p {
+            line-height: 1.6;
+            color: #6f6f6f;
+        }
+    }
+
+    table {
+        background: #fff;
+        border: solid 1px #ddd;
+        margin-bottom: 1.25rem;
+        table-layout: auto;
+        border-collapse: separate;
+        border-spacing: 2px;
+
+        thead {
+            background: #F5F5F5;
+
+            tr {
+                td, th {
+                    color: #222;
+                    font-size: 0.875rem;
+                    font-weight: bold;
+                    padding: 0.5rem 0.625rem 0.625rem;
+                }
+            }
+        }
+
+        thead, tfoot, tbody {
+            tr {
+                td, th {
+                    display: table-cell;
+                    line-height: 1.125rem;
+                    padding: 0.5rem 0.625rem 0.625rem;
+                }
+            }
+        }
+    }
+
+    table tr.even, table tr.alt, table tr:nth-of-type(even) {
+        background: #F9F9F9;
+    }
+}

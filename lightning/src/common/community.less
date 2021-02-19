@@ -1,0 +1,211 @@
+@import "../tools/slds-styles/force-base.less";
+
+.cmnt-header {
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+.cmnt-subheader {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.cmnt-topbar {
+    width: 100%;
+}
+
+.cmnt-searchPanel {
+    width: 100%;
+    background-color: #fff;
+
+    .cmnt-searchIcon {
+        width: 35px;
+        .slds-icon {
+            fill: #444;
+        }
+    }
+}
+
+.cmnt-projects {
+    width: 100%;
+}
+
+.cmnt-searchProperties {
+    width: 100%;
+
+    .cmnt-searchProperties-actionHeader {
+        width: 200px;
+    }
+}
+
+.cmnt-myClients {
+    width: 100%;
+}
+
+.cmnt-myClients-editClientForm {
+  background-color: white;
+}
+
+.cmnt-searchProperties-tableHeader {
+
+}
+
+.cmnt-DocIcon {
+    fill: black;
+}
+
+.cmnt-documentsCard {
+    font-size: 1rem;
+}
+
+.cmnt-projectCard, .cmnt-documentsCard {
+    color: black;
+    line-height: 1.2;
+    background-color: white;
+}
+
+.cmnt-projectCard-description {
+    text-overflow: ellipsis;
+    white-space: pre-line;
+}
+
+.cmnt-projectCard-projectInfo {
+    max-height: 130px;
+    overflow: scroll;
+}
+
+.cmnt-projectCard-imageGroup {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+
+.cmnt-imageModal {
+    position: fixed;
+    z-index: 1000;
+    padding-top: 20px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
+
+    img {
+        padding: 0 !important;
+        border: none !important;
+    }
+
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        opacity: 1;
+        transition: 0.3s;
+
+        &:hover,
+        &:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+
+    .content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
+
+    .caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    }
+
+    .content,
+    .caption {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
+}
+
+.cmnt-solicitorView-projectPanel{
+    font-size: 11px;
+    .header:hover{
+        cursor: pointer;
+    }
+    .header{
+        div{
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 100%;
+            white-space: nowrap;
+        }
+    }
+    span{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 100%;
+        white-space: nowrap;
+    }
+}
+
+.cmnt-solicitorView-projectLogo{
+    img {
+        max-width: 200px;
+        max-height: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 20px;
+    }
+}
+
+.cmnt-solicitorView-projectLogo:hover{
+    cursor: pointer;
+}
+
+.cmnt-solicitorView-backArrow{
+    fill: grey;
+}
+
+.cmnt-solicitorView-backArrow:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.cmnt-solicitorView-projectContent{
+    height: 250px;
+}
+
+.cmnt-solicitorView-flatPanel{
+    background-color: white;
+    width:100%;
+}
+
+.cmnt-solicitorView-dueDate{
+    color: red;
+}
+.cmnt-solicitorView-completedTask{
+    text-decoration: line-through;
+}
+
+.cmnt-solicitorView-clientName{
+    white-space: nowrap;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}

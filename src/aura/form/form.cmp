@@ -1,0 +1,31 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common,c:contentEditable">
+    <aura:attribute name="variant" type="String" access="GLOBAL" description="The variant of the form"/>
+    <aura:attribute name="layout" type="String" access="GLOBAL" description="The layout of the form"/>
+    <aura:attribute name="name" type="String" access="GLOBAL" description="The name of the form" required="true"/>
+    <aura:attribute name="validators" type="Object" access="GLOBAL" description="The custom validators"/>
+    <aura:attribute name="constraints" type="Object" access="GLOBAL" description="The custom constraints"/>
+    <aura:attribute name="readonly" type="Boolean" access="GLOBAL" description="Whether the form is readonly"/>
+    <aura:attribute name="disabled" type="Boolean" access="GLOBAL" description="Whether the form is disabled"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateCommittedValues" type="Object" access="PRIVATE" description="description"/>
+
+    <aura:method name="validate" access="GLOBAL">
+    </aura:method>
+    <aura:method name="getFields" access="GLOBAL">
+    </aura:method>
+    <aura:method name="getValidFields" access="GLOBAL">
+    </aura:method>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.variant }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.layout }"/>
+    <aura:handler name="change" action="{! c.handleFormReadonly }" value="{! v.readonly }"/>
+    <aura:handler name="change" action="{! c.handleFormDisabled }" value="{! v.disabled }"/>
+
+    <div class="{! v.privateComputedClass }">
+        {! v.body }
+    </div>
+
+</aura:component>

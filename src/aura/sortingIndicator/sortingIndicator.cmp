@@ -1,0 +1,45 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="sortable" type="Boolean" access="GLOBAL" description="Whether it is sortable"/>
+    <aura:attribute name="active" type="Boolean" access="GLOBAL" description="Whether it is the current applied sorting"/>
+    <aura:attribute name="direction" type="String" access="GLOBAL" description="The sorting direction(asc/desc)"/>
+    <aura:attribute name="variant" type="String" access="GLOBAL" description="The variant of this indicator(default/control)"/>
+    <aura:attribute name="name" type="String" access="GLOBAL" description="The name of the sorting"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateComputedSortedClass" type="String" access="PRIVATE" description="description"/>
+
+    <aura:registerEvent name="onsort" type="c:dataEvent" access="GLOBAL" description="The event is fired when a sorting request is sent"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computeSortedClassNames }" value="{! v.active }"/>
+
+    <aura:if isTrue="{! v.sortable }">
+        <aura:if isTrue="{! v.variant == 'default' }">
+            <div class="{! v.privateComputedSortedClass }">
+                <a class="{! v.privateComputedClass }" href="javascript:void(0);" role="button" tabindex="-1" onclick="{! c.onClick }">
+                    <span class="slds-assistive-text">Sort by: </span>
+                    {! v.body }
+                    <div class="slds-icon_container">
+                        <c:primitiveIcon variant="bare" iconName="{! 'utility:' + (v.direction == 'asc' ? 'arrowup' : 'arrowdown') }" svgClass="slds-icon slds-icon_x-small slds-icon-text-default slds-is-sortable__icon slds-m-bottom_xxx-small"/>
+                    </div>
+                </a>
+            </div>
+        </aura:if>
+        <aura:if isTrue="{! v.variant == 'control' }">
+            <div class="{! v.privateComputedSortedClass }">
+                {! v.body }
+                <a class="{! v.privateComputedClass }" href="javascript:void(0);" role="button" tabindex="-1" onclick="{! c.onClick }">
+                    <span class="slds-assistive-text">Sort by: {! v.name }</span>
+                    <div class="slds-icon_container">
+                        <c:primitiveIcon variant="bare" iconName="{! 'utility:' + (v.direction == 'asc' ? 'arrowup' : 'arrowdown') }" svgClass="slds-icon slds-icon_x-small slds-icon-text-default slds-is-sortable__icon slds-m-bottom_xxx-small"/>
+                    </div>
+                </a>
+            </div>
+        </aura:if>
+        <aura:set attribute="else">
+            {! v.body }
+        </aura:set>
+    </aura:if>
+
+</aura:component>

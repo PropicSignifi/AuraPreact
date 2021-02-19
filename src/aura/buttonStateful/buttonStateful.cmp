@@ -1,0 +1,62 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:focusable,c:common,c:commented">
+    <aura:attribute name="state" type="Boolean" access="GLOBAL" default="false"/>
+    <aura:attribute name="labelWhenOff" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="labelWhenOn" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="labelWhenHover" type="String" access="GLOBAL"/>
+    <aura:attribute name="iconNameWhenOff" type="String" access="GLOBAL"/>
+    <aura:attribute name="iconNameWhenOn" type="String" access="GLOBAL"/>
+    <aura:attribute name="iconNameWhenHover" type="String" access="GLOBAL"/>
+    <aura:attribute name="variant" type="String" access="GLOBAL" default="neutral"/>
+    <aura:attribute name="iconPosition" type="String" access="GLOBAL" required="false" default="left"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateIsClicked" type="Boolean" access="PRIVATE"/>
+
+    <aura:registerEvent name="onclick" type="c:dataEvent" access="GLOBAL" description="Description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleClassChange }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.handleVariantChange }" value="{! v.variant }"/>
+    <aura:handler name="change" action="{! c.handleStateChange }" value="{! v.state }"/>
+    <aura:handler name="change" action="{! c.handlePrivateIsClickedChange }" value="{! v.privateIsClicked }"/>
+
+    <button class="{! v.privateComputedClass }" onblur="{! c.handleBlur }" accesskey="{! v.accesskey }" aria-live="assertive" onfocus="{! c.handleFocus }" tabindex="{! v.tabindex }" onclick="{! c.handleClick }" title="{! v.title }" aura:id="privateButton">
+        <span class="slds-text-not-selected">
+            <aura:if isTrue="{! !empty(v.iconNameWhenOff) &amp;&amp; v.iconPosition == 'left' }">
+                <c:primitiveIcon variant="bare" iconName="{! v.iconNameWhenOff }" svgClass="slds-button__icon--stateful slds-button__icon--left slds-m-bottom_xxx-small"/>
+            </aura:if>
+            {! v.labelWhenOff }
+            <aura:if isTrue="{! !empty(v.iconNameWhenOff) &amp;&amp; v.iconPosition == 'right' }">
+                <c:primitiveIcon variant="bare" iconName="{! v.iconNameWhenOff }" svgClass="slds-button__icon--stateful slds-button__icon--right slds-m-bottom_xxx-small"/>
+            </aura:if>
+            <aura:if isTrue="{! !empty(v.tooltip) }">
+                <c:helptext content="{! v.tooltip }" class="slds-m-left_x-small"/>
+            </aura:if>
+        </span>
+        <span class="slds-text-selected">
+            <aura:if isTrue="{! !empty(v.iconNameWhenOn) &amp;&amp; v.iconPosition == 'left' }">
+                <c:primitiveIcon variant="bare" iconName="{! v.iconNameWhenOn }" svgClass="slds-button__icon--stateful slds-button__icon--left slds-m-bottom_xxx-small"/>
+            </aura:if>
+            {! v.labelWhenOn }
+            <aura:if isTrue="{! !empty(v.iconNameWhenOn) &amp;&amp; v.iconPosition == 'right' }">
+                <c:primitiveIcon variant="bare" iconName="{! v.iconNameWhenOn }" svgClass="slds-button__icon--stateful slds-button__icon--right slds-m-bottom_xxx-small"/>
+            </aura:if>
+            <aura:if isTrue="{! !empty(v.tooltip) }">
+                <c:helptext content="{! v.tooltip }" class="slds-m-left_x-small"/>
+            </aura:if>
+        </span>
+        <span class="slds-text-selected-focus">
+            <aura:if isTrue="{! !empty(v.iconNameWhenHover) &amp;&amp; v.iconPosition == 'left' }">
+                <c:primitiveIcon variant="bare" iconName="{! v.iconNameWhenHover }" svgClass="slds-button__icon--stateful slds-button__icon--left slds-m-bottom_xxx-small"/>
+            </aura:if>
+            {! v.labelWhenHover }
+            <aura:if isTrue="{! !empty(v.iconNameWhenHover) &amp;&amp; v.iconPosition == 'right' }">
+                <c:primitiveIcon variant="bare" iconName="{! v.iconNameWhenHover }" svgClass="slds-button__icon--stateful slds-button__icon--right slds-m-bottom_xxx-small"/>
+            </aura:if>
+            <aura:if isTrue="{! !empty(v.tooltip) }">
+                <c:helptext content="{! v.tooltip }" class="slds-m-left_x-small"/>
+            </aura:if>
+        </span>
+    </button>
+
+</aura:component>

@@ -1,0 +1,43 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="row" type="Object" access="GLOBAL" description="The table header row object"/>
+    <aura:attribute name="rowConfig" type="Object" access="GLOBAL" description="The table header row config"/>
+    <aura:attribute name="providers" type="Object" access="GLOBAL" description="The providers of the component refs"/>
+    <aura:attribute name="checkable" type="Boolean" access="GLOBAL" description="Whether it supports checking rows"/>
+    <aura:attribute name="select" type="String" access="GLOBAL" default="multiple"/>
+    <aura:attribute name="resizable" type="Boolean" access="GLOBAL"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateRowConfig" type="Object" access="GLOBAL" description="The table header row config"/>
+    <aura:attribute name="privateTable" type="Object" access="GLOBAL" description="The enclosing table component"/>
+
+    <aura:method name="renderRow" access="GLOBAL">
+    </aura:method>
+    <aura:method name="setTable" access="GLOBAL">
+        <aura:attribute name="table" type="Object"/>
+    </aura:method>
+
+    <aura:registerEvent name="onselectAll" type="c:dataEvent" access="GLOBAL"
+        description="The event is fired when the selectAll checkbox is selected."/>
+    <aura:registerEvent name="onHeaderEvent" type="c:dataEvent" access="GLOBAL"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="onclick" event="c:dataEvent" action="{! c.handleOnEvent }" includeFacets="true"/>
+    <aura:handler name="onchange" event="c:dataEvent" action="{! c.handleOnEvent }" includeFacets="true"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+
+    <tr class="{! v.privateComputedClass }">
+        <aura:if isTrue="{! v.checkable }">
+            <aura:if isTrue="{! v.select == 'multiple' }">
+                <th style="width: 2rem;">
+                    <c:input type="checkbox" name="selectAll" label="Select All" variant="label-hidden" checked="{! v.row.$selected }" onchange="{! c.handleSelected }"/>
+                </th>
+                <aura:set attribute="else">
+                    <th style="width: 2rem;">
+                    </th>
+                </aura:set>
+            </aura:if>
+        </aura:if>
+        <c:objectEditor aura:id="private" template="table-header-row" object="{! v.row }" editorConfig="{! v.privateRowConfig }" providers="{! v.providers }"/>
+    </tr>
+
+</aura:component>

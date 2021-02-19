@@ -1,0 +1,9 @@
+<aura:interface description="Focusable UI element">
+    <aura:attribute name="accesskey" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="tabindex" type="Integer" access="GLOBAL" required="false"/>
+
+    <aura:method name="focus" access="GLOBAL"/>
+
+    <aura:registerEvent name="onfocus" type="c:dataEvent" access="GLOBAL"/>
+    <aura:registerEvent name="onblur" type="c:dataEvent" access="GLOBAL"/>
+</aura:interface>

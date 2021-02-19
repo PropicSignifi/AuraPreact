@@ -1,0 +1,36 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:focusable,c:common">
+    <aura:attribute name="name" type="String" access="GLOBAL"/>
+    <aura:attribute name="value" type="String" access="GLOBAL"/>
+    <aura:attribute name="iconName" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="iconClass" type="String" access="GLOBAL"/>
+    <aura:attribute name="iconDisplay" type="String" access="GLOBAL" description="Adjust the icon span display"/>
+    <aura:attribute name="variant" type="String" access="GLOBAL" default="border"/>
+    <aura:attribute name="size" type="String" access="GLOBAL" default="medium"/>
+    <aura:attribute name="disabled" type="Boolean" access="GLOBAL" default="false"/>
+    <aura:attribute name="alternativeText" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="type" type="String" access="GLOBAL" default="button"/>
+
+    <aura:attribute name="privateComputedButtonClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateIconSize" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateIconClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateTitle" type="String" access="PRIVATE"/>
+
+    <aura:registerEvent name="onclick" type="c:dataEvent" access="GLOBAL"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.updatePrivateAttributes }" value="{! v.variant }"/>
+    <aura:handler name="change" action="{! c.updatePrivateAttributes }" value="{! v.size }"/>
+    <aura:handler name="change" action="{! c.updatePrivateAttributes }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.updatePrivateAttributes }" value="{! v.title }"/>
+    <aura:handler name="change" action="{! c.handleIconClassChange }" value="{! v.iconClass }"/>
+
+    <button class="{! v.privateComputedButtonClass }" onblur="{! c.handleBlur }" value="{! v.value }" accesskey="{! v.accesskey }" type="{! v.type }" name="{! v.name }" onfocus="{! c.handleFocus }" disabled="{! v.disabled }" tabindex="{! v.tabindex }" onclick="{! c.handleClick }" title="{! v.privateTitle }" aura:id="privateButton">
+        <c:primitiveIcon variant="bare" iconName="{! v.iconName }" svgClass="{! v.privateIconClass }" display="{! v.iconDisplay }"/>
+        <aura:if isTrue="{! !empty(v.alternativeText) }">
+            <span class="slds-assistive-text">
+                {! v.alternativeText }
+            </span>
+        </aura:if>
+    </button>
+
+</aura:component>

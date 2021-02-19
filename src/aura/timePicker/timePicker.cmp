@@ -1,0 +1,77 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:inputable,c:focusable,c:common,c:commented,c:hasPopup">
+    <aura:attribute name="time" type="String" access="GLOBAL"/>
+    <aura:attribute name="value" type="Long" access="GLOBAL" description="Time in milliseconds"/>
+    <aura:attribute name="label" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="placeholder" type="String" access="GLOBAL"/>
+    <aura:attribute name="startTime" type="Integer" access="GLOBAL" description="Start time in minutes"/>
+    <aura:attribute name="endTime" type="Integer" access="GLOBAL" description="End time in minutes"/>
+    <aura:attribute name="interval" type="Integer" access="GLOBAL" description="Interval in minutes"/>
+    <aura:attribute name="options" type="List" access="GLOBAL"/>
+    <aura:attribute name="messageWhenBadInput" type="String" access="GLOBAL"/>
+    <aura:attribute name="messageWhenValueMissing" type="String" access="GLOBAL"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateHelpMessage" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateExpanded" type="Boolean" access="PRIVATE"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="$destroy" event="c:dataEvent" action="{! c.doDestroy }"/>
+    <aura:handler name="change" action="{! c.handleClassChange }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.handleTimeValueChange }" value="{! v.value }"/>
+
+    <div class="{! v.privateComputedClass }" title="{! v.title }">
+        <label class="{! join(' ', 'slds-form-element__label', (v.variant == 'label-hidden' ? 'slds-m-right--xxx-small' : '')) }" for="{! globalId }">
+            <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : '' }">
+                <aura:if isTrue="{! !empty(v.labelHtml) }">
+                    <aura:unescapedHtml value="{! v.labelHtml }"/>
+                    <aura:set attribute="else">
+                        {! v.label }
+                    </aura:set>
+                </aura:if>
+            </span>
+            <aura:if isTrue="{! v.required }">
+                <abbr class="slds-required" title="{! $Label.LightningControl.required }">
+                    *
+                </abbr>
+            </aura:if>
+            <aura:if isTrue="{! !empty(v.tooltip) }">
+                <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+            </aura:if>
+        </label>
+        <div class="slds-form-element__control slds-grow">
+            <div class="slds-combobox_container" data-timepicker="{! globalId }">
+                <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-combobox-picklist slds-timepicker" aura:id="combobox" aria-haspopup="listbox" role="combobox">
+                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                        <input type="text" class="slds-input slds-combobox__input" id="{! globalId }" aura:id="private" />
+                        <span class="slds-icon_container slds-icon-utility-clock slds-input__icon slds-input__icon_right" title="Time Picker">
+                            <c:primitiveIcon iconName="ctc-utility:a_time" variant="bare" size="x-small"/>
+                            <span class="slds-assistive-text">Time Picker</span>
+                        </span>
+                    </div>
+                    <div aura:id="popup" data-timepicker="{! globalId }" id="{! 'listbox-' + globalId }" role="listbox" class="{! 'slds-dropdown_append-to-body ' + v.popupClass }">
+                        <ul class="{! 'slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown--fluid slds-dropdown--length-5 ' + (v.privateExpanded ? '' : 'slds-hide ') }" role="presentation">
+                            <aura:iteration items="{! v.options }" var="option" indexVar="index">
+                                <li role="presentation" class="slds-listbox__item" id="{! globalId + '-' + index }" aura:id="privateOption" data-index="{! index }" onclick="{! c.handleNodeClick }">
+                                    <span id="{! 'listbox-option-' + globalId + '-' + index }" class="{! 'slds-media slds-listbox__option slds-listbox__option_plain slds-media_small slds-media_center' + (option.selected ? ' slds-is-selected' : '') }" role="option">
+                                        <span class="slds-media__figure">
+                                            <c:primitiveIcon variant="bare" iconName="ctc-utility:a_tick" svgClass="slds-icon slds-icon_x-small slds-listbox__icon-selected"/>
+                                        </span>
+                                        <span class="slds-media__body">
+                                            <span class="slds-truncate" title="{! option.label }">{! option.label }</span>
+                                        </span>
+                                    </span>
+                                </li>
+                            </aura:iteration>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <aura:if isTrue="{! !empty(v.privateHelpMessage) }">
+            <div class="slds-form-element__help" aria-live="assertive" id="{! globalId + '-desc' }">
+                {! v.privateHelpMessage }
+            </div>
+        </aura:if>
+    </div>
+
+</aura:component>

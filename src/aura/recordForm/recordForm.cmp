@@ -1,0 +1,24 @@
+<aura:component access="GLOBAL" extends="c:baseRoot" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,lightning:isUrlAddressable">
+    <aura:attribute name="name" type="String" access="GLOBAL"/>
+    <aura:attribute name="recordId" type="String" access="GLOBAL"/>
+    <aura:attribute name="sObjectName" type="String" access="GLOBAL"/>
+    <aura:attribute name="layoutCode" type="String" access="GLOBAL"/>
+    <aura:attribute name="resourceName" type="String" access="GLOBAL"/>
+    <aura:attribute name="header" type="String" access="GLOBAL"/>
+    <aura:attribute name="type" type="String" access="GLOBAL"/>
+    <aura:attribute name="hideHeader" type="Boolean" access="GLOBAL"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" value="{! v.pageReference }" action="{! c.init }" />
+    <aura:handler name="change" value="{! v.name }" action="{! c.init }" />
+    <aura:handler name="change" value="{! v.recordId }" action="{! c.init }" />
+    <aura:handler name="change" value="{! v.sObjectName }" action="{! c.init }" />
+    <aura:handler name="change" value="{! v.layoutCode }" action="{! c.init }" />
+    <aura:handler name="change" value="{! v.resourceName }" action="{! c.init }" />
+    <aura:handler name="change" value="{! v.header }" action="{! c.init }" />
+    <aura:handler name="change" value="{! v.type }" action="{! c.init }" />
+
+    <c:gLightningExtension/>
+    <c:dataLightningExtension/>
+    <c:preact aura:id="preact" name="recordForm" waitFor="GLightningExtension,DataLightningExtension"/>
+</aura:component>

@@ -1,0 +1,152 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:inputable,c:focusable,c:common,c:commented,c:hasPopup">
+    <aura:attribute name="value" type="Long" access="GLOBAL"/>
+    <aura:attribute name="label" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="placeholder" type="String" access="GLOBAL"/>
+    <aura:attribute name="messageWhenBadInput" type="String" access="GLOBAL"/>
+    <aura:attribute name="messageWhenValueMissing" type="String" access="GLOBAL"/>
+    <aura:attribute name="startYear" type="Integer" description="The start year" />
+    <aura:attribute name="endYear" type="Integer" description="The end year" />
+    <aura:attribute name="date" type="String" description="The selected date." />
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateHelpMessage" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateDate" type="Integer" description="The currently highlighted date." default="1" access="PRIVATE" />
+    <aura:attribute name="privateMonth" type="Integer" description="The currently rendered month." default="1" access="PRIVATE" />
+    <aura:attribute name="privateMonthName" type="String" description="The currently rendered month name." access="PRIVATE" />
+    <aura:attribute name="privateYear" type="Integer" description="The currently rendered year." default="2017" access="PRIVATE" />
+    <aura:attribute name="privateYearStr" type="String" description="The currently rendered year." default="2017" access="PRIVATE" />
+    <aura:attribute name="privateYearOptions" type="List" access="PRIVATE"/>
+    <aura:attribute name="privateNamesOfWeekdays" type="List" description="The names of the week days based on locale." access="PRIVATE" />
+    <aura:attribute name="privateExpanded" type="Boolean" access="PRIVATE"/>
+
+    <aura:registerEvent name="onchange" type="c:dataEvent" description="The event fired when a calendar value is selected" />
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="$destroy" event="c:dataEvent" action="{! c.doDestroy }"/>
+    <aura:handler name="change" action="{! c.handleClassChange }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.handleDateValueChange }" value="{! v.value }"/>
+
+    <div class="{! v.privateComputedClass }" title="{! v.title }">
+        <label class="{! join(' ', 'slds-form-element__label', (v.variant == 'label-hidden' ? 'slds-m-right--xxx-small' : '')) }" for="{! globalId }">
+            <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : '' }">
+                <aura:if isTrue="{! !empty(v.labelHtml) }">
+                    <aura:unescapedHtml value="{! v.labelHtml }"/>
+                    <aura:set attribute="else">
+                        {! v.label }
+                    </aura:set>
+                </aura:if>
+            </span>
+            <aura:if isTrue="{! v.required }">
+                <abbr class="slds-required" title="{! $Label.LightningControl.required }">
+                    *
+                </abbr>
+            </aura:if>
+            <aura:if isTrue="{! !empty(v.tooltip) }">
+                <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+            </aura:if>
+        </label>
+        <div class="slds-form-element__control slds-grow slds-input-has-icon slds-input-has-icon_right" data-datepicker="{! globalId }">
+            <input type="text" class="slds-input" id="{! globalId }" aura:id="private" onfocus="{! c.handleInputFocus }"/>
+            <c:buttonIcon alternativeText="Select a Date" variant="bare" iconName="ctc-utility:a_date" iconDisplay="inline-flex"
+                class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" onclick="{! c.toggleDatePicker }"/>
+        </div>
+        <div aura:id="grid" id="datepicker-dropdown" class="{! 'slds-datepicker slds-dropdown slds-dropdown_left slds-dropdown_append-to-body ' + (v.privateExpanded ? '' : 'slds-hide ') + v.popupClass }" data-datepicker="{! globalId }">
+            <div class="slds-datepicker__filter slds-grid">
+                <div class="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
+                    <div class="slds-align-middle">
+                        <c:buttonIcon variant="bare" alternativeText="Previous Month" iconName="ctc-utility:a_left"
+                            iconDisplay="inline-flex"
+                            class="slds-button slds-button_icon slds-button_icon-container"
+                            onclick="{! c.goToPreviousMonth }"/>
+                    </div>
+                    <h2 id="month" class="slds-align-middle" aria-live="assertive" aria-atomic="true">{! v.privateMonthName }</h2>
+                    <div class="slds-align-middle">
+                        <c:buttonIcon variant="bare" alternativeText="Next Month" iconName="ctc-utility:a_right"
+                            iconDisplay="inline-flex"
+                            class="slds-button slds-button_icon slds-button_icon-container"
+                            onclick="{! c.goToNextMonth }"/>
+                    </div>
+                </div>
+                <div class="slds-shrink-none">
+                    <c:select aura:id="yearSelect" name="yearSelect" label="Select Year" variant="label-hidden"
+                        value="{! v.privateYearStr }" onchange="{! c.handleYearChange }" options="{! v.privateYearOptions }">
+                    </c:select>
+                </div>
+            </div>
+            <table aura:id="maintable" class="slds-datepicker__month" role="grid" aria-labelledby="month">
+                <thead>
+                    <tr id="weekdays">
+                        <aura:iteration items="{! v.privateNamesOfWeekdays }" var="day">
+                            <th scope="col">
+                                <abbr title="{! day.displayName }">{! day.displayName }</abbr>
+                            </th>
+                        </aura:iteration>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr aura:id="week1">
+                        <c:dateCell aura:id="0" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="1" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="2" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="3" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="4" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="5" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="6" dateCellClick="{! c.handleClick }"/>
+                    </tr>
+                    <tr aura:id="week2">
+                        <c:dateCell aura:id="7" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="8" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="9" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="10" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="11" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="12" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="13" dateCellClick="{! c.handleClick }"/>
+                    </tr>
+                    <tr aura:id="week3">
+                        <c:dateCell aura:id="14" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="15" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="16" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="17" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="18" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="19" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="20" dateCellClick="{! c.handleClick }"/>
+                    </tr>
+                    <tr aura:id="week4">
+                        <c:dateCell aura:id="21" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="22" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="23" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="24" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="25" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="26" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="27" dateCellClick="{! c.handleClick }"/>
+                    </tr>
+                    <tr aura:id="week5">
+                        <c:dateCell aura:id="28" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="29" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="30" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="31" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="32" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="33" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="34" dateCellClick="{! c.handleClick }"/>
+                    </tr>
+                    <tr aura:id="week6">
+                        <c:dateCell aura:id="35" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="36" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="37" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="38" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="39" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="40" dateCellClick="{! c.handleClick }"/>
+                        <c:dateCell aura:id="41" dateCellClick="{! c.handleClick }"/>
+                    </tr>
+                </tbody>
+            </table>
+            <c:button variant="base" label="Today" onclick="{! c.goToToday }" class="slds-button slds-align_absolute-center slds-text-link"/>
+        </div>
+        <aura:if isTrue="{! !empty(v.privateHelpMessage) }">
+            <div class="slds-form-element__help" aria-live="assertive" id="{! globalId + '-desc' }">
+                {! v.privateHelpMessage }
+            </div>
+        </aura:if>
+    </div>
+
+</aura:component>

@@ -1,0 +1,17 @@
+<aura:component extends="c:baseComponent">
+    <aura:attribute name="index" type="Integer" access="GLOBAL" description="Description"/>
+    <aura:attribute name="tag" type="Object" access="GLOBAL" description="Description"/>
+
+    <aura:registerEvent name="onclick" type="c:dataEvent" access="GLOBAL" description="Description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+
+    <li role="presentation" class="slds-listbox__item" data-index="{! v.index }" onclick="{! c.onClickItem }">
+        <span id="{! 'listbox-option-' + globalId + '-' + v.index }" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+            <span class="slds-media__body">
+                {! v.tag.label }
+            </span>
+        </span>
+    </li>
+
+</aura:component>

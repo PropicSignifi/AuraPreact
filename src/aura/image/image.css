@@ -1,0 +1,17 @@
+.THIS.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.THIS.image-container .alternative-text {
+    position: absolute;
+    z-index: 2;
+    background-color: #eee;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

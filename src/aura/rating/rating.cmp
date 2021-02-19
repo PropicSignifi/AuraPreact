@@ -1,0 +1,62 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:inputable,c:focusable,c:common,c:commented">
+    <aura:attribute name="value" type="Object" access="GLOBAL"/>
+    <aura:attribute name="options" type="List" access="GLOBAL" required="true"/>
+    <aura:attribute name="showTooltip" type="boolean" access="GLOBAL" description="Whether the tooltip of each rating star is shown"/>
+    <aura:attribute name="style" type="String" access="GLOBAL" default="favorite"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateHelpMessage" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateOptions" type="List" access="PRIVATE"/>
+    <aura:attribute name="privateActiveIconName" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateActiveStyle" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateInactiveIconName" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateInactiveStyle" type="String" access="PRIVATE"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleClassChange }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.handleValueChange }" value="{! v.options }"/>
+    <aura:handler name="change" action="{! c.handleValueChange }" value="{! v.value }"/>
+
+    <div class="{! v.privateComputedClass }" title="{! v.title }">
+        <label class="{! join(' ', 'slds-form-element__label', (v.variant == 'label-hidden' ? 'slds-m-right--xxx-small' : '')) }" for="{! globalId }">
+            <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : '' }">
+                <aura:if isTrue="{! !empty(v.labelHtml) }">
+                    <aura:unescapedHtml value="{! v.labelHtml }"/>
+                    <aura:set attribute="else">
+                        {! v.label }
+                    </aura:set>
+                </aura:if>
+            </span>
+            <aura:if isTrue="{! v.required }">
+                <abbr class="slds-required" title="{! $Label.LightningControl.required }">
+                    *
+                </abbr>
+            </aura:if>
+            <aura:if isTrue="{! !empty(v.tooltip) }">
+                <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+            </aura:if>
+        </label>
+        <div class="slds-form-element__control slds-grow" onfocusin="{! c.handleNodeFocus }" onfocusout="{! c.handleNodeBlur }">
+            <aura:if isTrue="{! v.showTooltip }">
+                <aura:iteration items="{! v.privateOptions }" var="option" indexVar="index">
+                    <button class="{! 'slds-button ' + (option.$active ? v.privateActiveStyle : v.privateInactiveStyle) }" onclick="{! c.handleOptionClick }" data-index="{! index }" disabled="{! v.disabled }">
+                        <c:helptext content="{! option.label }" iconName="{! option.$active ? v.privateActiveIconName : v.privateInactiveIconName }" align="bottom-left"/>
+                    </button>
+                </aura:iteration>
+                <aura:set attribute="else">
+                    <aura:iteration items="{! v.privateOptions }" var="option" indexVar="index">
+                        <button class="{! 'slds-button ' + (option.$active ? v.privateActiveStyle : v.privateInactiveStyle) }" onclick="{! c.handleOptionClick }" data-index="{! index }" disabled="{! v.disabled }">
+                            <c:primitiveIcon iconName="{! option.$active ? v.privateActiveIconName : v.privateInactiveIconName }" variant="bare" svgClass="slds-icon--x-small slds-m-bottom_xxx-small"/>
+                        </button>
+                    </aura:iteration>
+                </aura:set>
+            </aura:if>
+        </div>
+        <aura:if isTrue="{! !empty(v.privateHelpMessage) }">
+            <div class="slds-form-element__help" aria-live="assertive" id="{! globalId + '-desc' }">
+                {! v.privateHelpMessage }
+            </div>
+        </aura:if>
+    </div>
+
+</aura:component>

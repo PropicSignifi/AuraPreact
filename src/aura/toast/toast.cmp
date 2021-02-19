@@ -1,0 +1,43 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="visible" type="Boolean" access="GLOBAL"/>
+    <aura:attribute name="variant" type="String" access="GLOBAL"/>
+    <aura:attribute name="position" type="String" access="GLOBAL"/>
+    <aura:attribute name="wait" type="Integer" access="GLOBAL" default="15000"/>
+    <aura:attribute name="content" type="Aura.Component[]" access="GLOBAL"/>
+    <aura:attribute name="contentText" type="String" access="GLOBAL"/>
+
+    <aura:attribute name="privateComputedContainerClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateIcon" type="String" access="PRIVATE"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeContainerClassNames }" value="{! v.position }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.variant }"/>
+    <aura:handler name="change" action="{! c.computeIconName }" value="{! v.variant }"/>
+    <aura:handler name="change" action="{! c.monitorToast }" value="{! v.visible }"/>
+
+    <div class="{! v.privateComputedContainerClass }">
+        <aura:if isTrue="{! v.visible }">
+            <div class="{! v.privateComputedClass }" role="alert">
+                <span class="slds-assistive-text">{! v.variant }</span>
+                <span class="slds-icon_container slds-icon-utility-info slds-m-right_small slds-no-flex slds-align-top" title="{! v.variant }">
+                    <c:primitiveIcon variant="bare" iconName="{! v.privateIcon }" svgClass="slds-icon slds-icon_small"/>
+                </span>
+                <div class="slds-notify__content">
+                    <aura:if isTrue="{! !empty(v.contentText) }">
+                        <h2 class="slds-text-heading_small">{! v.contentText }</h2>
+                        <aura:set attribute="else">
+                            {! v.content }
+                        </aura:set>
+                    </aura:if>
+                </div>
+                <button class="slds-button slds-button_icon slds-notify__close slds-button_icon-inverse" title="Close" onclick="{! c.onClose }">
+                    <c:primitiveIcon variant="bare" iconName="utility:close" svgClass="slds-button__icon slds-button__icon_large"/>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            </div>
+        </aura:if>
+    </div>
+
+</aura:component>

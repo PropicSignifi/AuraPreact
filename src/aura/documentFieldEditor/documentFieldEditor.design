@@ -1,0 +1,8 @@
+<design:component label="Propic Document Field Editor">
+    <design:attribute name="label" label="Label" default="" />
+    <design:attribute name="fieldName" label="Field Name" default="" required="true" />
+    <design:supportedFormFactors>
+        <design:supportedFormFactor type="Large"/>
+        <design:supportedFormFactor type="Small"/>
+    </design:supportedFormFactors>
+</design:component>

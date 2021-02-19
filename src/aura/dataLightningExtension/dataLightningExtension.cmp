@@ -1,0 +1,3 @@
+<aura:component access="GLOBAL" extends="c:serviceComponent" controller="DataLightningExtension">
+    <aura:attribute name="serviceName" type="String" default="DataLightningExtension"/>
+</aura:component>

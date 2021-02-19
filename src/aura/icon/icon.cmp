@@ -1,0 +1,25 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="iconName" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="size" type="String" access="GLOBAL" default="medium"/>
+    <aura:attribute name="variant" type="String" access="GLOBAL"/>
+    <aura:attribute name="alternativeText" type="String" access="GLOBAL"/>
+
+    <aura:attribute name="privateContainerClassNames" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateVariant" type="String" access="PRIVATE"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleIconNameChange }" value="{! v.iconName }"/>
+    <aura:handler name="change" action="{! c.setContainerClassNames }" value="{! v.size }"/>
+    <aura:handler name="change" action="{! c.handleVariantChange }" value="{! v.variant }"/>
+    <aura:handler name="change" action="{! c.setContainerClassNames }" value="{! v.class }"/>
+
+    <span class="{! v.privateContainerClassNames }" title="{! v.title }">
+        <c:primitiveIcon size="{! v.size }" variant="{! v.privateVariant }" iconName="{! v.iconName }"/>
+        <aura:if isTrue="{! !empty(v.alternativeText) }">
+            <span class="slds-assistive-text">
+                {! v.alternativeText }
+            </span>
+        </aura:if>
+    </span>
+
+</aura:component>

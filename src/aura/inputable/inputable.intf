@@ -1,0 +1,15 @@
+<aura:interface description="Inputable UI element">
+    <aura:attribute name="name" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="label" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="labelHtml" type="String" access="GLOBAL"/>
+    <aura:attribute name="variant" type="String" access="GLOBAL" default="standard"/>
+    <aura:attribute name="disabled" type="Boolean" access="GLOBAL"/>
+    <aura:attribute name="readonly" type="Boolean" access="GLOBAL"/>
+    <aura:attribute name="required" type="Boolean" access="GLOBAL"/>
+    <aura:attribute name="validity" type="Object" access="GLOBAL"/>
+    <aura:attribute name="messageWhenValueMissing" type="String" access="GLOBAL"/>
+
+    <aura:method name="showHelpMessageIfInvalid" access="GLOBAL"/>
+
+    <aura:registerEvent name="onchange" type="c:dataEvent" access="GLOBAL"/>
+</aura:interface>

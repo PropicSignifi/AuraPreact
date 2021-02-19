@@ -1,0 +1,25 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="value" type="Object" access="GLOBAL" required="true"/>
+    <aura:attribute name="hour12" type="Boolean" access="GLOBAL"/>
+    <aura:attribute name="weekday" type="String" access="GLOBAL"/>
+    <aura:attribute name="era" type="String" access="GLOBAL"/>
+    <aura:attribute name="year" type="String" access="GLOBAL"/>
+    <aura:attribute name="month" type="String" access="GLOBAL"/>
+    <aura:attribute name="day" type="String" access="GLOBAL"/>
+    <aura:attribute name="hour" type="String" access="GLOBAL"/>
+    <aura:attribute name="minute" type="String" access="GLOBAL"/>
+    <aura:attribute name="second" type="String" access="GLOBAL"/>
+    <aura:attribute name="timeZoneName" type="String" access="GLOBAL"/>
+    <aura:attribute name="timeZone" type="String" access="GLOBAL"/>
+    <aura:attribute name="type" type="String" access="GLOBAL"/>
+
+    <aura:attribute name="privateFormattedValue" type="String" access="PRIVATE"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleValueChange }" value="{! v.value }"/>
+
+    <span class="{! v.class }" title="{! v.title }">
+        {! v.privateFormattedValue }
+    </span>
+
+</aura:component>

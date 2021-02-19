@@ -1,0 +1,5 @@
+<design:component label="Propic Help Content">
+    <sfdc:objects>
+        <sfdc:object>CRM_Help__c</sfdc:object>
+    </sfdc:objects>
+</design:component>

@@ -1,0 +1,37 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:focusable,c:common,c:commented">
+    <aura:attribute name="name" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="value" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="label" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="variant" type="String" access="GLOBAL" required="false" default="tertiary"/>
+    <aura:attribute name="iconName" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="iconPosition" type="String" access="GLOBAL" required="false" default="left"/>
+    <aura:attribute name="disabled" type="Boolean" access="GLOBAL" required="false" default="false"/>
+    <aura:attribute name="type" type="String" access="GLOBAL" required="false" default="button"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" required="false"/>
+
+    <aura:registerEvent name="onclick" type="c:dataEvent" access="GLOBAL"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.variant }"/>
+
+    <button class="{! v.privateComputedClass }" onblur="{! c.handleBlur }" value="{! v.value }" accesskey="{! v.accesskey }" type="{! v.type }" name="{! v.name }" onfocus="{! c.handleFocus }" disabled="{! v.disabled }" tabindex="{! v.tabindex }" onclick="{! c.handleClick }" title="{! v.title }" aura:id="privateButton">
+        <aura:if isTrue="{! v.iconName &amp;&amp; v.iconPosition == 'left' }">
+            <c:primitiveIcon variant="bare" iconName="{! v.iconName }" svgClass="slds-button__icon slds-button__icon--left slds-m-bottom_xxx-small"/>
+        </aura:if>
+        <aura:if isTrue="{! v.label &amp;&amp; v.body.length == 0 }">
+            {! v.label }
+            <aura:set attribute="else">
+                {! v.body }
+            </aura:set>
+        </aura:if>
+        <aura:if isTrue="{! v.iconName &amp;&amp; v.iconPosition == 'right' }">
+            <c:primitiveIcon variant="bare" iconName="{! v.iconName }" svgClass="slds-button__icon slds-button__icon--right slds-m-bottom_xxx-small"/>
+        </aura:if>
+        <aura:if isTrue="{! !empty(v.tooltip) }">
+            <c:helptext content="{! v.tooltip }" class="slds-m-left_x-small"/>
+        </aura:if>
+    </button>
+
+</aura:component>

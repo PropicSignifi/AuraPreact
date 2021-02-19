@@ -1,0 +1,47 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="size" type="String" access="GLOBAL"/>
+    <aura:attribute name="variant" type="String" access="GLOBAL"/>
+    <aura:attribute name="header" type="Aura.Component[]" access="GLOBAL"/>
+    <aura:attribute name="footer" type="Aura.Component[]" access="GLOBAL"/>
+    <aura:attribute name="headerText" type="String" access="GLOBAL"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateComputedBackdropClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateVisible" type="Boolean" access="PRIVATE" description="Please use show() or hide() to control the visibility"/>
+
+    <aura:method name="show" access="GLOBAL" description="Description">
+    </aura:method>
+    <aura:method name="hide" access="GLOBAL" description="Description">
+    </aura:method>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="$destroy" event="c:dataEvent" action="{! c.doDestroy }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.privateVisible }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.size }"/>
+
+    <section aura:id="privateModal" role="dialog" tabindex="-1" class="{! v.privateComputedClass }">
+        <div class="slds-modal__container">
+            <header class="{! v.variant == 'prompt' ? 'slds-modal__header slds-theme_error slds-theme_alert-texture' : 'slds-modal__header' }">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{! c.hide }">
+                    <c:primitiveIcon variant="bare" iconName="utility:close" svgClass="slds-button__icon slds-button__icon_large"/>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <aura:if isTrue="{! !empty(v.headerText) }">
+                    <h2 class="slds-text-heading_medium slds-hyphenate">{! v.headerText }</h2>
+                    <aura:set attribute="else">
+                        {! v.header }
+                    </aura:set>
+                </aura:if>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium">
+                {! v.body }
+            </div>
+            <footer class="{! v.variant == 'prompt' ? 'slds-modal__footer slds-theme_default' : 'slds-modal__footer' }">
+                {! v.footer }
+            </footer>
+        </div>
+    </section>
+    <div aura:id="privateBackdrop" class="{! v.privateComputedBackdropClass }"></div>
+
+</aura:component>

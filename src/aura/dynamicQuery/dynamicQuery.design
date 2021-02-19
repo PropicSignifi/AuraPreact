@@ -1,0 +1,31 @@
+<design:component label="Propic Dynamic Query">
+    <design:attribute name="name" label="Unique Table Name" default="DynamicQueryTable" required="true"/>
+    <design:attribute name="title" label="Table Title" default="Table Data"/>
+    <design:attribute name="query" label="SOQL" default="SELECT Id, Name FROM Account" placeholder="Use ${recordId} as the parent record id placeholder" required="true"/>
+    <design:attribute name="pageSize" label="Default Page Size" default="5"/>
+    <design:attribute name="column1" label="Column 1" placeholder="path || label || type(optional)" default="Name || Account Name"/>
+    <design:attribute name="column2" label="Column 2" placeholder="path || label || type(optional)"/>
+    <design:attribute name="column3" label="Column 3" placeholder="path || label || type(optional)"/>
+    <design:attribute name="column4" label="Column 4" placeholder="path || label || type(optional)"/>
+    <design:attribute name="column5" label="Column 5" placeholder="path || label || type(optional)"/>
+    <design:attribute name="column6" label="Column 6" placeholder="path || label || type(optional)"/>
+    <design:attribute name="column7" label="Column 7" placeholder="path || label || type(optional)"/>
+    <design:attribute name="column8" label="Column 8" placeholder="path || label || type(optional)"/>
+    <design:attribute name="column9" label="Column 9" placeholder="path || label || type(optional)"/>
+    <design:attribute name="column10" label="Column 10" placeholder="path || label || type(optional)"/>
+    <design:attribute name="action1" label="Action 1" placeholder="label || type || parameters" default="New"/>
+    <design:attribute name="action2" label="Action 2" placeholder="label || type || parameters" default="Open"/>
+    <design:attribute name="action3" label="Action 3" placeholder="label || type || parameters" default="Edit"/>
+    <design:attribute name="action4" label="Action 4" placeholder="label || type || parameters" default="Google || url || https://www.google.com?q=${Id}"/>
+    <design:attribute name="action5" label="Action 5" placeholder="label || type || parameters" default="Hello Flow || flow || hello?recordId=Id"/>
+    <design:attribute name="action6" label="Action 6" placeholder="label || type || parameters" default="Send Email || component || c:sendEmail?recordId=Id"/>
+    <design:attribute name="action7" label="Action 7" placeholder="label || type || parameters"/>
+    <design:attribute name="action8" label="Action 8" placeholder="label || type || parameters"/>
+    <design:attribute name="action9" label="Action 9" placeholder="label || type || parameters"/>
+    <design:attribute name="action10" label="Action 10" placeholder="label || type || parameters"/>
+    <design:attribute name="extension" label="Extension" default=""/>
+    <design:supportedFormFactors>
+        <design:supportedFormFactor type="Large"/>
+        <design:supportedFormFactor type="Small"/>
+    </design:supportedFormFactors>
+</design:component>

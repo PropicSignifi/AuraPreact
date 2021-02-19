@@ -1,0 +1,46 @@
+:global(.slds-bottom-navigation) {
+    display: flex;
+    justify-content: space-evenly;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    padding: 0.275rem;
+    border-top: 1px solid rgb(217, 219, 221);
+    z-index: 9000;
+
+    :global(.slds-bottom-navigation_action) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    :global(.slds-icon_bottom-navigation) {
+        background-color: #62b7ed;
+    }
+
+    :global(.slds-is-selected) {
+        :global(.slds-icon_bottom-navigation) {
+            background-color: #54698d;
+        }
+    }
+}
+
+:global(.slds-bottom-navigation_popup) {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    z-index: 9000;
+
+    :global(.slds-is-selected) {
+        background-color: #eee;
+    }
+
+    :global(.slds-bottom-navigation_close) {
+        cursor: pointer;
+    }
+}

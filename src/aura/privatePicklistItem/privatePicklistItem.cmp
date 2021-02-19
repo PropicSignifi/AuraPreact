@@ -1,0 +1,45 @@
+<aura:component extends="c:baseComponent">
+    <aura:attribute name="option" type="Object" access="GLOBAL" description="Description"/>
+    <aura:attribute name="index" type="Integer" access="GLOBAL" description="Description"/>
+    <aura:attribute name="style" type="String" access="GLOBAL" description="Description"/>
+
+    <aura:registerEvent name="onclick" type="c:dataEvent" access="GLOBAL"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+
+    <aura:if isTrue="{! v.option.isGroupLabel }">
+        <li role="presentation" class="{! 'slds-listbox__item ' + (v.option.filtered ? 'slds-show' : 'slds-hide') }" aura:id="privateOption" id="{! globalId + '-' + v.index }">
+            <span class="slds-media slds-listbox__option slds-listbox__option_plain" role="presentation" id="{! 'listbox-option-' + globalId + '-' + v.index }">
+                <h3 class="slds-text-title_caps" role="presentation">{! v.option.label }</h3>
+            </span>
+        </li>
+        <aura:set attribute="else">
+            <li role="presentation" class="{! 'slds-listbox__item ' + (v.option.filtered ? 'slds-show' : 'slds-hide') }" aura:id="privateOption" id="{! globalId + '-' + v.index }" data-index="{! v.index }" onclick="{! c.handleNodeClick }">
+                <span id="{! 'listbox-option-' + globalId + '-' + v.index }" class="{! 'slds-media slds-listbox__option slds-listbox__option_plain slds-media_small slds-media_center' + (v.option.selected ? ' slds-is-selected' : '') }" role="option">
+                    <span class="slds-media__figure">
+                        <aura:if isTrue="{! v.style == 'base' || empty(v.style) }">
+                            <c:primitiveIcon variant="bare" iconName="ctc-utility:a_tick" svgClass="slds-icon slds-icon_x-small slds-listbox__icon-selected"/>
+                        </aura:if>
+                        <aura:if isTrue="{! v.style == 'checkbox' }">
+                            <c:input type="checkbox" variant="label-hidden" name="selected" label="Selected" checked="{! v.option.selected }" readonly="true" class="slds-m-bottom_xxx-small checkbox"/>
+                        </aura:if>
+                        <aura:if isTrue="{! v.style == 'checkbutton' }">
+                            <c:input type="checkbox-small" variant="label-hidden" name="selected" label="Selected" checked="{! v.option.selected }" readonly="true" class="checkbutton"/>
+                        </aura:if>
+                    </span>
+                    <span class="slds-media__body">
+                        <span class="slds-truncate" title="{! v.option.label }">
+                            <aura:if isTrue="{! !empty(v.option.labelHtml) }">
+                                <aura:unescapedHtml value="{! v.option.labelHtml }"/>
+                                <aura:set attribute="else">
+                                    {! v.option.label }
+                                </aura:set>
+                            </aura:if>
+                        </span>
+                    </span>
+                </span>
+            </li>
+        </aura:set>
+    </aura:if>
+
+</aura:component>

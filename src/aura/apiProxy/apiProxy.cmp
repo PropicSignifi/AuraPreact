@@ -1,0 +1,29 @@
+<aura:component controller="DataLightningExtension">
+    <ltng:require
+        scripts="{! join(',',
+            $Resource.ctcPropertyLightning + '/lib/postmate.js'
+        ) }"
+        afterScriptsLoaded="{! c.onScriptsLoaded }"
+    />
+
+    <aura:method name="restRequest" action="{! c.onRestRequest }">
+        <aura:attribute
+            name="request"
+            type="Map"
+            required="true"
+            description="Supports these keys: url (string), method (string), body (string), headers (map)."
+        />
+    </aura:method>
+
+    <aura:method name="httpRequest" action="{! c.onHttpRequest }">
+        <aura:attribute
+            name="request"
+            type="Map"
+            required="true"
+            description="Supports jquery ajax settings"
+        />
+    </aura:method>
+
+    <div aura:id="postmate" class="slds-hide"></div>
+
+</aura:component>

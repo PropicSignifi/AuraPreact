@@ -1,0 +1,57 @@
+:global(.slds-table .slds-text-title_caps) .thCell {
+    background-color: white;
+}
+
+.cancelEvent {
+    pointer-events: none;
+}
+
+.table {
+    &:focus {
+        outline: none !important;
+    }
+
+    .rowExpander {
+        background: rgba(244, 246, 249, 0.3);
+        box-shadow: 0 1px 0 0 rgba(244, 246, 249, 0.3);
+
+        .content {
+            padding: 0;
+            background-color: rgba(243, 242, 242, 0.5);
+        }
+    }
+
+    .rowExpanderHidden {
+        display: none;
+    }
+
+    :global(.slds-th__action) {
+        padding: 0px;
+    }
+
+}
+
+.inlineEditing {
+    padding: 4px;
+    background: white;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    box-shadow: 1px 1px 0.5px grey;
+}
+
+.emptyTable {
+    height: 100px;
+}
+
+.emptyRow {
+    text-align: center !important;
+    box-shadow: none !important;
+    background-color: rgb(243, 242, 242) !important;
+}
+
+.clickedRow {
+    & > td,
+    & > td:hover {
+        background-color: rgb(238, 241, 246) !important;
+    }
+}

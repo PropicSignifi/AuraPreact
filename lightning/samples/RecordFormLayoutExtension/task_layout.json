@@ -1,0 +1,72 @@
+{
+    "groups": [{
+            "label": "Task Information",
+            "editHeading": true,
+            "detailHeading": true,
+            "columns": [{
+                    "items": [{
+                            "name": "OwnerId"
+                        },
+                        {
+                            "name": "Subject"
+                        },
+                        {
+                            "name": "ActivityDate"
+                        },
+                        {
+                            "name": "Contact_Mobile__c"
+                        },
+                        {
+                            "name": "Contact_Phone__c"
+                        },
+                        {
+                            "name": "Contact_Email__c"
+                        }
+                    ]
+                },
+                {
+                    "items": [{
+                            "name": "WhatId"
+                        },
+                        {
+                            "name": "WhoId"
+                        },
+                        {
+                            "name": "Type"
+                        },
+                        {
+                            "name": "Activity_Completed_On__c"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "Description Information",
+            "editHeading": false,
+            "detailHeading": false,
+            "columns": [{
+                "items": [{
+                    "name": "Description"
+                }]
+            }]
+        }, {
+            "label": "Additional Information",
+            "editHeading": true,
+            "detailHeading": true,
+            "columns": [{
+                    "items": [{
+                            "name": "Status"
+                        },
+                        {
+                            "name": "Priority"
+                        }
+                    ]
+                },
+                {
+                    "items": []
+                }
+            ]
+        }
+    ]
+}

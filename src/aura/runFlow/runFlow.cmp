@@ -1,0 +1,14 @@
+<aura:component access="GLOBAL" extends="c:baseRoot" implements="lightning:isUrlAddressable">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="flowName" type="String" />
+    <aura:attribute name="retRecordId" type="String" />
+    <aura:attribute name="onFinish" type="Object" />
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" value="{! v.pageReference }" action="{! c.init }" />
+
+    <div class="background">
+        <lightning:flow aura:id="flow" onstatuschange="{! c.onStatusChange }"/>
+    </div>
+</aura:component>

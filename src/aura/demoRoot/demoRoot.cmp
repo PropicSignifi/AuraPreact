@@ -1,0 +1,114 @@
+<aura:component access="GLOBAL" extends="c:baseRoot" implements="force:appHostable" >
+    <aura:attribute name="demoComponents" type="Object[]" access="PRIVATE"
+        description="All the demo components"/>
+    <aura:attribute name="name" type="String" access="PRIVATE" default=""
+        description="Name of the demo"/>
+    <aura:attribute name="compName" type="String" access="PRIVATE" default=""
+        description="Qualified name of the current component"/>
+    <aura:attribute name="description" type="String" access="PRIVATE" default=""
+        description="Description of the demo component"/>
+    <aura:attribute name="compParams" type="String" access="PRIVATE" default="{}"
+        description="The json string of the comp parameters"/>
+    <aura:attribute name="params" type="Object" access="PRIVATE"
+        description="The comp parameters"/>
+    <aura:attribute name="selectedTabId" type="String" access="PRIVATE"
+        description="The selected tab id"/>
+    <aura:attribute name="stats" type="Object" access="PRIVATE"
+        description="The statistics info"/>
+    <aura:attribute name="requires" type="List" access="PRIVATE"
+        description="The require list"/>
+    <aura:attribute name="privateNewlyAdded" type="String" access="PRIVATE"
+        description="The newly added components"/>
+    <aura:attribute name="privateNoCreated" type="String" access="PRIVATE"
+        description="The components without created field"/>
+    <aura:attribute name="privateExpression" type="String" access="PRIVATE"
+        description="The expression to be evaluated on the component"/>
+    <aura:attribute name="privateExpressionResult" type="String" access="PRIVATE"
+        description="The result of the expression evaluated"/>
+    <aura:attribute name="privateEditingExpression" type="Boolean" access="PRIVATE"
+        description="Whether the user is editing expression"/>
+    <aura:attribute name="privateOptions" type="List" access="PRIVATE"/>
+    <aura:attribute name="namespace" type="String" access="PRIVATE"/>
+
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.onInit }"/>
+    <aura:handler name="$destroy" event="c:dataEvent" action="{! c.onDestroy }"/>
+
+    <div aura:id="placeholder" class="slds-placeholder-container">
+        <c:placeholder name="list_app" opacity="50"/>
+    </div>
+    <lightning:card aura:id="app" class="slds-hide">
+        <aura:set attribute="title">
+            <h1 class="slds-text-align_center">Lightning Components Demo</h1>
+        </aura:set>
+        <p class="slds-p-horizontal_small">
+            <c:picklist aura:id="selectComp" name="selectComp" label="Select a component" onchange="{! c.selectComp }" value="{! v.name }" options="{! v.privateOptions }" searchable="true">
+            </c:picklist>
+            <aura:if isTrue="{! !empty(v.name) }">
+                <aura:if isTrue="{! !empty(v.requires) }">
+                    <c:alert variant="warning" closeable="false" class="slds-m-top_medium">
+                        <ul>
+                            <aura:iteration items="{! v.requires }" var="require">
+                                <li>{! require }</li>
+                            </aura:iteration>
+                        </ul>
+                    </c:alert>
+                </aura:if>
+                <div class="slds-box slds-theme_shade slds-m-top_medium">
+                    <lightning:formattedRichText value="{! v.description }"/>
+                </div>
+                <c:tabset variant="scoped" class="slds-m-top_medium" selectedTabId="{! v.selectedTabId }">
+                    <c:tab label="JSON" id="json">
+                        <c:textarea aura:id="paramsTextarea" label="Component Parameters" value="{! v.compParams }" class="slds-m-top_medium paramsTextarea"/>
+                    </c:tab>
+                    <c:tab label="Config" onactive="{! c.onConfigActive }" id="config">
+                        <div class="slds-grid slds-wrap" aura:id="configPanel">
+                        </div>
+                    </c:tab>
+                    <c:tab label="Expression" onactive="{! c.onExpressionActive }" oninactive="{! c.onExpressionInactive }" id="expression">
+                        <c:textarea aura:id="expressionTextarea" label="Expression" value="{! v.privateExpression }" class="slds-m-top_medium expressionTextarea" placeholder="Evaluate a one-line expression. Use 'comp' to refer the newly created component."/>
+                        <aura:if isTrue="{! !empty(v.privateExpressionResult) }">
+                            <c:expandableSection title="Result" class="slds-m-top_medium" expanded="true">
+                                {! v.privateExpressionResult }
+                            </c:expandableSection>
+                        </aura:if>
+                    </c:tab>
+                </c:tabset>
+                <div class="slds-m-top_medium">
+                    <c:button variant="brand" label="Try" onclick="{! c.onTryComp }" />
+                </div>
+                <div class="slds-box slds-m-top_medium">
+                    <c:demoPanel aura:id="demoComponent" compName="{! v.compName }" params="{! v.params }"/>
+                </div>
+                <aura:set attribute="else">
+                    <div class="slds-m-top_small">
+                        <lightning:badge class="slds-badge_lightest" label="{! v.stats.numOfStandard + ' Standard Components'}"/>
+                        <lightning:badge class="slds-badge_lightest" label="{! v.stats.numOfCustom + ' Custom Components'}"/>
+                    </div>
+                    <div class="slds-box slds-theme_shade slds-m-top_medium">
+                        <p>Select a component above to try its usage. After either editing the json file or updating the config, click "Try" button to apply the changes. The newly created component will be shown in the below section, together with generated markup. At the bottom are the links for the component reference.</p><br/>
+                        <p>
+                            Newly added: <strong>{! v.privateNewlyAdded }</strong>
+                        </p><br/>
+                        <aura:if isTrue="{! !empty(v.privateNoCreated) }">
+                            <p>
+                                Missing 'created': <strong>{! v.privateNoCreated }</strong>
+                            </p><br/>
+                        </aura:if>
+                        <p>Useful links:</p><br/>
+                        <ul>
+                            <li><a href="https://www.lightningdesignsystem.com" target="_blank">Lightning Design System</a></li>
+                            <li><a href="https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/intro_framework.htm" target="_blank">Lightning Component Developer Guide</a></li>
+                            <li><a href="/auradocs/reference.app" target="_blank">Aura Docs Reference</a></li>
+                            <li><a href="/componentReference/suite.app" target="_blank">Component Reference Suite</a></li>
+                            <li><a href="http://documentation.auraframework.org/lockerApiTest/index.app?aura.mode=DEV" target="_blank">Locker Service API</a></li>
+                            <li><a href="{! '/' + v.namespace + '/RemoteApi.app' }" target="_blank">Remote API</a></li>
+                            <li><a href="{! '/' + v.namespace + '/fieldrenderersdemoproperty.app' }" target="_blank">Field Renderer Demo</a></li>
+                            <li><a href="{! '/' + v.namespace + '/restApiExplorer.app' }" target="_blank">Rest API Explorer</a></li>
+                        </ul>
+                    </div>
+                </aura:set>
+            </aura:if>
+        </p>
+    </lightning:card>
+</aura:component>

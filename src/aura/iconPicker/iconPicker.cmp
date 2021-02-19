@@ -1,0 +1,41 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:inputable,c:focusable,c:common,c:commented">
+    <aura:attribute name="value" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="category" type="String" access="GLOBAL" description="Description" default="ctc-utility"/>
+    <aura:attribute name="label" type="String" access="GLOBAL" description="Description" required="true"/>
+    <aura:attribute name="placeholder" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="messageWhenValueMissing" type="String" access="GLOBAL" description="Description"/>
+
+    <aura:attribute name="privateGetSuggestions" type="Object" access="PRIVATE" description="Description"/>
+    <aura:attribute name="privateValue" type="Object" access="PRIVATE" description="Description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleValueChange }" value="{! v.value }"/>
+
+    <c:suggestionBox
+        aura:id="private"
+        variant="{! v.variant }"
+        name="{! v.name }"
+        label="{! v.label }"
+        labelHtml="{! v.labelHtml }"
+        disabled="{! v.disabled }"
+        readonly="{! v.readonly }"
+        required="{! v.required }"
+        validity="{! v.validity }"
+        accesskey="{! v.accesskey }"
+        tabindex="{! v.tabindex }"
+        class="{! v.class }"
+        popupClass="slds-iconPicker"
+        title="{! v.title }"
+        value="{! v.privateValue }"
+        placeholder="{! v.placeholder }"
+        tooltip="{! v.tooltip }"
+        cache="true"
+        minlength="0"
+        messageWhenValueMissing="{! v.messageWhenValueMissing }"
+        getSuggestions="{! v.privateGetSuggestions }"
+        onchange="{! c.onValueChange }"
+    >
+    </c:suggestionBox>
+
+
+</aura:component>

@@ -1,0 +1,13 @@
+<aura:component access="GLOBAL" extends="c:baseComponent">
+    <aura:attribute name="case" type="String" access="GLOBAL" description="Description"/>
+
+    <aura:method name="switchToCase" access="GLOBAL" description="Description">
+        <aura:attribute name="case" type="String"/>
+    </aura:method>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeCaseChange }" value="{! v.case }"/>
+
+    {! v.body }
+
+</aura:component>

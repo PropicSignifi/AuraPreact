@@ -1,0 +1,33 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="content" type="String" access="GLOBAL"/>
+    <aura:attribute name="align" type="String" access="GLOBAL" default="bottom-left"/>
+    <aura:attribute name="iconName" type="String" access="GLOBAL" default="ctc-utility:info_info"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateContainerComputedClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateShowTooltip" type="Boolean" access="PRIVATE"/>
+    <aura:attribute name="privateUnescaped" type="Boolean" access="PRIVATE"/>
+    <aura:attribute name="privateContent" type="Boolean" access="PRIVATE"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeContainerClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.privateShowTooltip }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.align }"/>
+    <aura:handler name="change" action="{! c.handleContentChange }" value="{! v.content }"/>
+
+    <div class="{! v.privateContainerComputedClass }">
+        <c:primitiveIcon iconName="{! v.iconName }" variant="bare" size="x-small" svgClass="slds-m-bottom_xxx-small" aura:id="icon"/>
+
+        <section class="{! v.privateComputedClass }" role="dialog">
+            <div class="slds-popover__body">
+                <aura:if isTrue="{! v.privateUnescaped }">
+                    <aura:unescapedHtml value="{! v.privateContent }"/>
+                    <aura:set attribute="else">
+                        {! v.privateContent }
+                    </aura:set>
+                </aura:if>
+            </div>
+        </section>
+    </div>
+
+</aura:component>

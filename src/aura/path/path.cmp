@@ -1,0 +1,45 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="variant" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="stages" type="List" access="GLOBAL" description="Description" required="true"/>
+    <aura:attribute name="value" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="action" type="Aura.Component[]" access="GLOBAL" description="Description"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateCurrentIndex" type="Integer" access="PRIVATE" description="description"/>
+
+    <aura:registerEvent name="onchange" type="c:dataEvent" access="GLOBAL" description="Description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.variant }"/>
+    <aura:handler name="change" action="{! c.computeCurrentValue }" value="{! v.value }"/>
+
+    <div class="{! v.privateComputedClass }">
+        <div class="slds-grid slds-path__track">
+            <div class="slds-grid slds-path__scroller-container">
+                <div class="slds-path__scroller" role="application">
+                    <div class="slds-path__scroller_inner">
+                        <ul class="slds-path__nav" role="listbox" aria-orientation="horizontal">
+                            <aura:iteration items="{! v.stages }" var="stage" indexVar="index">
+                                <li class="{! 'slds-path__item' + (index &lt; v.privateCurrentIndex ? ' slds-is-complete' : (index &gt; v.privateCurrentIndex ? ' slds-is-incomplete' : ' slds-is-current slds-is-active')) }" role="presentation">
+                                    <a aria-selected="true" class="slds-path__link" href="javascript:void(0);" id="{! globalId + '-path-' + index }" role="option" tabindex="0">
+                                        <span class="slds-path__stage">
+                                            <c:primitiveIcon variant="bare" iconName="utility:check" svgClass="slds-icon slds-icon_x-small"/>
+                                            <span class="slds-assistive-text">{! stage.label }</span>
+                                        </span>
+                                        <span class="slds-path__title">{! stage.label }</span>
+                                    </a>
+                                </li>
+                            </aura:iteration>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-grid slds-path__action">
+                <span class="slds-path__stage-name">{! v.value }</span>
+                {! v.action }
+            </div>
+        </div>
+    </div>
+
+</aura:component>

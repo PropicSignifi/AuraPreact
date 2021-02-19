@@ -1,0 +1,31 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="name" type="String" access="GLOBAL"/>
+    <aura:attribute name="label" type="String" access="GLOBAL"/>
+    <aura:attribute name="actions" type="Aura.Component[]" access="GLOBAL"/>
+
+    <aura:attribute name="privateIsOpen" type="Boolean" access="PRIVATE" default="false"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+
+    <li class="{! 'slds-accordion__list-item ' + v.class }" title="{! v.title }">
+        <section class="{! v.privateIsOpen ? 'slds-accordion__section slds-is-open' : 'slds-accordion__section' }">
+            <div class="slds-accordion__summary">
+                <h3 class="slds-text-heading--small slds-accordion__summary-heading" onkeydown="{! c.handleKeyDown }">
+                    <button class="slds-button slds-button--reset slds-accordion__summary-action" aria-expanded="{! v.privateIsOpen }" type="button" onclick="{! c.handleSelectSection }" aria-controls="{! globalId + '_content' }" aura:id="section-control">
+                        <c:primitiveIcon size="x-small" iconName="ctc-utility:a_switch" svgClass="slds-accordion__summary-action-icon slds-button__icon slds-button__icon--left"/>
+                        <span class="slds-truncate" title="{! v.label }">
+                            {! v.label }
+                        </span>
+                    </button>
+                </h3>
+                <aura:if isTrue="{! !empty(v.actions) }">
+                    {! v.actions }
+                </aura:if>
+            </div>
+            <div class="slds-accordion__content" aria-hidden="{! !v.privateIsOpen }" id="{! globalId + '_content' }">
+                {! v.body }
+            </div>
+        </section>
+    </li>
+
+</aura:component>

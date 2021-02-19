@@ -1,0 +1,3 @@
+<aura:interface description="Programmatically configurable UI elements">
+    <aura:attribute name="popupClass" type="String" access="GLOBAL"/>
+</aura:interface>

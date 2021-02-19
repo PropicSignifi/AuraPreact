@@ -1,0 +1,3 @@
+<aura:interface description="Programmatically configurable UI elements">
+    <aura:attribute name="configurer" type="Object" access="GLOBAL"/>
+</aura:interface>

@@ -1,0 +1,39 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="variant" type="String" access="GLOBAL" description="Description"/>
+    <aura:attribute name="name" type="String" access="GLOBAL" description="Description" required="true"/>
+    <aura:attribute name="total" type="Integer" access="GLOBAL" description="The number of the items" default="50"/>
+    <aura:attribute name="pageSize" type="Integer" access="GLOBAL" description="The size of the page" default="5"/>
+    <aura:attribute name="current" type="Integer" access="GLOBAL" description="The current page" default="1"/>
+    <aura:attribute name="range" type="Integer" access="GLOBAL" description="The range of visible pages from center to boundary" default="2"/>
+    <aura:attribute name="tableName" type="String" access="GLOBAL" description="The name of the table"/>
+    <aura:attribute name="listName" type="String" access="GLOBAL" description="The name of the list"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" description="description"/>
+    <aura:attribute name="privatePageInfos" type="List" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateLastPage" type="Integer" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateLastTotal" type="Integer" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateHasFirst" type="Boolean" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateHasPrev" type="Boolean" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateHasNext" type="Boolean" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateHasLast" type="Boolean" access="PRIVATE" description="description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.variant }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.privatePageInfos }"/>
+    <aura:handler name="change" action="{! c.computePagination }" value="{! v.total }"/>
+    <aura:handler name="change" action="{! c.computePagination }" value="{! v.pageSize }"/>
+    <aura:handler name="change" action="{! c.computePagination }" value="{! v.current }"/>
+    <aura:handler event="c:appEvent" action="{! c.handleSizeChange }"/>
+
+    <ul class="{! v.privateComputedClass }">
+        <li class="{! v.privateHasFirst ? '' : 'disabled' }" data-id="first" onclick="{! c.gotoPage }">&lt;&lt;</li>
+        <li class="{! v.privateHasPrev ? '' : 'disabled' }" data-id="prev" onclick="{! c.gotoPage }">&lt;</li>
+        <aura:iteration items="{! v.privatePageInfos }" var="pageInfo">
+            <li class="{! pageInfo.current ? 'active' : '' }" data-id="{! pageInfo.page }" onclick="{! c.gotoPage }">{! pageInfo.page }</li>
+        </aura:iteration>
+        <li class="{! v.privateHasNext ? '' : 'disabled' }" data-id="next" onclick="{! c.gotoPage }">&gt;</li>
+        <li class="{! v.privateHasLast ? '' : 'disabled' }" data-id="last" onclick="{! c.gotoPage }">&gt;&gt;</li>
+    </ul>
+
+</aura:component>

@@ -1,0 +1,149 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:inputable,c:focusable,c:common,c:commented,c:hasPopup">
+    <aura:attribute name="value" type="List" access="GLOBAL"/>
+    <aura:attribute name="label" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="placeholder" type="String" access="GLOBAL"/>
+    <aura:attribute name="getTags" type="Object" access="GLOBAL" description="Function to load tags"/>
+    <aura:attribute name="messageWhenValueMissing" type="String" access="GLOBAL"/>
+    <aura:attribute name="style" type="String" access="GLOBAL" default="below"/>
+    <aura:attribute name="cache" type="Boolean" access="GLOBAL" description="Whether to use cache for the tags" default="false"/>
+    <aura:attribute name="wait" type="Integer" access="GLOBAL" description="A period of waiting before loading the tags" default="50"/>
+    <aura:attribute name="minlength" type="Integer" access="GLOBAL" description="The min length to start auto completion" default="3"/>
+    <aura:attribute name="limit" type="Integer" access="GLOBAL" description="The limit of the tag list" default="5"/>
+    <aura:attribute name="iconNameLeft" type="String" access="GLOBAL"/>
+    <aura:attribute name="iconNameRight" type="String" access="GLOBAL"/>
+    <aura:attribute name="messageWhenNotFound" type="String" access="GLOBAL" default="No results found"/>
+    <aura:attribute name="messageWhenRendering" type="String" access="GLOBAL" default="Loading ..."/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateComputedFormElementClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateHelpMessage" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateFocused" type="Boolean" access="PRIVATE"/>
+    <aura:attribute name="privateVisible" type="Boolean" access="PRIVATE"/>
+    <aura:attribute name="privateTags" type="List" access="PRIVATE"/>
+    <aura:attribute name="privateFilteredTags" type="List" access="PRIVATE"/>
+    <aura:attribute name="privateLoadingTags" type="Boolean" access="PRIVATE" default="true"/>
+    <aura:attribute name="privateValue" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateIsRendering" type="Boolean" access="PRIVATE"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="$destroy" event="c:dataEvent" action="{! c.doDestroy }"/>
+    <aura:handler name="change" action="{! c.handleClassChange }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.handleValueChange }" value="{! v.value }"/>
+
+    <div class="{! v.privateComputedClass }" title="{! v.title }">
+        <label class="{! join(' ', 'slds-form-element__label', (v.variant == 'label-hidden' ? 'slds-m-right--xxx-small' : '')) }" for="{! globalId }">
+            <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : '' }">
+                <aura:if isTrue="{! !empty(v.labelHtml) }">
+                    <aura:unescapedHtml value="{! v.labelHtml }"/>
+                    <aura:set attribute="else">
+                        {! v.label }
+                    </aura:set>
+                </aura:if>
+            </span>
+            <aura:if isTrue="{! v.required }">
+                <abbr class="slds-required" title="{! $Label.LightningControl.required }">
+                    *
+                </abbr>
+            </aura:if>
+            <aura:if isTrue="{! !empty(v.tooltip) }">
+                <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+            </aura:if>
+        </label>
+        <aura:if isTrue="{! empty(v.style) || v.style == 'below' }">
+            <div class="slds-form-element__control slds-grow">
+                <div class="{! 'slds-combobox_container slds-has-inline-listbox' + (v.privateFocused ? ' slds-has-input-focus' : '') }">
+                    <div class="{! 'slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-combobox-lookup' + (v.privateVisible ? ' slds-is-open' : '') }" aria-expanded="false" aria-haspopup="listbox" role="combobox" data-tags-input="{! globalId }">
+                        <div aura:id="input" class="{! v.privateComputedFormElementClass }" role="none">
+                            <input aura:id="private" type="text" class="slds-input slds-combobox__input" id="{! globalId }" aria-autocomplete="list" aria-controls="{! 'listbox-' + globalId }" role="textbox"/>
+                            <aura:if isTrue="{! !empty(v.iconNameLeft) }">
+                                <c:primitiveIcon variant="bare" iconName="{! v.iconNameLeft }" svgClass="slds-input__icon slds-input__icon--left slds-icon-text-default"/>
+                            </aura:if>
+                            <aura:if isTrue="{! !empty(v.iconNameRight) }">
+                                <c:primitiveIcon variant="bare" iconName="{! v.iconNameRight }" svgClass="slds-input__icon slds-input__icon--right slds-icon-text-default"/>
+                            </aura:if>
+                        </div>
+                        <div aura:id="popup" data-tags-input="{! globalId }" id="{! 'listbox-' + globalId }" role="listbox" class="slds-dropdown_append-to-body">
+                            <ul class="{! 'slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid slds-dropdown_length-' + v.limit + ' ' + (v.privateVisible ? '' : 'slds-hide ') + v.popupClass }" role="presentation">
+                                <li role="presentation" class="{! 'slds-listbox__item ' + (v.privateLoadingTags ? 'slds-show' : 'slds-hide') }" style="height: 3.5rem;">
+                                    <lightning:spinner aura:id="spinner" variant="brand" size="medium" alternativeText="loading"></lightning:spinner>
+                                </li>
+                                <c:iteration aura:id="itemList" items="{! v.privateFilteredTags }" template="{! v.computed.template }" providers="{! v.computed.providers }"/>
+                                <li role="presentation" class="{! 'slds-listbox__item ' + ((v.privateIsRendering &amp;&amp; !v.privateLoadingTags) ? 'slds-show' : 'slds-hide') }">
+                                    <span class="slds-media slds-listbox__option slds-listbox__option_plain" role="presentation" id="{! 'listbox-option-' + globalId + '-rendering' }">
+                                        <h3 class="slds-text-title_caps" role="presentation">{! v.messageWhenRendering }</h3>
+                                    </span>
+                                </li>
+                                <li role="presentation" class="{! 'slds-listbox__item ' + ((!v.privateIsRendering &amp;&amp; empty(v.privateFilteredTags) &amp;&amp; !v.privateLoadingTags) ? 'slds-show' : 'slds-hide') }">
+                                    <span class="slds-media slds-listbox__option slds-listbox__option_plain" role="presentation" id="{! 'listbox-option-' + globalId + '-noResultFound' }">
+                                        <h3 class="slds-text-title_caps" role="presentation">{! v.messageWhenNotFound }</h3>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <aura:if isTrue="{! !empty(v.value) }">
+                    <div id="{! 'listbox-selected-' + globalId }" role="listbox" aria-orientation="horizontal">
+                        <ul class="slds-listbox slds-listbox_horizontal slds-p-top_xxx-small" role="group" aria-label="Selected Tags:">
+                            <aura:iteration items="{! v.value }" var="tag">
+                                <li role="presentation" class="slds-listbox__item">
+                                    <lightning:pill name="{! tag.value }" label="{! tag.label }" onremove="{! c.onRemoveTag }"/>
+                                </li>
+                            </aura:iteration>
+                        </ul>
+                    </div>
+                </aura:if>
+            </div>
+        </aura:if>
+        <aura:if isTrue="{! v.style == 'inside' }">
+            <div class="slds-form-element__control slds-grow">
+                <div id="{! 'listbox-selected-' + globalId }" role="listbox" aria-orientation="horizontal" class="{! 'slds-pill_container' + (v.privateFocused ? ' slds-has-input-focus' : '') }">
+                    <ul class="slds-listbox slds-listbox_horizontal" role="group" aria-label="Selected Tags:">
+                        <aura:iteration items="{! v.value }" var="tag">
+                            <li role="presentation" class="slds-listbox__item">
+                                <lightning:pill name="{! tag.value }" label="{! tag.label }" onremove="{! c.onRemoveTag }"/>
+                            </li>
+                        </aura:iteration>
+                    </ul>
+                    <div class="slds-combobox_container slds-has-inline-listbox slds-border_none slds-grow">
+                        <div class="{! 'slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-combobox-lookup' + (v.privateVisible ? ' slds-is-open' : '') }" aria-expanded="false" aria-haspopup="listbox" role="combobox" data-tags-input="{! globalId }">
+                            <div aura:id="input" class="{! v.privateComputedFormElementClass }" role="none">
+                                <input aura:id="private" type="text" class="slds-input slds-combobox__input slds-input_inside" id="{! globalId }" aria-autocomplete="list" aria-controls="{! 'listbox-' + globalId }" role="textbox"/>
+                                <aura:if isTrue="{! !empty(v.iconNameLeft) &amp;&amp; empty(v.value) }">
+                                    <c:primitiveIcon variant="bare" iconName="{! v.iconNameLeft }" svgClass="slds-input__icon slds-input__icon--left slds-icon-text-default"/>
+                                </aura:if>
+                                <aura:if isTrue="{! !empty(v.iconNameRight) }">
+                                    <c:primitiveIcon variant="bare" iconName="{! v.iconNameRight }" svgClass="slds-input__icon slds-input__icon--right slds-icon-text-default"/>
+                                </aura:if>
+                            </div>
+                            <div aura:id="popup" data-tags-index="{! globalId }" id="{! 'listbox-' + globalId }" role="listbox" class="{! 'slds-dropdown_append-to-body ' + v.popupClass }">
+                                <ul class="{! 'slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid slds-dropdown_length-' + v.limit + ' ' + (v.privateVisible ? '' : 'slds-hide ') }" role="presentation">
+                                    <li role="presentation" class="{! 'slds-listbox__item ' + (v.privateLoadingTags ? 'slds-show' : 'slds-hide') }" style="height: 3.5rem;">
+                                        <lightning:spinner aura:id="spinner" variant="brand" size="medium" alternativeText="loading"></lightning:spinner>
+                                    </li>
+                                    <c:iteration aura:id="itemList" items="{! v.privateFilteredTags }" template="{! v.computed.template }" providers="{! v.computed.providers }"/>
+                                    <li role="presentation" class="{! 'slds-listbox__item ' + (v.privateIsRendering ? 'slds-show' : 'slds-hide') }">
+                                        <span class="slds-media slds-listbox__option slds-listbox__option_plain" role="presentation" id="{! 'listbox-option-' + globalId + '-rendering' }">
+                                            <h3 class="slds-text-title_caps" role="presentation">{! v.messageWhenRendering }</h3>
+                                        </span>
+                                    </li>
+                                    <li role="presentation" class="{! 'slds-listbox__item ' + (!v.privateIsRendering &amp;&amp; empty(v.privateFilteredTags) ? 'slds-show' : 'slds-hide') }">
+                                        <span class="slds-media slds-listbox__option slds-listbox__option_plain" role="presentation" id="{! 'listbox-option-' + globalId + '-noResultFound' }">
+                                            <h3 class="slds-text-title_caps" role="presentation">{! v.messageWhenNotFound }</h3>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+        <aura:if isTrue="{! !empty(v.privateHelpMessage) }">
+            <div class="slds-form-element__help" aria-live="assertive" id="{! globalId + '-desc' }">
+                {! v.privateHelpMessage }
+            </div>
+        </aura:if>
+    </div>
+
+</aura:component>

@@ -1,0 +1,12 @@
+.THIS .slds-tabs--scoped__link,
+.THIS .slds-tabs--default__link {
+    overflow: visible;
+}
+
+.THIS.slds-tabs--scoped__item.slds-active .cHelptext .slds-icon--x-small {
+    fill: rgb(0, 112, 210);
+}
+
+.THIS .slds-popover_tooltip.slds-nubbin_bottom-left {
+    bottom: 40px;
+}

@@ -1,0 +1,10 @@
+<design:component label="Propic Image Field Editor">
+    <design:attribute name="label" label="Label" default="" />
+    <design:attribute name="fieldName" label="Field Name" default="" required="true" />
+    <design:attribute name="previewWidth" label="Preview Width" default="" />
+    <design:attribute name="previewHeight" label="Preview Height" default="" />
+    <design:supportedFormFactors>
+        <design:supportedFormFactor type="Large"/>
+        <design:supportedFormFactor type="Small"/>
+    </design:supportedFormFactors>
+</design:component>

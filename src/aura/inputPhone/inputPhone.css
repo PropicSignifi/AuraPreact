@@ -1,0 +1,30 @@
+.THIS .countryPicklist>.slds-form-element__label {
+    display: none;
+}
+
+.THIS .countryPicklist .slds-input {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    min-width: 80px;
+}
+
+.THIS .numberField {
+    margin-left: -3px;
+}
+
+.THIS .numberField .slds-input {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.THIS.slds-form--inline .slds-form-element__control {
+    display: inline-flex;
+}
+
+.THIS.slds-form--inline .countryPicklist {
+    margin-right: 0 !important;
+}
+
+.THIS.slds-form--inline .numberField {
+    display: inline-flex !important;
+}

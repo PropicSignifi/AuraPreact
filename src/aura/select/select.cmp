@@ -1,0 +1,53 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:inputable,c:focusable,c:common,c:commented,c:dataConsumer">
+    <aura:attribute name="label" type="String" access="GLOBAL" required="true"/>
+    <aura:attribute name="value" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="options" type="List" access="GLOBAL" required="false"/>
+    <aura:attribute name="messageWhenValueMissing" type="String" access="GLOBAL" required="false"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" required="false"/>
+    <aura:attribute name="privateHelpMessage" type="String" access="PRIVATE" required="false"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleClassChange }" value="{! v.class }"/>
+
+    <div class="{! v.privateComputedClass }" title="{! v.title }">
+        <label class="{! join(' ', 'slds-form-element__label', (v.variant == 'label-hidden' ? 'slds-m-right--xxx-small' : '')) }" for="{! globalId }">
+            <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : '' }">
+                <aura:if isTrue="{! !empty(v.labelHtml) }">
+                    <aura:unescapedHtml value="{! v.labelHtml }"/>
+                    <aura:set attribute="else">
+                        {! v.label }
+                    </aura:set>
+                </aura:if>
+            </span>
+            <aura:if isTrue="{! v.required }">
+                <abbr class="slds-required" title="{! $Label.LightningControl.required }">
+                    *
+                </abbr>
+            </aura:if>
+            <aura:if isTrue="{! !empty(v.tooltip) }">
+                <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+            </aura:if>
+        </label>
+        <div class="slds-form-element__control slds-grow">
+            <div class="slds-select_container">
+                <select class="slds-select" id="{! globalId }" aura:id="private">
+                    <aura:if isTrue="{! !empty(v.options) }">
+                        <aura:iteration items="{! v.options }" var="option">
+                            <option value="{! option.value }" selected="{! option.selected }">{! option.label }</option>
+                        </aura:iteration>
+                        <aura:set attribute="else">
+                            {! v.body }
+                        </aura:set>
+                    </aura:if>
+                </select>
+            </div>
+        </div>
+        <aura:if isTrue="{! !empty(v.privateHelpMessage) }">
+            <div class="slds-form-element__help" aria-live="assertive" id="{! globalId + '-desc' }">
+                {! v.privateHelpMessage }
+            </div>
+        </aura:if>
+    </div>
+
+</aura:component>

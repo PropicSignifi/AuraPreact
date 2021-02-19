@@ -1,0 +1,7 @@
+<aura:component access="GLOBAL" extends="c:baseRoot" implements="force:appHostable">
+    <aura:attribute name="preactlet" type="Object" access="GLOBAL" description="The preactlet component"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.doInit }"/>
+
+    <c:preact aura:id="preact" preactlet="{! v.preactlet }"></c:preact>
+</aura:component>

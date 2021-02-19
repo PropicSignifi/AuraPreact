@@ -1,0 +1,28 @@
+<aura:component extends="c:baseComponent">
+    <aura:attribute name="index" type="Integer" access="GLOBAL" description="Description"/>
+    <aura:attribute name="option" type="Object" access="GLOBAL" description="Description"/>
+
+    <aura:registerEvent name="onclick" type="c:dataEvent" access="GLOBAL" description="Description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+
+    <li role="presentation" class="slds-listbox__item" data-index="{! v.index }" onclick="{! c.onClickItem }">
+        <span id="{! 'listbox-option-' + globalId + '-' + v.index }" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+            <aura:if isTrue="{! !empty(v.option.iconName) }">
+                <span class="slds-media__figure">
+                    <span class="{! 'slds-icon_container ' + (empty(v.option.iconContainer) ? 'slds-icon_container-default' : ('slds-icon_container-' + v.option.iconContainer)) }" title="{! v.option.iconName }">
+                        <c:primitiveIcon variant="bare" iconName="{! v.option.iconName }" svgClass="slds-icon slds-icon_small"/>
+                        <span class="slds-assistive-text"></span>
+                    </span>
+                </span>
+            </aura:if>
+            <span class="slds-media__body">
+                <span class="slds-listbox__option-text slds-listbox__option-text_entity">{! v.option.value }</span>
+                <aura:if isTrue="{! !empty(v.option.iconName) &amp;&amp; !empty(v.option.description) }">
+                    <span class="slds-listbox__option-meta slds-listbox__option-meta_entity">{! v.option.description }</span>
+                </aura:if>
+            </span>
+        </span>
+    </li>
+
+</aura:component>

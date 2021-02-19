@@ -1,0 +1,34 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:dependency resource="c:privateTabContent"/>
+
+    <aura:attribute name="variant" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="selectedTabId" type="String" access="GLOBAL" required="false"/>
+    <aura:attribute name="privateLastSelectedTab" type="Object" access="PRIVATE" required="false"/>
+    <aura:attribute name="privateTabRefs" type="Object" access="PRIVATE" required="false"/>
+    <aura:attribute name="privateTabsetClassNames" type="String" access="PRIVATE" required="false"/>
+    <aura:attribute name="privateTabClassNames" type="String" access="PRIVATE" required="false"/>
+    <aura:attribute name="privateContent" type="Aura.Component[]" access="GLOBAL"/>
+    <aura:attribute name="privateHasTabOverflow" type="Boolean" access="PRIVATE" required="false" default="false"/>
+    <aura:attribute name="privateTabNavClassNames" type="String" access="PRIVATE" required="false"/>
+
+    <aura:registerEvent name="onselect" type="c:dataEvent" access="GLOBAL"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleSelectedTabIdChange }" value="{! v.selectedTabId }"/>
+    <aura:handler name="change" action="{! c.handleOverflowChange }" value="{! v.privateHasTabOverflow }"/>
+    <aura:handler name="change" action="{! c.handleTabsetClassNameChange }" value="{! v.class }"/>
+
+    <div class="{! v.privateTabsetClassNames }" title="{! v.title }">
+        <div class="{! v.privateTabClassNames }">
+            <div class="slds-tabs__nav-scroller--inner" onscroll="{! c.onScroll }" aura:id="privateNavScroller">
+                <ul class="{! v.privateTabNavClassNames }" onkeydown="{! c.handleKeysIteration }" role="tablist" aura:id="privateTabHeaders"/>
+                <div class="slds-tab__scroll-controls" aria-hidden="true">
+                    <lightning:buttonIcon variant="base" iconName="{! v.variant == 'vertical' ? 'utility:chevronup' : 'utility:chevronleft' }" alternativeText="{! v.variant == 'vertical' ? 'Scroll Up' : 'Scroll Left' }" tabindex="-1" onclick="{! c.scrollBack }" aura:id="sBack"/>
+                    <lightning:buttonIcon variant="base" iconName="{! v.variant == 'vertical' ? 'utility:chevrondown' : 'utility:chevronright' }" alternativeText="{! v.variant == 'vertical' ? 'Scroll Down' : 'Scroll Right' }" tabindex="-1" onclick="{! c.scrollForward }" aura:id="sForward"/>
+                </div>
+            </div>
+        </div>
+        {! v.privateContent }
+    </div>
+
+</aura:component>

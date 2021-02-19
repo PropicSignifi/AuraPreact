@@ -1,0 +1,61 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:inputable,c:focusable,c:common,c:commented">
+    <aura:attribute name="value" type="String" access="GLOBAL"/>
+    <aura:attribute name="countries" type="List" access="GLOBAL"/>
+    <aura:attribute name="type" type="String" access="GLOBAL"/>
+    <aura:attribute name="placeholder" type="String" access="GLOBAL"/>
+    <aura:attribute name="forceOnChange" type="Boolean" access="GLOBAL"
+        description="Force flushing onchange events. Normally inputs with formatters will fire onchange events only after blurring."/>
+    <aura:attribute name="messageWhenValueMissing" type="String" access="GLOBAL"/>
+    <aura:attribute name="messageWhenPatternMismatch" type="String" access="GLOBAL" default="Phone number is invalid"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateComputedInputClass" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateHelpMessage" type="String" access="PRIVATE"/>
+    <aura:attribute name="privateCountryCode" type="Integer" access="PRIVATE"/>
+    <aura:attribute name="privateNumber" type="String" access="PRIVATE" default=""/>
+    <aura:attribute name="privateCountries" type="List" access="PRIVATE"/>
+    <aura:attribute name="privateFormatter" type="String" access="PRIVATE" default="phone"/>
+
+    <aura:method name="getCountryCode" access="GLOBAL" description="Get the digit form of the country code">
+    </aura:method>
+    <aura:method name="getPhoneNumber" access="GLOBAL" description="Get the phone number without the country code">
+    </aura:method>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleClassChange }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.handleValueChange }" value="{! v.countries }"/>
+    <aura:handler name="change" action="{! c.handleValueChange }" value="{! v.value }"/>
+
+    <div class="{! v.privateComputedClass }" title="{! v.title }">
+        <label class="{! join(' ', 'slds-form-element__label', (v.variant == 'label-hidden' ? 'slds-m-right--xxx-small' : '')) }" for="{! globalId }">
+            <span class="{! v.variant == 'label-hidden' ? 'slds-assistive-text' : '' }">
+                <aura:if isTrue="{! !empty(v.labelHtml) }">
+                    <aura:unescapedHtml value="{! v.labelHtml }"/>
+                    <aura:set attribute="else">
+                        {! v.label }
+                    </aura:set>
+                </aura:if>
+            </span>
+            <aura:if isTrue="{! v.required }">
+                <abbr class="slds-required" title="{! $Label.LightningControl.required }">
+                    *
+                </abbr>
+            </aura:if>
+            <aura:if isTrue="{! !empty(v.tooltip) }">
+                <c:helptext content="{! v.tooltip }" class="slds-m-left_xx-small"/>
+            </aura:if>
+        </label>
+        <div class="slds-form-element__control slds-grow slds-grid">
+            <c:picklist name="country" label="Country" variant="label-hidden" options="{! v.privateCountries }" value="{! v.privateCountryCode }" disabled="{! v.disabled }" readonly="{! v.readonly }" configurer="{! v.computed.picklistConfigurer }" class="countryPicklist" popupClass="slds-width_min-content" onchange="{! c.onCountryChange }"/>
+            <c:input name="number" label="Number" variant="label-hidden" type="text" value="{! v.privateNumber }" placeholder="{! v.placeholder }" disabled="{! v.disabled }" readonly="{! v.readonly }" class="{! 'slds-col slds-grid numberField ' + v.privateComputedInputClass }" formatter="{! v.privateFormatter }" onblur="{! c.handleBlur }" onchange="{! c.onNumberChange }" forceOnChange="true"/>
+        </div>
+        <aura:if isTrue="{! !empty(v.privateHelpMessage) }">
+            <div class="slds-has-error">
+                <div class="slds-form-element__help" aria-live="assertive" id="{! globalId + '-desc' }">
+                    {! v.privateHelpMessage }
+                </div>
+            </div>
+        </aura:if>
+    </div>
+
+</aura:component>

@@ -1,0 +1,18 @@
+.tabLabel {
+    display: inline-flex !important;
+    align-items: center;
+    overflow: initial;
+}
+
+.tabLabel .labelText {
+    font-weight: 400;
+    color: #0070d2
+}
+
+.tabItems {
+    flex-flow: wrap;
+}
+
+.moreTabsButton>button:focus {
+    box-shadow: none;
+}

@@ -1,0 +1,8 @@
+<aura:component access="GLOBAL" extends="c:baseComponent">
+    <aura:attribute name="name" type="String" access="GLOBAL" description="Description" required="true"/>
+    <aura:attribute name="value" type="String" access="GLOBAL" description="Description" required="true"/>
+    <aura:attribute name="inject" type="Boolean" access="GLOBAL" description="Description" default="false"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+
+</aura:component>

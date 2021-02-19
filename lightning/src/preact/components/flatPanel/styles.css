@@ -1,0 +1,21 @@
+.flatPanel {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.flatPanel .header {
+    align-items: center;
+}
+
+.flatPanel .headerCenter {
+    align-items: center !important;
+    justify-content: center;
+}
+
+.flatPanel .content {
+    flex-grow: 1;
+}
+
+.headerText {
+    font-size: 1rem;
+}

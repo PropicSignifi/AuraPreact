@@ -1,0 +1,27 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="iconName" type="String" access="GLOBAL" description="description" required="true"/>
+    <aura:attribute name="variant" type="String" access="GLOBAL" description="description"/>
+
+    <aura:attribute name="privateComputedClass" type="String" access="PRIVATE" description="description"/>
+    <aura:attribute name="privateMenuVisible" type="Boolean" access="PRIVATE" description="description"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.class }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.variant }"/>
+    <aura:handler name="change" action="{! c.computeClassNames }" value="{! v.privateMenuVisible }"/>
+
+    <div>
+        <button class="{! 'slds-button slds-button_icon' + (v.variant == 'border' ? ' slds-button_icon-border-filled' : '') }" title="{! v.title }" data-dynamicMenu="{! globalId }" onclick="{! c.showDynamicMenu }">
+            <c:primitiveIcon variant="bare" iconName="{! v.iconName }" svgClass="slds-button__icon"/>
+            <span class="slds-assistive-text">{! v.title }</span>
+        </button>
+        <section class="{! v.privateComputedClass }" role="dialog" aria-label="{! v.title }" aria-describedby="{! 'dialog-' + globalId }" data-dynamicMenu="{! globalId }">
+            <div class="slds-popover__body slds-p-horizontal_none" id="{! 'dialog-' + globalId }">
+                <div class="slds-p-vertical_x-small slds-p-horizontal_small">
+                    {! v.body }
+                </div>
+            </div>
+        </section>
+    </div>
+
+</aura:component>

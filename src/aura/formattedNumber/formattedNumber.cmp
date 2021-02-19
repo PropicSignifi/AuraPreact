@@ -1,0 +1,22 @@
+<aura:component access="GLOBAL" extends="c:baseComponent" implements="c:common">
+    <aura:attribute name="value" type="Decimal" access="GLOBAL" required="true"/>
+    <aura:attribute name="style" type="String" access="GLOBAL" default="decimal"/>
+    <aura:attribute name="currencyCode" type="String" access="GLOBAL"/>
+    <aura:attribute name="currencyDisplayAs" type="String" access="GLOBAL" default="symbol"/>
+    <aura:attribute name="minimumIntegerDigits" type="Integer" access="GLOBAL"/>
+    <aura:attribute name="minimumFractionDigits" type="Integer" access="GLOBAL"/>
+    <aura:attribute name="maximumFractionDigits" type="Integer" access="GLOBAL"/>
+    <aura:attribute name="minimumSignificantDigits" type="Integer" access="GLOBAL"/>
+    <aura:attribute name="maximumSignificantDigits" type="Integer" access="GLOBAL"/>
+    <aura:attribute name="type" type="String" access="GLOBAL"/>
+
+    <aura:attribute name="privateFormattedValue" type="String" access="PRIVATE"/>
+
+    <aura:handler name="$init" event="c:dataEvent" action="{! c.init }"/>
+    <aura:handler name="change" action="{! c.handleValueChange }" value="{! v.value }"/>
+
+    <span class="{! v.class }" title="{! v.title }">
+        {! v.privateFormattedValue }
+    </span>
+
+</aura:component>

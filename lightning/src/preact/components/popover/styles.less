@@ -1,0 +1,64 @@
+.container {
+}
+
+.triggerContainer {
+    display: inline-block;
+}
+
+.placeholder {
+    height: 100px;
+}
+
+:global(.popover-left) {
+    transform: translateY(-50%);
+}
+
+:global(.popover-left-top),
+:global(.popover-left-top-corner) {
+}
+
+:global(.popover-left-bottom),
+:global(.popover-left-bottom-corner) {
+    transform: translateY(-100%);
+}
+
+:global(.popover-right) {
+    transform: translate(-100%, -50%);
+}
+
+:global(.popover-right-top),
+:global(.popover-right-top-corner) {
+    transform: translate(-100%, 0);
+}
+
+:global(.popover-right-bottom),
+:global(.popover-right-bottom-corner) {
+    transform: translate(-100%, -100%);
+}
+
+:global(.popover-top) {
+    transform: translate(-50%, 0);
+}
+
+:global(.popover-top-left),
+:global(.popover-top-left-corner) {
+}
+
+:global(.popover-top-right),
+:global(.popover-top-right-corner) {
+    transform: translate(-100%, 0);
+}
+
+:global(.popover-bottom) {
+    transform: translate(-50%, -100%);
+}
+
+:global(.popover-bottom-left),
+:global(.popover-bottom-left-corner) {
+    transform: translate(0, -100%);
+}
+
+:global(.popover-bottom-right),
+:global(.popover-bottom-right-corner) {
+    transform: translate(-100%, -100%);
+}

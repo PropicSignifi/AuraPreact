@@ -1,0 +1,1898 @@
+.confettiContainer[custom-celebration]{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.confetti[custom-celebration]{
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    user-select: none;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transform: translateY(-100px) translateZ(0);
+    will-change: transform;
+}
+
+.confetti[custom-celebration],.ribbon[custom-celebration]{
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.ribbon[custom-celebration]{
+    margin: auto 0;
+    height: 100vh;
+    transform: translate3d(25vw,0,0);
+    position: absolute;
+    top: 0;
+}
+
+.ribbon[custom-celebration] .path[custom-celebration]{
+    fill: none;
+    stroke: #00a1e0;
+    stroke-width: 7px;
+    stroke-dasharray: 300 2448.854;
+    stroke-dashoffset: 2748.847;
+    animation: ribbon_animation 2.2s both cubic-bezier(.19,.29,.59,1);
+    opacity: 1;
+    animation-delay: 1.6s;
+    will-change: opacity;
+    position: absolute;
+    z-index: 1000;
+}
+
+@keyframes ribbon_animation{
+    0%{
+        stroke-dashoffset: 2748.847;
+        stroke-dasharray: 0 2748.854;
+    }
+    10%{
+        stroke-dashoffset: 2748.847;
+        stroke-dasharray: 300 2448.854;
+    }
+    90%{
+        stroke-dashoffset: 300;
+        stroke-dasharray: 300 2448.854;
+    }
+    to{
+        stroke-dashoffset: 300;
+        stroke-dasharray: 0 3048.854;
+    }
+}
+
+.heartTotal[custom-celebration]{
+    position: absolute;
+    z-index: 1000;
+}
+
+.heartWrapper[custom-celebration]{
+    animation-name: heartWrapper_animation;
+    animation-delay: 2.05s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+}
+
+.heart[custom-celebration],.heartWrapper[custom-celebration]{
+    animation-duration: 4s;
+}
+
+.heart[custom-celebration]{
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size: 60px;
+    transform-origin: 50% 50%;
+    transform: translateZ(0);
+    touch-action: none;
+    will-change: transform;
+    animation-name: heart_animation;
+    animation-delay: 2s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+}
+
+.heart[custom-celebration],.heartWrap2[custom-celebration]{
+    position: absolute;
+    pointer-events: none;
+}
+
+.heartWrap2[custom-celebration]{
+    transform: translate(-1vw,-2vh);
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+@keyframes heart_animation{
+    0%{
+        transform: rotateY(0deg) rotate(0deg);
+        transform-origin: 25% 50%;
+        opacity: 0;
+    }
+    10%{
+        transform: rotateY(0deg) rotate(0deg);
+        transform-origin: 25% 50%;
+    }
+    25%{
+        transform: rotateY(180deg) rotate(45deg);
+        transform-origin: 25% 50%;
+    }
+    40%{
+        transform: rotateY(180deg) rotate(45deg);
+        transform-origin: 25% 50%;
+    }
+    60%{
+        transform: rotateY(540deg) rotate(-10deg);
+        transform-origin: 25% 50%;
+    }
+    to{
+        transform: rotateY(540deg) rotate(20deg);
+        transform-origin: 25% 50%;
+    }
+}
+
+@keyframes heartWrapper_animation{
+    0%{
+        opacity: 0;
+        transform: translate3d(36.5vw,32.4vh,0);
+    }
+    0.5917%{
+        opacity: 1;
+        transform: translate3d(36.7vw,34.3vh,0);
+    }
+    1.1834%{
+        transform: translate3d(37vw,36.2vh,0);
+    }
+    1.7751%{
+        transform: translate3d(37.3vw,38.1vh,0);
+    }
+    2.3669%{
+        transform: translate3d(37.6vw,40vh,0);
+    }
+    2.9586%{
+        transform: translate3d(37.9vw,41.8vh,0);
+    }
+    3.5503%{
+        transform: translate3d(38.3vw,43.7vh,0);
+    }
+    4.142%{
+        transform: translate3d(38.7vw,45.5vh,0);
+    }
+    4.7337%{
+        transform: translate3d(39.3vw,47.2vh,0);
+    }
+    5.3254%{
+        transform: translate3d(39.8vw,48.9vh,0);
+    }
+    5.9172%{
+        transform: translate3d(40.5vw,50.5vh,0);
+    }
+    6.5089%{
+        transform: translate3d(41.2vw,52.1vh,0);
+    }
+    7.1006%{
+        transform: translate3d(41.9vw,53.5vh,0);
+    }
+    7.6923%{
+        transform: translate3d(42.7vw,54.9vh,0);
+    }
+    8.284%{
+        transform: translate3d(43.6vw,56.2vh,0);
+    }
+    8.8757%{
+        transform: translate3d(44.3vw,57vh,0);
+    }
+    9.4675%{
+        transform: translate3d(45vw,57.8vh,0);
+    }
+    10.0592%{
+        transform: translate3d(45.8vw,58.3vh,0);
+    }
+    10.6509%{
+        transform: translate3d(46.7vw,58.8vh,0);
+    }
+    11.2426%{
+        transform: translate3d(47.5vw,59.1vh,0);
+    }
+    11.8343%{
+        transform: translate3d(48.4vw,59.4vh,0);
+    }
+    12.426%{
+        transform: translate3d(49.2vw,59.6vh,0);
+    }
+    13.0178%{
+        transform: translate3d(50.1vw,59.7vh,0);
+    }
+    13.6095%{
+        transform: translate3d(51vw,59.7vh,0);
+    }
+    14.2012%{
+        transform: translate3d(51.8vw,59.6vh,0);
+    }
+    14.7929%{
+        transform: translate3d(52.7vw,59.5vh,0);
+    }
+    15.3846%{
+        transform: translate3d(53.5vw,59.2vh,0);
+    }
+    15.9763%{
+        transform: translate3d(54.4vw,58.9vh,0);
+    }
+    16.568%{
+        transform: translate3d(55.2vw,58.6vh,0);
+    }
+    17.1598%{
+        transform: translate3d(56.1vw,58.1vh,0);
+    }
+    17.7515%{
+        transform: translate3d(56.9vw,57.5vh,0);
+    }
+    18.3432%{
+        transform: translate3d(57.6vw,56.9vh,0);
+    }
+    18.9349%{
+        transform: translate3d(58.4vw,56.1vh,0);
+    }
+    19.5266%{
+        transform: translate3d(59.1vw,55.2vh,0);
+    }
+    20.1183%{
+        transform: translate3d(59.8vw,54.3vh,0);
+    }
+    20.7101%{
+        transform: translate3d(60.4vw,53.2vh,0);
+    }
+    21.3018%{
+        transform: translate3d(60.9vw,52vh,0);
+    }
+    21.8935%{
+        transform: translate3d(61.4vw,50.6vh,0);
+    }
+    22.4852%{
+        transform: translate3d(61.8vw,49.3vh,0);
+    }
+    23.0769%{
+        transform: translate3d(62vw,47.8vh,0);
+    }
+    23.6686%{
+        transform: translate3d(62.2vw,46.3vh,0);
+    }
+    24.2604%{
+        transform: translate3d(62.3vw,44.8vh,0);
+    }
+    24.8521%{
+        transform: translate3d(62.3vw,43.7vh,0);
+    }
+    25.4438%{
+        transform: translate3d(62.3vw,42.8vh,0);
+    }
+    26.0355%{
+        transform: translate3d(62.3vw,41.9vh,0);
+    }
+    26.6272%{
+        transform: translate3d(62.2vw,41vh,0);
+    }
+    27.2189%{
+        transform: translate3d(62.1vw,40.1vh,0);
+    }
+    27.8107%{
+        transform: translate3d(62.1vw,39.2vh,0);
+    }
+    28.4024%{
+        transform: translate3d(61.9vw,38.3vh,0);
+    }
+    28.9941%{
+        transform: translate3d(61.8vw,37.4vh,0);
+    }
+    29.5858%{
+        transform: translate3d(61.6vw,36.6vh,0);
+    }
+    30.1775%{
+        transform: translate3d(61.4vw,35.7vh,0);
+    }
+    30.7692%{
+        transform: translate3d(61.2vw,34.9vh,0);
+    }
+    31.3609%{
+        transform: translate3d(61vw,34.1vh,0);
+    }
+    31.9527%{
+        transform: translate3d(60.7vw,33.3vh,0);
+    }
+    32.5444%{
+        transform: translate3d(60.5vw,32.5vh,0);
+    }
+    33.1361%{
+        transform: translate3d(60.2vw,31.8vh,0);
+    }
+    33.7278%{
+        transform: translate3d(59.8vw,31.1vh,0);
+    }
+    34.3195%{
+        transform: translate3d(59.5vw,30.4vh,0);
+    }
+    34.9112%{
+        transform: translate3d(59.1vw,29.8vh,0);
+    }
+    35.503%{
+        transform: translate3d(58.8vw,29.2vh,0);
+    }
+    36.0947%{
+        transform: translate3d(58.4vw,28.6vh,0);
+    }
+    36.6864%{
+        transform: translate3d(57.9vw,28.1vh,0);
+    }
+    37.2781%{
+        transform: translate3d(57.5vw,27.6vh,0);
+    }
+    37.8698%{
+        transform: translate3d(57.1vw,27.2vh,0);
+    }
+    38.4615%{
+        transform: translate3d(56.6vw,26.8vh,0);
+    }
+    39.0533%{
+        transform: translate3d(56.1vw,26.4vh,0);
+    }
+    39.645%{
+        transform: translate3d(55.6vw,26.2vh,0);
+    }
+    40.2367%{
+        transform: translate3d(55.2vw,25.9vh,0);
+    }
+    40.8284%{
+        transform: translate3d(54.7vw,25.7vh,0);
+    }
+    41.4201%{
+        transform: translate3d(54.1vw,25.6vh,0);
+    }
+    42.0118%{
+        transform: translate3d(53.6vw,25.5vh,0);
+    }
+    42.6036%{
+        transform: translate3d(53.1vw,25.5vh,0);
+    }
+    43.1953%{
+        transform: translate3d(52.6vw,25.5vh,0);
+    }
+    43.787%{
+        transform: translate3d(52.1vw,25.6vh,0);
+    }
+    44.3787%{
+        transform: translate3d(51.6vw,25.7vh,0);
+    }
+    44.9704%{
+        transform: translate3d(51.1vw,25.9vh,0);
+    }
+    45.5621%{
+        transform: translate3d(50.6vw,26.1vh,0);
+    }
+    46.1538%{
+        transform: translate3d(50.1vw,26.4vh,0);
+    }
+    46.7456%{
+        transform: translate3d(49.6vw,26.7vh,0);
+    }
+    47.3373%{
+        transform: translate3d(49.2vw,27vh,0);
+    }
+    47.929%{
+        transform: translate3d(48.7vw,27.4vh,0);
+    }
+    48.5207%{
+        transform: translate3d(48.3vw,27.9vh,0);
+    }
+    49.1124%{
+        transform: translate3d(47.8vw,28.3vh,0);
+    }
+    49.7041%{
+        transform: translate3d(47.4vw,28.9vh,0);
+    }
+    50.2959%{
+        transform: translate3d(46.9vw,29.6vh,0);
+    }
+    50.8876%{
+        transform: translate3d(46.3vw,30.5vh,0);
+    }
+    51.4793%{
+        transform: translate3d(45.8vw,31.5vh,0);
+    }
+    52.071%{
+        transform: translate3d(45.4vw,32.5vh,0);
+    }
+    52.6627%{
+        transform: translate3d(45vw,33.6vh,0);
+    }
+    53.2544%{
+        transform: translate3d(44.6vw,34.7vh,0);
+    }
+    53.8462%{
+        transform: translate3d(44.3vw,35.9vh,0);
+    }
+    54.4379%{
+        transform: translate3d(44.1vw,37.1vh,0);
+    }
+    55.0296%{
+        transform: translate3d(43.8vw,38.3vh,0);
+    }
+    55.6213%{
+        transform: translate3d(43.6vw,39.6vh,0);
+    }
+    56.213%{
+        transform: translate3d(43.4vw,40.9vh,0);
+    }
+    56.8047%{
+        transform: translate3d(43.3vw,42.1vh,0);
+    }
+    57.3964%{
+        transform: translate3d(43.1vw,43.4vh,0);
+    }
+    57.9882%{
+        transform: translate3d(43vw,44.7vh,0);
+    }
+    58.5799%{
+        transform: translate3d(42.9vw,46vh,0);
+    }
+    59.1716%{
+        transform: translate3d(42.8vw,47.3vh,0);
+    }
+    59.7633%{
+        transform: translate3d(42.8vw,48.6vh,0);
+    }
+    60.355%{
+        transform: translate3d(42.7vw,49.9vh,0);
+    }
+    60.9467%{
+        transform: translate3d(42.7vw,51.2vh,0);
+    }
+    61.5385%{
+        transform: translate3d(42.7vw,52.5vh,0);
+    }
+    62.1302%{
+        transform: translate3d(42.6vw,53.8vh,0);
+    }
+    62.7219%{
+        transform: translate3d(42.6vw,55.1vh,0);
+    }
+    63.3136%{
+        transform: translate3d(42.6vw,56.4vh,0);
+    }
+    63.9053%{
+        transform: translate3d(42.6vw,57.7vh,0);
+    }
+    64.497%{
+        transform: translate3d(42.6vw,59vh,0);
+    }
+    65.0888%{
+        transform: translate3d(42.7vw,60.3vh,0);
+    }
+    65.6805%{
+        transform: translate3d(42.7vw,61.6vh,0);
+    }
+    66.2722%{
+        transform: translate3d(42.7vw,62.9vh,0);
+    }
+    66.8639%{
+        transform: translate3d(42.7vw,64.2vh,0);
+    }
+    67.4556%{
+        transform: translate3d(42.8vw,65.5vh,0);
+    }
+    68.0473%{
+        transform: translate3d(42.8vw,66.8vh,0);
+    }
+    68.6391%{
+        transform: translate3d(42.9vw,68.1vh,0);
+    }
+    69.2308%{
+        transform: translate3d(42.9vw,69.4vh,0);
+    }
+    69.8225%{
+        transform: translate3d(43vw,70.7vh,0);
+    }
+    70.4142%{
+        transform: translate3d(43vw,72vh,0);
+    }
+    71.0059%{
+        transform: translate3d(43.1vw,73.2vh,0);
+    }
+    71.5976%{
+        transform: translate3d(43.2vw,74.5vh,0);
+    }
+    72.1893%{
+        transform: translate3d(43.2vw,75.8vh,0);
+    }
+    72.7811%{
+        transform: translate3d(43.3vw,77vh,0);
+    }
+    73.3728%{
+        transform: translate3d(43.4vw,78.3vh,0);
+    }
+    73.9645%{
+        transform: translate3d(43.5vw,79.5vh,0);
+    }
+    74.5562%{
+        transform: translate3d(43.6vw,80.7vh,0);
+    }
+    75.1479%{
+        transform: translate3d(43.7vw,82vh,0);
+    }
+    75.7396%{
+        transform: translate3d(43.8vw,83.2vh,0);
+    }
+    76.3314%{
+        transform: translate3d(43.9vw,84.5vh,0);
+    }
+    76.9231%{
+        transform: translate3d(44vw,85.7vh,0);
+    }
+    77.5148%{
+        transform: translate3d(44.2vw,87vh,0);
+    }
+    78.1065%{
+        transform: translate3d(44.3vw,88.2vh,0);
+    }
+    78.6982%{
+        transform: translate3d(44.4vw,89.4vh,0);
+    }
+    79.2899%{
+        transform: translate3d(44.6vw,90.7vh,0);
+    }
+    79.8817%{
+        transform: translate3d(44.7vw,91.9vh,0);
+    }
+    80.4734%{
+        transform: translate3d(44.8vw,93.1vh,0);
+    }
+    81.0651%{
+        transform: translate3d(45vw,94.4vh,0);
+    }
+    81.6568%{
+        transform: translate3d(45.2vw,95.6vh,0);
+    }
+    82.2485%{
+        transform: translate3d(45.3vw,96.8vh,0);
+    }
+    82.8402%{
+        transform: translate3d(45.5vw,98vh,0);
+    }
+    83.432%{
+        transform: translate3d(45.7vw,99.3vh,0);
+    }
+    84.0237%{
+        transform: translate3d(45.8vw,100.5vh,0);
+    }
+    84.6154%{
+        transform: translate3d(46vw,101.7vh,0);
+    }
+    85.2071%{
+        transform: translate3d(46.2vw,102.9vh,0);
+    }
+    85.7988%{
+        transform: translate3d(46.4vw,104.1vh,0);
+    }
+    86.3905%{
+        transform: translate3d(46.7vw,105.3vh,0);
+    }
+    86.9822%{
+        transform: translate3d(46.9vw,106.5vh,0);
+    }
+    87.574%{
+        transform: translate3d(47.2vw,107.6vh,0);
+    }
+    88.1657%{
+        transform: translate3d(47.4vw,108.8vh,0);
+    }
+    88.7574%{
+        transform: translate3d(47.8vw,109.9vh,0);
+    }
+    89.3491%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    89.9408%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    90.5325%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    91.1243%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    91.716%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    92.3077%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    92.8994%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    93.4911%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    94.0828%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    94.6746%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    95.2663%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    95.858%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    96.4497%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    97.0414%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    97.6331%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    98.2249%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    98.8166%{
+        transform: translate3d(48.1vw,111vh,0);
+    }
+    99.4083%{
+        transform: translate3d(48.1vw,111vh,0);
+        opacity: 1;
+    }
+    to{
+        transform: translate3d(48.1vw,111vh,0);
+        opacity: 0;
+    }
+}
+
+.heartPieces[custom-celebration]{
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-size: 50px;
+    position: absolute;
+    will-change: transform;
+    animation-delay: 0s;
+    animation-duration: 2.1s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+}
+
+.heartLeft[custom-celebration]{
+    left: -26px;
+    top: 10px;
+    background-size: 30px;
+    animation-name: heartLeftRight_animation;
+}
+
+.heartLeftContainer[custom-celebration]{
+    animation-name: heartLeftContainer_animation;
+    animation-delay: 0s;
+    animation-duration: 2.1s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+}
+
+@keyframes heartLeftContainer_animation{
+    0%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    0.8065%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    1.6129%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    2.4194%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    3.2258%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    4.0323%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    4.8387%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    5.6452%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    6.4516%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    7.2581%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    8.0645%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    8.871%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    9.6774%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    10.4839%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    11.2903%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    12.0968%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    12.9032%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    13.7097%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    14.5161%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    15.3226%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    16.129%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    16.9355%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    17.7419%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    18.5484%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    19.3548%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    20.1613%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    20.9677%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    21.7742%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    22.5806%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    23.3871%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    24.1935%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    25%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    25.8065%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    26.6129%{
+        transform: translate3d(48.5vw,-9.7vh,0);
+    }
+    27.4194%{
+        transform: translate3d(48.8vw,-8.3vh,0);
+    }
+    28.2258%{
+        transform: translate3d(49vw,-6.4vh,0);
+    }
+    29.0323%{
+        transform: translate3d(49vw,-4.4vh,0);
+    }
+    29.8387%{
+        transform: translate3d(48.9vw,-2.4vh,0);
+    }
+    30.6452%{
+        transform: translate3d(48.7vw,-.4vh,0);
+    }
+    31.4516%{
+        transform: translate3d(48.5vw,1.5vh,0);
+    }
+    32.2581%{
+        transform: translate3d(48.3vw,3.5vh,0);
+    }
+    33.0645%{
+        transform: translate3d(48.1vw,5.4vh,0);
+    }
+    33.871%{
+        transform: translate3d(47.9vw,7.4vh,0);
+    }
+    34.6774%{
+        transform: translate3d(47.7vw,9.3vh,0);
+    }
+    35.4839%{
+        transform: translate3d(47.4vw,11.3vh,0);
+    }
+    36.2903%{
+        transform: translate3d(47.2vw,13.2vh,0);
+    }
+    37.0968%{
+        transform: translate3d(47.1vw,15.1vh,0);
+    }
+    37.9032%{
+        transform: translate3d(47.2vw,16.4vh,0);
+    }
+    38.7097%{
+        transform: translate3d(47.3vw,17.8vh,0);
+    }
+    39.5161%{
+        transform: translate3d(47.5vw,19.1vh,0);
+    }
+    40.3226%{
+        transform: translate3d(47.8vw,20.4vh,0);
+    }
+    41.129%{
+        transform: translate3d(48.2vw,21.5vh,0);
+    }
+    41.9355%{
+        transform: translate3d(48.7vw,22.5vh,0);
+    }
+    42.7419%{
+        transform: translate3d(49.3vw,23.4vh,0);
+    }
+    43.5484%{
+        transform: translate3d(50vw,24.2vh,0);
+    }
+    44.3548%{
+        transform: translate3d(50.7vw,24.8vh,0);
+    }
+    45.1613%{
+        transform: translate3d(51.4vw,25.2vh,0);
+    }
+    45.9677%{
+        transform: translate3d(52.1vw,25.6vh,0);
+    }
+    46.7742%{
+        transform: translate3d(52.9vw,25.8vh,0);
+    }
+    47.5806%{
+        transform: translate3d(53.7vw,25.9vh,0);
+    }
+    48.3871%{
+        transform: translate3d(54.4vw,25.8vh,0);
+    }
+    49.1935%{
+        transform: translate3d(55.2vw,25.6vh,0);
+    }
+    50%{
+        transform: translate3d(55.9vw,25.3vh,0);
+    }
+    50.8065%{
+        transform: translate3d(56.7vw,24.8vh,0);
+    }
+    51.6129%{
+        transform: translate3d(57.3vw,24.1vh,0);
+    }
+    52.4194%{
+        transform: translate3d(57.9vw,23.1vh,0);
+    }
+    53.2258%{
+        transform: translate3d(58.1vw,22.5vh,0);
+    }
+    54.0323%{
+        transform: translate3d(58.2vw,21.9vh,0);
+    }
+    54.8387%{
+        transform: translate3d(58.4vw,21.3vh,0);
+    }
+    55.6452%{
+        transform: translate3d(58.5vw,20.6vh,0);
+    }
+    56.4516%{
+        transform: translate3d(58.6vw,19.9vh,0);
+    }
+    57.2581%{
+        transform: translate3d(58.6vw,19.3vh,0);
+    }
+    58.0645%{
+        transform: translate3d(58.5vw,18.6vh,0);
+    }
+    58.871%{
+        transform: translate3d(58.4vw,17.9vh,0);
+    }
+    59.6774%{
+        transform: translate3d(58.2vw,17.3vh,0);
+    }
+    60.4839%{
+        transform: translate3d(57.9vw,16.8vh,0);
+    }
+    61.2903%{
+        transform: translate3d(57.6vw,16.4vh,0);
+    }
+    62.0968%{
+        transform: translate3d(57.3vw,16vh,0);
+    }
+    62.9032%{
+        transform: translate3d(56.9vw,15.7vh,0);
+    }
+    63.7097%{
+        transform: translate3d(56.6vw,15.5vh,0);
+    }
+    64.5161%{
+        transform: translate3d(56.2vw,15.4vh,0);
+    }
+    65.3226%{
+        transform: translate3d(55.8vw,15.3vh,0);
+    }
+    66.129%{
+        transform: translate3d(55.4vw,15.3vh,0);
+    }
+    66.9355%{
+        transform: translate3d(55vw,15.4vh,0);
+    }
+    67.7419%{
+        transform: translate3d(54.7vw,15.5vh,0);
+    }
+    68.5484%{
+        transform: translate3d(54.3vw,15.7vh,0);
+    }
+    69.3548%{
+        transform: translate3d(53.9vw,16vh,0);
+    }
+    70.1613%{
+        transform: translate3d(53.6vw,16.3vh,0);
+    }
+    70.9677%{
+        transform: translate3d(53.3vw,16.7vh,0);
+    }
+    71.7742%{
+        transform: translate3d(53vw,17.1vh,0);
+    }
+    72.5806%{
+        transform: translate3d(52.7vw,17.5vh,0);
+    }
+    73.3871%{
+        transform: translate3d(52.4vw,18vh,0);
+    }
+    74.1935%{
+        transform: translate3d(52.2vw,18.6vh,0);
+    }
+    75%{
+        transform: translate3d(52vw,19.1vh,0);
+    }
+    75.8065%{
+        transform: translate3d(51.8vw,19.7vh,0);
+    }
+    76.6129%{
+        transform: translate3d(51.6vw,20.3vh,0);
+    }
+    77.4194%{
+        transform: translate3d(51.4vw,21.2vh,0);
+    }
+    78.2258%{
+        transform: translate3d(51vw,22.7vh,0);
+    }
+    79.0323%{
+        transform: translate3d(50.7vw,24.2vh,0);
+    }
+    79.8387%{
+        transform: translate3d(50.3vw,25.6vh,0);
+    }
+    80.6452%{
+        transform: translate3d(49.9vw,27vh,0);
+    }
+    81.4516%{
+        transform: translate3d(49.4vw,28.4vh,0);
+    }
+    82.2581%{
+        transform: translate3d(48.8vw,29.5vh,0);
+    }
+    83.0645%{
+        transform: translate3d(48vw,30.3vh,0);
+    }
+    83.871%{
+        transform: translate3d(47.1vw,30.5vh,0);
+    }
+    84.6774%{
+        transform: translate3d(46.3vw,29.9vh,0);
+    }
+    85.4839%{
+        transform: translate3d(45.6vw,29vh,0);
+    }
+    86.2903%{
+        transform: translate3d(44.9vw,27.9vh,0);
+    }
+    87.0968%{
+        transform: translate3d(44.2vw,26.8vh,0);
+    }
+    87.9032%{
+        transform: translate3d(43.5vw,25.8vh,0);
+    }
+    88.7097%{
+        transform: translate3d(42.9vw,24.7vh,0);
+    }
+    89.5161%{
+        transform: translate3d(42.1vw,23.8vh,0);
+    }
+    90.3226%{
+        transform: translate3d(41.3vw,23vh,0);
+    }
+    91.129%{
+        transform: translate3d(40.5vw,22.6vh,0);
+    }
+    91.9355%{
+        transform: translate3d(39.6vw,22.9vh,0);
+    }
+    92.7419%{
+        transform: translate3d(38.8vw,23.7vh,0);
+    }
+    93.5484%{
+        transform: translate3d(38.5vw,24.3vh,0);
+    }
+    94.3548%{
+        transform: translate3d(38.1vw,25.1vh,0);
+    }
+    95.1613%{
+        transform: translate3d(37.8vw,25.9vh,0);
+    }
+    95.9677%{
+        transform: translate3d(37.6vw,26.9vh,0);
+    }
+    96.7742%{
+        transform: translate3d(37.5vw,27.8vh,0);
+        opacity: 1;
+    }
+    97.5806%{
+        transform: translate3d(37.4vw,28.9vh,0);
+    }
+    98.3871%{
+        transform: translate3d(37.4vw,29.8vh,0);
+    }
+    99.1935%{
+        transform: translate3d(37.5vw,30.2vh,0);
+    }
+    99.990%{
+        opacity: 1;
+    }
+    to{
+        transform: translate3d(37.75vw,30.3vh,0);
+        opacity: 0;
+    }
+}
+
+.heartRight[custom-celebration]{
+    left: 46px;
+    top: 11px;
+    background-size: 30px;
+    animation-name: heartLeftRight_animation;
+}
+
+.heartRightContainer[custom-celebration]{
+    animation-name: heartRightContainer_animation;
+    animation-delay: 0s;
+    animation-duration: 2.1s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+}
+
+@keyframes heartLeftRight_animation{
+    0%{
+        transform: rotate(20deg) rotateY(0deg) rotateX(45deg);
+    }
+    50%{
+        transform: rotateY(90deg) rotateX(180deg);
+    }
+    75%{
+        transform: rotate(90deg) rotateY(180deg) rotateX(1turn);
+    }
+    to{
+        transform: rotate(0deg) rotateY(0deg) rotateX(0deg);
+    }
+}
+
+@keyframes heartRightContainer_animation{
+    0%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    0.8065%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    1.6129%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    2.4194%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    3.2258%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    4.0323%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    4.8387%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    5.6452%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    6.4516%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    7.2581%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    8.0645%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    8.871%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    9.6774%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    10.4839%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    11.2903%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    12.0968%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    12.9032%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    13.7097%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    14.5161%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    15.3226%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    16.129%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    16.9355%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    17.7419%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    18.5484%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    19.3548%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    20.1613%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    20.9677%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    21.7742%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    22.5806%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    23.3871%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    24.1935%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    25%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    25.8065%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    26.6129%{
+        transform: translate3d(4.6vw,-11.7vh,0);
+    }
+    27.4194%{
+        transform: translate3d(4.9vw,-9.8vh,0);
+    }
+    28.2258%{
+        transform: translate3d(5.3vw,-7.4vh,0);
+    }
+    29.0323%{
+        transform: translate3d(5.9vw,-5vh,0);
+    }
+    29.8387%{
+        transform: translate3d(6.5vw,-2.6vh,0);
+    }
+    30.6452%{
+        transform: translate3d(7.2vw,-.3vh,0);
+    }
+    31.4516%{
+        transform: translate3d(8vw,1.9vh,0);
+    }
+    32.2581%{
+        transform: translate3d(8.8vw,4vh,0);
+    }
+    33.0645%{
+        transform: translate3d(9.7vw,6.1vh,0);
+    }
+    33.871%{
+        transform: translate3d(10.7vw,8vh,0);
+    }
+    34.6774%{
+        transform: translate3d(11.8vw,9.7vh,0);
+    }
+    35.4839%{
+        transform: translate3d(13vw,11.2vh,0);
+    }
+    36.2903%{
+        transform: translate3d(14.3vw,12.3vh,0);
+    }
+    37.0968%{
+        transform: translate3d(15.8vw,12.5vh,0);
+    }
+    37.9032%{
+        transform: translate3d(17vw,11.4vh,0);
+    }
+    38.7097%{
+        transform: translate3d(17.4vw,10.8vh,0);
+    }
+    39.5161%{
+        transform: translate3d(18vw,10.4vh,0);
+    }
+    40.3226%{
+        transform: translate3d(18.5vw,10.1vh,0);
+    }
+    41.129%{
+        transform: translate3d(19.1vw,9.8vh,0);
+    }
+    41.9355%{
+        transform: translate3d(19.6vw,9.7vh,0);
+    }
+    42.7419%{
+        transform: translate3d(20.2vw,9.6vh,0);
+    }
+    43.5484%{
+        transform: translate3d(20.8vw,9.5vh,0);
+    }
+    44.3548%{
+        transform: translate3d(21.3vw,9.6vh,0);
+    }
+    45.1613%{
+        transform: translate3d(21.9vw,9.8vh,0);
+    }
+    45.9677%{
+        transform: translate3d(22.5vw,10.1vh,0);
+    }
+    46.7742%{
+        transform: translate3d(22.9vw,10.6vh,0);
+    }
+    47.5806%{
+        transform: translate3d(23.2vw,11.5vh,0);
+    }
+    48.3871%{
+        transform: translate3d(23.2vw,12.5vh,0);
+    }
+    49.1935%{
+        transform: translate3d(23vw,13.4vh,0);
+    }
+    50%{
+        transform: translate3d(22.7vw,14.2vh,0);
+    }
+    50.8065%{
+        transform: translate3d(22.3vw,15vh,0);
+    }
+    51.6129%{
+        transform: translate3d(21.9vw,15.7vh,0);
+    }
+    52.4194%{
+        transform: translate3d(21.4vw,16.4vh,0);
+    }
+    53.2258%{
+        transform: translate3d(21vw,17vh,0);
+    }
+    54.0323%{
+        transform: translate3d(20.3vw,17.8vh,0);
+    }
+    54.8387%{
+        transform: translate3d(19.5vw,18.7vh,0);
+    }
+    55.6452%{
+        transform: translate3d(18.7vw,19.4vh,0);
+    }
+    56.4516%{
+        transform: translate3d(17.8vw,20.1vh,0);
+    }
+    57.2581%{
+        transform: translate3d(17vw,20.6vh,0);
+    }
+    58.0645%{
+        transform: translate3d(16.1vw,21vh,0);
+    }
+    58.871%{
+        transform: translate3d(15.2vw,21.3vh,0);
+    }
+    59.6774%{
+        transform: translate3d(14.3vw,21.5vh,0);
+    }
+    60.4839%{
+        transform: translate3d(13.3vw,21.4vh,0);
+    }
+    61.2903%{
+        transform: translate3d(12.8vw,21.1vh,0);
+    }
+    62.0968%{
+        transform: translate3d(12.5vw,20.9vh,0);
+    }
+    62.9032%{
+        transform: translate3d(12.2vw,20.4vh,0);
+    }
+    63.7097%{
+        transform: translate3d(12vw,19.9vh,0);
+    }
+    64.5161%{
+        transform: translate3d(11.8vw,19.3vh,0);
+    }
+    65.3226%{
+        transform: translate3d(11.8vw,18.6vh,0);
+    }
+    66.129%{
+        transform: translate3d(11.9vw,17.9vh,0);
+    }
+    66.9355%{
+        transform: translate3d(12vw,17.3vh,0);
+    }
+    67.7419%{
+        transform: translate3d(12.3vw,16.8vh,0);
+    }
+    68.5484%{
+        transform: translate3d(12.6vw,16.4vh,0);
+    }
+    69.3548%{
+        transform: translate3d(12.9vw,16.2vh,0);
+    }
+    70.1613%{
+        transform: translate3d(13.3vw,16.2vh,0);
+    }
+    70.9677%{
+        transform: translate3d(13.7vw,16.5vh,0);
+    }
+    71.7742%{
+        transform: translate3d(14vw,16.9vh,0);
+    }
+    72.5806%{
+        transform: translate3d(14.4vw,17.7vh,0);
+    }
+    73.3871%{
+        transform: translate3d(14.8vw,18.4vh,0);
+    }
+    74.1935%{
+        transform: translate3d(15.3vw,19.2vh,0);
+    }
+    75%{
+        transform: translate3d(15.7vw,20vh,0);
+    }
+    75.8065%{
+        transform: translate3d(16.1vw,20.7vh,0);
+    }
+    76.6129%{
+        transform: translate3d(16.6vw,21.4vh,0);
+    }
+    77.4194%{
+        transform: translate3d(17vw,22.1vh,0);
+    }
+    78.2258%{
+        transform: translate3d(17.5vw,22.8vh,0);
+    }
+    79.0323%{
+        transform: translate3d(18vw,23.3vh,0);
+    }
+    79.8387%{
+        transform: translate3d(18.6vw,23.8vh,0);
+    }
+    80.6452%{
+        transform: translate3d(19.1vw,24.1vh,0);
+    }
+    81.4516%{
+        transform: translate3d(20vw,24.3vh,0);
+    }
+    82.2581%{
+        transform: translate3d(20.8vw,24.2vh,0);
+    }
+    83.0645%{
+        transform: translate3d(21.7vw,23.9vh,0);
+    }
+    83.871%{
+        transform: translate3d(22.5vw,23vh,0);
+    }
+    84.6774%{
+        transform: translate3d(23.3vw,22.7vh,0);
+    }
+    85.4839%{
+        transform: translate3d(24.1vw,21.9vh,0);
+    }
+    86.2903%{
+        transform: translate3d(24.8vw,21.1vh,0);
+    }
+    87.0968%{
+        transform: translate3d(25.6vw,20.2vh,0);
+    }
+    87.9032%{
+        transform: translate3d(26.3vw,19.3vh,0);
+    }
+    88.7097%{
+        transform: translate3d(27vw,18.5vh,0);
+    }
+    89.5161%{
+        transform: translate3d(27.8vw,18.3vh,0);
+    }
+    90.3226%{
+        transform: translate3d(28.7vw,18.2vh,0);
+    }
+    91.129%{
+        transform: translate3d(29.5vw,18.4vh,0);
+    }
+    91.9355%{
+        transform: translate3d(30.2vw,18.9vh,0);
+    }
+    92.7419%{
+        transform: translate3d(30.9vw,19.8vh,0);
+    }
+    93.5484%{
+        transform: translate3d(31.5vw,20.9vh,0);
+    }
+    94.3548%{
+        transform: translate3d(32vw,22.1vh,0);
+    }
+    95.1613%{
+        transform: translate3d(32.5vw,23.3vh,0);
+    }
+    95.9677%{
+        transform: translate3d(33vw,24.6vh,0);
+    }
+    96.7742%{
+        transform: translate3d(33.4vw,25.9vh,0);
+        opacity: 1;
+    }
+    97.5806%{
+        transform: translate3d(33.9vw,27.2vh,0);
+    }
+    98.3871%{
+        transform: translate3d(34.6vw,29.9vh,0);
+    }
+    99.1935%{
+        transform: translate3d(34.8vw,32.8vh,0);
+        opacity: 1;
+    }
+    99.990%{
+        opacity: 1;
+    }
+    to{
+        transform: translate3d(34.05vw,33.4vh,0);
+        opacity: 0;
+    }
+}
+
+.heartTriangleContainer[custom-celebration]{
+    animation-name: heartTriangleContainer_animation;
+    animation-delay: 0s;
+    animation-duration: 2.1s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+}
+
+@keyframes heartTriangleContainer_animation{
+    0%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    0.8065%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    1.6129%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    2.4194%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    3.2258%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    4.0323%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    4.8387%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    5.6452%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    6.4516%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    7.2581%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    8.0645%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    8.871%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    9.6774%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    10.4839%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    11.2903%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    12.0968%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    12.9032%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    13.7097%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    14.5161%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    15.3226%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    16.129%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    16.9355%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    17.7419%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    18.5484%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    19.3548%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    20.1613%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    20.9677%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    21.7742%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    22.5806%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    23.3871%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    24.1935%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    25%{
+        transform: translate3d(29.9vw,-29.7vh,0);
+    }
+    25.8065%{
+        transform: translate3d(29.4vw,-29.4vh,0);
+    }
+    26.6129%{
+        transform: translate3d(29.1vw,-28.7vh,0);
+    }
+    27.4194%{
+        transform: translate3d(28.8vw,-28vh,0);
+    }
+    28.2258%{
+        transform: translate3d(28.5vw,-27.2vh,0);
+    }
+    29.0323%{
+        transform: translate3d(28.3vw,-26.4vh,0);
+    }
+    29.8387%{
+        transform: translate3d(28.1vw,-25.6vh,0);
+    }
+    30.6452%{
+        transform: translate3d(28vw,-24.7vh,0);
+    }
+    31.4516%{
+        transform: translate3d(27.8vw,-23.9vh,0);
+    }
+    32.2581%{
+        transform: translate3d(27.7vw,-23vh,0);
+    }
+    33.0645%{
+        transform: translate3d(27.6vw,-22.1vh,0);
+    }
+    33.871%{
+        transform: translate3d(27.5vw,-21.2vh,0);
+    }
+    34.6774%{
+        transform: translate3d(27.4vw,-20.3vh,0);
+    }
+    35.4839%{
+        transform: translate3d(27.3vw,-19.5vh,0);
+    }
+    36.2903%{
+        transform: translate3d(27.3vw,-18.6vh,0);
+    }
+    37.0968%{
+        transform: translate3d(27.2vw,-17.7vh,0);
+    }
+    37.9032%{
+        transform: translate3d(27.2vw,-16.8vh,0);
+    }
+    38.7097%{
+        transform: translate3d(27.2vw,-15.9vh,0);
+    }
+    39.5161%{
+        transform: translate3d(27.2vw,-15vh,0);
+    }
+    40.3226%{
+        transform: translate3d(27.2vw,-14.1vh,0);
+    }
+    41.129%{
+        transform: translate3d(27.3vw,-13.2vh,0);
+    }
+    41.9355%{
+        transform: translate3d(27.3vw,-12.3vh,0);
+    }
+    42.7419%{
+        transform: translate3d(27.4vw,-11.4vh,0);
+    }
+    43.5484%{
+        transform: translate3d(27.5vw,-10.5vh,0);
+    }
+    44.3548%{
+        transform: translate3d(27.6vw,-9.6vh,0);
+    }
+    45.1613%{
+        transform: translate3d(27.7vw,-8.8vh,0);
+    }
+    45.9677%{
+        transform: translate3d(27.8vw,-7.9vh,0);
+    }
+    46.7742%{
+        transform: translate3d(28vw,-7.1vh,0);
+    }
+    47.5806%{
+        transform: translate3d(28.2vw,-6.2vh,0);
+    }
+    48.3871%{
+        transform: translate3d(28.4vw,-5.4vh,0);
+    }
+    49.1935%{
+        transform: translate3d(28.6vw,-4.6vh,0);
+    }
+    50%{
+        transform: translate3d(28.9vw,-3.8vh,0);
+    }
+    50.8065%{
+        transform: translate3d(29.1vw,-3.1vh,0);
+    }
+    51.6129%{
+        transform: translate3d(29.4vw,-2.4vh,0);
+    }
+    52.4194%{
+        transform: translate3d(29.8vw,-1.7vh,0);
+    }
+    53.2258%{
+        transform: translate3d(30.1vw,-1vh,0);
+    }
+    54.0323%{
+        transform: translate3d(30.4vw,-.4vh,0);
+    }
+    54.8387%{
+        transform: translate3d(30.8vw,.1vh,0);
+    }
+    55.6452%{
+        transform: translate3d(31.1vw,.6vh,0);
+    }
+    56.4516%{
+        transform: translate3d(31.5vw,1.1vh,0);
+    }
+    57.2581%{
+        transform: translate3d(31.8vw,1.6vh,0);
+    }
+    58.0645%{
+        transform: translate3d(32.2vw,2vh,0);
+    }
+    58.871%{
+        transform: translate3d(32.6vw,2.4vh,0);
+    }
+    59.6774%{
+        transform: translate3d(33vw,2.7vh,0);
+    }
+    60.4839%{
+        transform: translate3d(33.4vw,3.1vh,0);
+    }
+    61.2903%{
+        transform: translate3d(33.8vw,3.4vh,0);
+    }
+    62.0968%{
+        transform: translate3d(34.3vw,3.7vh,0);
+    }
+    62.9032%{
+        transform: translate3d(34.7vw,4vh,0);
+    }
+    63.7097%{
+        transform: translate3d(35.1vw,4.3vh,0);
+    }
+    64.5161%{
+        transform: translate3d(35.5vw,4.6vh,0);
+    }
+    65.3226%{
+        transform: translate3d(35.9vw,4.9vh,0);
+    }
+    66.129%{
+        transform: translate3d(36.3vw,5.3vh,0);
+    }
+    66.9355%{
+        transform: translate3d(36.7vw,5.7vh,0);
+    }
+    67.7419%{
+        transform: translate3d(37.1vw,6.1vh,0);
+    }
+    68.5484%{
+        transform: translate3d(37.4vw,6.6vh,0);
+    }
+    69.3548%{
+        transform: translate3d(37.8vw,7.2vh,0);
+    }
+    70.1613%{
+        transform: translate3d(38.1vw,7.7vh,0);
+    }
+    70.9677%{
+        transform: translate3d(38.4vw,8.4vh,0);
+    }
+    71.7742%{
+        transform: translate3d(38.6vw,9vh,0);
+    }
+    72.5806%{
+        transform: translate3d(38.9vw,9.7vh,0);
+    }
+    73.3871%{
+        transform: translate3d(39.1vw,10.4vh,0);
+    }
+    74.1935%{
+        transform: translate3d(39.3vw,11.1vh,0);
+    }
+    75%{
+        transform: translate3d(39.5vw,11.8vh,0);
+    }
+    75.8065%{
+        transform: translate3d(39.7vw,12.5vh,0);
+    }
+    76.6129%{
+        transform: translate3d(39.9vw,13.3vh,0);
+    }
+    77.4194%{
+        transform: translate3d(40vw,14vh,0);
+    }
+    78.2258%{
+        transform: translate3d(40.2vw,14.8vh,0);
+    }
+    79.0323%{
+        transform: translate3d(40.3vw,16vh,0);
+    }
+    79.8387%{
+        transform: translate3d(40.4vw,17.2vh,0);
+    }
+    80.6452%{
+        transform: translate3d(40.5vw,18.4vh,0);
+    }
+    81.4516%{
+        transform: translate3d(40.5vw,19.5vh,0);
+    }
+    82.2581%{
+        transform: translate3d(40.5vw,20.7vh,0);
+    }
+    83.0645%{
+        transform: translate3d(40.5vw,21.9vh,0);
+    }
+    83.871%{
+        transform: translate3d(40.5vw,23.1vh,0);
+    }
+    84.6774%{
+        transform: translate3d(40.4vw,24.9vh,0);
+    }
+    85.4839%{
+        transform: translate3d(40.4vw,26.5vh,0);
+    }
+    86.2903%{
+        transform: translate3d(40.3vw,27.7vh,0);
+    }
+    87.0968%{
+        transform: translate3d(40.2vw,28.9vh,0);
+    }
+    87.9032%{
+        transform: translate3d(40.1vw,30.1vh,0);
+    }
+    88.7097%{
+        transform: translate3d(39.6vw,31.3vh,0);
+    }
+    89.5161%{
+        transform: translate3d(39.2vw,32.4vh,0);
+    }
+    90.3226%{
+        transform: translate3d(39vw,33.6vh,0);
+    }
+    91.129%{
+        transform: translate3d(38.6vw,34.2vh,0);
+    }
+    91.9355%{
+        transform: translate3d(38.3vw,34.9vh,0);
+    }
+    92.7419%{
+        transform: translate3d(38.1vw,35.6vh,0);
+    }
+    93.5484%{
+        transform: translate3d(37.8vw,36.1vh,0);
+    }
+    94.3548%{
+        transform: translate3d(37.4vw,36.4vh,0);
+    }
+    95.1613%{
+        transform: translate3d(37vw,36.2vh,0);
+    }
+    95.9677%{
+        transform: translate3d(36.6vw,35.8vh,0);
+    }
+    96.7742%{
+        transform: translate3d(36.6vw,35.2vh,0);
+    }
+    97.5806%{
+        transform: translate3d(36.4vw,34.9vh,0);
+    }
+    98.3871%{
+        transform: translate3d(36.4vw,34.3vh,0);
+    }
+    99.1935%{
+        transform: translate3d(36.4vw,33.9vh,0);
+        opacity: 1;
+    }
+    99.990%{
+        opacity: 1;
+    }
+    to{
+        transform: translate3d(36.4vw,33.6vh,0);
+        opacity: 0;
+    }
+}
+
+.heartTriangle[custom-celebration]{
+    animation-name: heartTriangle_animation;
+    animation-delay: 0s;
+    animation-duration: 2.1s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+}
+
+@keyframes heartTriangle_animation{
+    0%{
+        transform: rotate(20deg) rotateY(0deg) rotateX(45deg);
+    }
+    50%{
+        transform: rotateY(90deg) rotateX(180deg);
+    }
+    75%{
+        transform: rotate(90deg);
+    }
+    to{
+        transform: rotateY(180deg) rotateX(1turn);
+    }
+}
